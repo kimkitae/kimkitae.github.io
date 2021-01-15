@@ -1,5 +1,5 @@
 current directory: /Users/kimkitae/kimkitae/vendor/bundle/ruby/2.6.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
-/Users/kimkitae/.rbenv/versions/2.6.6/bin/ruby -I /Users/kimkitae/.rbenv/versions/2.6.6/lib/ruby/2.6.0 -r ./siteconf20210115-86537-6e59yc.rb extconf.rb
+/Users/kimkitae/.rbenv/versions/2.6.6/bin/ruby -I /Users/kimkitae/.rbenv/versions/2.6.6/lib/ruby/2.6.0 -r ./siteconf20210115-98375-cit9km.rb extconf.rb
 creating Makefile
 
 current directory: /Users/kimkitae/kimkitae/vendor/bundle/ruby/2.6.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
@@ -13,4 +13,4 @@ linking shared-object ruby_http_parser.bundle
 
 current directory: /Users/kimkitae/kimkitae/vendor/bundle/ruby/2.6.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 ruby_http_parser.bundle ./.gem.20210115-86537-1hapelk
+/usr/bin/install -c -m 0755 ruby_http_parser.bundle ./.gem.20210115-98375-m5vmu8
