@@ -8,12 +8,23 @@ comments: false
     
 <center>모바일 <b>Automation Engineer</b></center>
 
-## 경험
+---
+
+SKP 서비스에서 APPIUM 자동화를 시작하여 현재 요기요에서 APPIUM과 Espresso, XCUITest로 자동화를 구현 및 운영 중입니다.
+기술 구현을 넘어서 좀 더 효과적인 자동화 테스트 전략에 관심이 많습니다.
+
+---
+
+## 자동화 경험
 * 모바일 Battery 소모량 Non-function 테스트
 * 모바일 Memory leak Non-function 테스트
 * Appium을 이용한 AND, iOS 자동화 구현
 * Built-in Test Framework 를 이용한 AND(Espresso), iOS(XCUITest) 자동화 구현
-* SoapUI를 통한 Regression Test 구현(암호화 jar 연동 및 자가 치유)
+* CI/CD를 통한 빠른 UI 테스트 진행
+* TestRail API를 이용한 UI 테스트 결과 업로드 연동
+* Python을 이용한 테스트 환경 개선 작업
+* SoapUI를 통한 Regression Test 구현(암호화 jar 연동 및 자가 치유 적용)
 * Postman, Newman을 이용한 API 자동화 구현
 * 빠른 테스트 시작을 위한 Slackbot 구현
 * 시스템 성능 테스트를 위한 Locust 구현
+* K6를 이용한 API 성능 테스트 진행
