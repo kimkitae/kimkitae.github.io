@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Espresso Android 연습하기"
+date: 2020-01-16
+excerpt: "Espresso를 이용한 자동화 실행 해보기"
+tags: [Espresso, Android]
+comments: true
+---
+
+[Project 바로가기](https://github.com/kimkitae/PracticeAutomationEspressoAndroid)
+Espresso 이용한 안드로이드 자동화 기초적 부분을 설명해주기 위한 만든 프로젝트 입니다.
+(간단하게 Element 클릭, Assertion에 대한 기초를 연습해 보실 수 있습니다.)
+
+설치 방법은 README 참조 해주세요.
+Android Studio 설치 및 SDK Manager 설치 완료 가정 하에 설명되어 있으니 설치 및 Emulator 생성 완료 해주세요.
+
+Apple 개발자 등록이 되어 있지 않아 샘플용 IPA를 만들수가 없어 XCUITest는 제외 합니다.
