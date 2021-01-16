@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Espresso Android 연습하기"
-date: 2020-01-16
+date: 2021-01-16
 excerpt: "Espresso를 이용한 자동화 실행 해보기"
 tags: [Espresso, Android]
 comments: true
