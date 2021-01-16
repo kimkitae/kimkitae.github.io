@@ -7,8 +7,12 @@ tags: [Espresso, Android]
 comments: true
 ---
 
-[Project 바로가기](https://github.com/kimkitae/PracticeAutomationEspressoAndroid)
-Espresso 이용한 안드로이드 자동화 기초적 부분을 설명해주기 위한 만든 프로젝트 입니다.
+<div markdown="0"><a href="https://github.com/kimkitae/PracticeAutomationEspressoAndroid" class="btn btn-info">Project 바로가기</a></div>
+
+--- 
+
+
+Espresso 이용한 안드로이드 자동화 기초적 부분을 설명해주기 위해 만든 프로젝트 입니다.
 (간단하게 Element 클릭, Assertion에 대한 기초를 연습해 보실 수 있습니다.)
 
 설치 방법은 README 참조 해주세요.
