@@ -6,9 +6,9 @@ date: 2020-01-16
 comments: false
 ---
     
-<center>모바일 <b>Automation Engineer</b></a></center>
+<center>모바일 <b>Automation Engineer</b></center>
 
-## 소개
+## 경험
 * 모바일 Battery 소모량 Non-function 테스트
 * 모바일 Memory leak Non-function 테스트
 * Appium을 이용한 AND, iOS 자동화 구현
