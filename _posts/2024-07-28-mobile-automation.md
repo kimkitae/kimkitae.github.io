@@ -1,7 +1,5 @@
 ---
-title: 모바일 자동화의 첫 페이지를 되돌아보며
-description: >-
-  저의 모바일 자동화를 되돌아보며, 성과와 새로운 도전을 이야기하고자 합니다.
+title: 모바일 자동화 여정 - 시작과 새로운 도전
 author: KimKitae
 date: 2024-07-28 11:42:00 +9000
 categories: [Automation, Testing]
