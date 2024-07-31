@@ -4,7 +4,7 @@ author: KimKitae
 date: 2024-07-28 11:42:00 +9000
 categories: [Automation, Testing]
 tags: [Testing]
-pin: true
+pin: false
 ---
 
 안녕하세요.  

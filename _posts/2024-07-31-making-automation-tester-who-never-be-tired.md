@@ -1,10 +1,10 @@
 ---
-title: "끊임없이 작동하는 테스터 - 소프트웨어와 하드웨어의 만남"
+title: 끊임없이 작동하는 테스터 - 소프트웨어와 하드웨어의 만남
 author: KimKitae
 date: 2024-07-31 15:52:00 +9000
 categories: [Automation, Testing]
 tags: [Testing]
-pin: false
+pin: true
 ---
 
 노션을 정리하다가 3~4년 전 DeliveryHero Korea에서 일할 때 아르헨티나와 우루과이의 Automation Engineer들과 나눴던 대화가 떠올랐습니다. 소프트웨어뿐만 아니라 하드웨어를 활용해 절대 멈추지 않는 소프트웨어 테스터를 만들어보자는 아이디어였는데요, 재미로 그때 작성했던 내용을 공유해봅니다.
