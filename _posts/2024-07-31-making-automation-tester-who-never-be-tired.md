@@ -16,16 +16,16 @@ pin: false
 ## 절대 지치지 않는 테스터 만들기
 백엔드에서는 매일 두 번 이상 배포를 진행하며, 배포마다 주문부터 결제 완료까지의 모든 결제 수단을 확인해야 합니다. 각 PG사에서 제공하는 화면의 가상 키보드는 암호화되어 있고, 매 화면 랜딩 시마다 숫자 배열이 랜덤으로 바뀝니다. 화면 캡처 보호 기능이 적용된 경우, 일반적인 캡처 시 해당 영역이 검은색으로만 표시됩니다. 따라서, GPU가 화면에 그리기 위해 메모리에 저장한 정보를 추출해야 합니다.
 
-![Screen Protect](/_assets/making-automation-tester-who-never-be-tired/protectscreen.jpg)
+![Screen Protect](https://github.com/user-attachments/assets/66299804-d681-4d19-b0b0-9464c1fa9771)
 
-![GPU 내 메모리 직접 접근](/_assets/making-automation-tester-who-never-be-tired/gpucapture.jpg)
+![GPU 내 메모리 직접 접근](https://github.com/user-attachments/assets/670fcfc9-74e1-414c-a933-706af1bc0c9b)
 
 이때 테스트 프레임워크는 높은 CPU와 메모리 자원을 소비합니다. (우리 시스템은 3GHz 8코어 Intel XeonE5, 64GB 메모리를 사용합니다) 시스템 모니터링에서 CPU 90% 이상, 메모리 200GB(Swap) 이상 사용률을 확인할 수 있습니다.
 
 ## 구현해보기
 알리익스프레스에서 판매하는 XY 플로터 기성제품(아두이노 및 커스터마이징 가능한 제품)을 구매하고, 아두이노 또는 라즈베리파이에 카메라 모듈을 연결합니다.
 
-![XY Plotter](/_assets/making-automation-tester-who-never-be-tired/xyplotter.png)
+![XY Plotter](https://github.com/user-attachments/assets/4bb90203-003f-4240-b4a3-9948e95f228f)
 
 
 Appium으로 앱 실행 및 오브젝트 확인:
