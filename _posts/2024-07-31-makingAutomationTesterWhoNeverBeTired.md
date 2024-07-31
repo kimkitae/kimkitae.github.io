@@ -7,8 +7,6 @@ tags: [Testing]
 pin: true
 ---
 
-노션을 정리하다가 3~4년 전 DeliveryHero Korea 소속 일 때 아르헨티나와 우루과이 국가의 Automation Engineer들과 대화를 나누며 소프트웨어뿐만 아니라 하드웨어를 활용해 절대 멈추지 않는 소프트웨어 테스터를 만들어보자는 아이디어 작성건이 있어 재미로 그때 작성했던 내용을 공유해봅니다.
-
 [Making Automation Tester who never be tired. -  KimKitae](https://kimkitae.notion.site/Making-Automation-Tester-who-never-be-tired-6e6f163cc1564e929909847d2a4716eb)
 
 ---
