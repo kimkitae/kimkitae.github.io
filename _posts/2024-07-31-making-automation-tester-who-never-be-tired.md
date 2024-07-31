@@ -1,5 +1,5 @@
 ---
-title: 끊임없이 작동하는 테스터 - 소프트웨어와 하드웨어의 만남
+title: 끊임없이 작동하는 테스터(소프트웨어와 하드웨어의 만남)
 author: KimKitae
 date: 2024-07-31 15:52:00 +9000
 categories: [Automation, Testing]
