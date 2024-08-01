@@ -4,7 +4,7 @@ author: KimKitae
 date: 2024-07-31 15:52:00 +9000
 categories: [Automation, Testing]
 tags: [Testing]
-pin: true
+pin: false
 ---
 
 [Making Automation Tester who never be tired. -  KimKitae](https://kimkitae.notion.site/Making-Automation-Tester-who-never-be-tired-6e6f163cc1564e929909847d2a4716eb)
