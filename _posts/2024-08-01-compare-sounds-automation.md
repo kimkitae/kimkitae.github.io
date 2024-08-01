@@ -50,9 +50,11 @@ djv.fingerprint_directory("test_sound/", [".mp3"], 3)
 오디오 인식을 위해서는 음악 파일 또는 마이크 입력을 사용하는 두 가지 방법이 있습니다.
 
 - 파일 인식
+
 ```
 $ python dejavu.py --recognize file notification.wav
 ```
+
 ```
 from dejavu.logic.recognizer.file_recognizer import FileRecognizer
 
@@ -60,6 +62,7 @@ song = djv.recognize(FileRecognizer, "notification.wav")
 ```
 
 - 마이크 인식
+
 ```
 from dejavu.logic.recognizer.microphone_recognizer import MicrophoneRecognizer
 
