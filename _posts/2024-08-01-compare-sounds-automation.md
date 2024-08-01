@@ -68,9 +68,11 @@ from dejavu.logic.recognizer.microphone_recognizer import MicrophoneRecognizer
 
 song = djv.recognize(MicrophoneRecognizer, seconds=10)  # 기본값은 10초
 ```
+
 ```
 $ python dejavu.py --recognize mic 10
 ```
+
 이렇게 Python 코드를 통해 구현하거나 간단한 명령어로 오디오 인식을 수행할 수 있습니다.
 
 ## 테스트하기
@@ -87,6 +89,7 @@ $ python dejavu.py --recognize mic 10
 
 
 **파일변환** 은 아래의 Python 코드로 변환이 가능합니다.
+
 ```
 # 모듈 설치: !pip install moviepy
 from moviepy.editor import VideoFileClip
