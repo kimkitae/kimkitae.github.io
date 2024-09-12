@@ -66,8 +66,8 @@ pin: true
 
 1. Web Server는 JavaScript로 UI를 구현하고, WebSocket 이벤트를 통해 실시간으로 화면을 업데이트합니다.
   
-
 > WebSocket 이벤트를 통해 화면을 업데이트 합니다.
+
 ```
 socket.onmessage = function(event) {
         try {
@@ -95,7 +95,9 @@ socket.onmessage = function(event) {
         }
     };
 ```
+
 >화면 영역 업데이트
+
 ```
 deviceContainer.innerHTML = `
     <div class="device-header"><h3>${device.phone_number || 'Unknown'}</h3></div>
@@ -111,7 +113,9 @@ deviceContainer.innerHTML = `
         </p>
     </div>`;
 ```
+
 > 단말 등록, SMS 문자 데이터 전송을 위한 Class
+
 ```
 class SmsEntry(BaseModel):
     phone_number: str = Field(..., example="01000000000")
@@ -127,6 +131,7 @@ class RegisterEntry(BaseModel):
 ```
 
 > 단말번호를 기준으로 Redis에 리스트 형태로 저장
+
 ```
 @router.post("/register", name="서버에 단말 등록", description="단말을 서버에 등록합니다.")
 async def register_device(sms_entry: RegisterEntry):
@@ -161,6 +166,7 @@ async def register_device(sms_entry: RegisterEntry):
 ```
 
 > Redis: 단말번호를 기준으로 SMS 인증번호를 10분간 저장하며, 만료 시 삭제. 
+> 
 > Slack API: 특정 Slack 채널로 인증문자 전송.
 
 ```
@@ -232,11 +238,13 @@ async def send_code(sms_entry: SmsEntry):
         send_log("ERROR", f"Error: {e}", "SMS API")
         raise HTTPException(status_code=500, detail=str(e))
 ```
+
 > 슬랙 채널에 인증문자 알림
 
 ![Slack 메세지 발송](https://github.com/user-attachments/assets/fc758acd-43a9-411b-9d5a-054e7002416d)
 
 >인증번호를 자동화 테스트에서도 활용할 수 있도록 API를 추가하여 최근 10분 내의 인증번호를 조회할 수 있게 추가 API 구현
+
 ```
 @router.get("/get/{phone_number}", name="해당 번호의 SMS code 가져오기", description="해당 번호의 최근 수신된 인증번호와 관련 정보를 가져옵니다.")
 async def get_code(phone_number: str):
