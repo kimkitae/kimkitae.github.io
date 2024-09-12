@@ -1,11 +1,275 @@
 ---
-title: LLM을 이용한 자동 스크립트 생성 해보기
+title: SMS 인증문자 관리 페이지 운영하기
 author: KimKitae
-date: 2024-08-02 12:00:00 +9000
-categories: [Automation, Testing, AI]
-tags: [Testing, AI]
-pin: false
+date: 2024-09-12 12:00:00 +9000
+categories: [Automation, TestPlatform]
+tags: [Testing, TestPlatform]
+pin: true
 ---
+
+테스트 중 SMS 인증번호를 이용해야 하는 경우가 있습니다. 매번 인증문자를 보기 위해 테스트폰을 찾아 문자를 확인하거나, 다른 사람이 들고 있는 단말에 번호확인 요청이 필요합니다.
+이로 인해 자동화 구현에 어려움이 발생하기도 합니다.
+
+최초 작업 시 Android 단말에선 `SMS Receiver`를 이용하여 수신 받은 문자 내용을 읽어올수 있어 이를 이용하여, 인증문자 수신 수 인증번호를 추출하여 특정 Slack 채널로 전달 할 수 있도록 `Àndroid SMS Receiver Application` 을 구현하였습니다.
+
+```
+@Override
+    public void onReceive(Context context, Intent intent) {
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            Object[] pdus = (Object[]) bundle.get("pdus");
+            if (pdus != null) {
+                for (Object pdu : pdus) {
+                    SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdu);
+                    String sender = smsMessage.getDisplayOriginatingAddress();
+                    String messageBody = smsMessage.getMessageBody();
+
+                    // 특정 번호로부터의 SMS인지 확인
+                    if (sender.equals("+821012345678")) { // 특정 번호를 여기서 설정
+                        String verificationCode = extractVerificationCode(messageBody);
+                        if (verificationCode != null) {
+                            sendToChannel(context, verificationCode); // 특정 슬랙 채널로 수신번호 전달
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private String extractVerificationCode(String message) {
+        // 인증번호 4자리 숫자 추출
+        Pattern pattern = Pattern.compile("\\b\\d{4}\\b");
+        Matcher matcher = pattern.matcher(message);
+        if (matcher.find()) {
+            return matcher.group(0);
+        }
+        return null;
+    }
+```
+
+최근 들어 테스트 인증이 필요한 영역 증가와 예비로 보유 중인 테스트 단말들이 있어, 이 리소스들을 어떻게 활용하면 좋을까 생각하다가 인증문자 통합관리 페이지를 만들어야겠다 생각하여 바로 작업에 착수해 봅니다.
+
+이를 위해 Web Server와 기존 Android Application 의 개선이 필요하였습니다.
+Web Server는 보다 빠른 구축을 위해 `fastapi`를 기반으로 `redis`를 연동하였습니다. 
+Web Server와 Client 는 `WebSocket`통신을 통해 실시간으로 상태 확인 및 인증번호 전달을 할 수 있도록 하였습니다.
+인증번호를 저장할 필요가 없기에 DB는 사용하지 않고, Redis를 통해 최근 수신된 10분 내 인증번호를 SET하면서 TTL을 지정합니다, 매 상태정보와 인증문자 수신 이벤트는 Kafka를 통해 비동기로 전달하도록 하였습니다.
+서버와 연결상태도 WebUI, Client로 전달하여 Web UI와 Client에서의 서버 연결상태를 확인 할 수 있습니다.
+
+![Flow Diagram](https://github.com/user-attachments/assets/b1c39cd4-073d-4063-a336-7214823744f9)
+
+## WebServer
+
+![인증문자 통합 관리 페이지](https://github.com/user-attachments/assets/e8e1a5e6-5e7c-4815-bdf8-bc2125b642e9)
+
+1. 보다 빠른 구축을 위해 JS만로 UI로 구현하며 `onmessage` 이벤트로 Android Client의 단말 등록, 해제, 수신 기능 중지 UI 및 데이터를 실시간으로 업데이트 할 수 있도록 합니다.  
+
+> WebSocket 이벤트를 통해 화면을 업데이트 합니다.
+```
+socket.onmessage = function(event) {
+        try {
+            const data = JSON.parse(event.data);
+            console.log('수신된 데이터:', data);
+
+            if (data.type === "sms_update" || data.type === "device_update") {
+                updateUIWithDeviceDetails(data.device);
+                if (data.type === "sms_update") {
+                    showNotification(data.device.phone_number, data.device.code);
+                }
+            } else if (data.type === "connection_status") {
+                updateDeviceStatus(data.identifier, data.is_connected);
+            } else if (data.type === "device_deleted") {
+                removeDeviceFromUI(data.phone_number);
+            } else if (data.type === "ping") {
+                socket.send(JSON.stringify({ type: "pong" }));
+            } else if (data.type === "error") {
+                console.error('WebSocket error message:', data.message);
+            } else {
+                console.warn('Unknown data type received:', data);
+            }
+        } catch (error) {
+            console.error('Error processing WebSocket message:', error);
+        }
+    };
+```
+>화면 영역 업데이트
+```
+deviceContainer.innerHTML = `
+    <div class="device-header"><h3>${device.phone_number || 'Unknown'}</h3></div>
+    <div class="device-info">
+        <p>인증번호: <span>${device.code || '-'}</span></p>
+        <p>메시지: <span>${device.message || '-'}</span></p>
+        <p>최근 수신 시간: <span class="received-time" data-original-time="${device.timestamp || ''}">${formattedTime}</span></p>
+        <p>메모: <span>${device.phone_memo || '-'}</span></p>
+        <p>관리자: <span>${device.phone_assigned || '-'}</span></p>
+        <p>등록 Slack 채널: <span>${device.slack_channel || '-'}</span></p>
+        <p class="connection-status ${isConnected ? 'connected' : 'disconnected'}">
+            연결 상태: ${isConnected ? '연결됨' : '연결 끊김'}
+        </p>
+    </div>`;
+```
+> 단말 등록, SMS 문자 데이터 전송을 위한 Class
+```
+class SmsEntry(BaseModel):
+    phone_number: str = Field(..., example="01000000000")
+    code: str = Field(..., example="1234")
+    message: str = Field(..., example="Failed to authenticate user.")
+    timestamp: datetime = Field(default_factory=datetime.now, example="2024-03-24T13:01:00")
+
+class RegisterEntry(BaseModel):
+    phone_number: str = Field(..., example="01000000000")
+    phone_memo: str = Field(..., example="메모")
+    phone_assigned: str = Field(..., example="홍길동")
+    slack_channel: str = Field(..., example="C03ERR0****")
+```
+
+> 단말번호를 기준으로 Redis에 리스트 형태로 저장
+```
+@router.post("/register", name="서버에 단말 등록", description="단말을 서버에 등록합니다.")
+async def register_device(sms_entry: RegisterEntry):
+    _redis = await RedisDriver.create()
+    _kafka = await KafkaManager.create()
+    _websockets = await WebSocketManager.create()
+
+    try:
+        device_info = {
+            "phone_number": sms_entry.phone_number,
+            "phone_memo": sms_entry.phone_memo,
+            "phone_assigned": sms_entry.phone_assigned,
+            "slack_channel": sms_entry.slack_channel
+        }
+
+        await _redis.sadd("registered_devices", sms_entry.phone_number)
+        await _redis.hset(f"device:{sms_entry.phone_number}", mapping=device_info)
+
+        send_log("debug", f"{sms_entry.phone_number} 단말 정보 등록 {device_info}", "SMS API")
+
+        message = {
+            "type": "device_update",
+            "device": device_info
+        }
+        await _redis.publish("sms-web", json.dumps(message))
+        await _websockets.broadcast_connection_status(sms_entry.phone_number, True)
+
+        return {"message": "ok"}
+    except Exception as e:
+        send_log("ERROR", f"{device_info} 단말 등록 실패: {e}", "SMS API")
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+> Slack API를 이용하여 단말정보에 저장된 Slack 채널로 인증문자 전달, 인증문자는 10분 뒤 Redis에서 삭제되도록 TTL 설정합니다.
+```
+@router.post("/send", name="Sms 서버로 전송", description="단말의 클라이언트에서 해당 서버로 SMS를 전송합니다.")
+async def send_code(sms_entry: SmsEntry):
+    _redis = await RedisDriver.create()
+    _websocket_manager = await get_sms_web_socket_manager()
+
+
+    try:
+
+        timestamp = datetime.now(pytz.utc)
+        seoul_timezone = pytz.timezone('Asia/Seoul')
+        timestamp_kst = timestamp.astimezone(seoul_timezone)
+
+        formatted_timestamp = timestamp_kst.strftime('%Y-%m-%d %H:%M:%S')
+        kor_time = await format_kst_time()
+        sms_data = {
+            "phone_number": sms_entry.phone_number,
+            "code": sms_entry.code,
+            "message": sms_entry.message,
+            "timestamp": formatted_timestamp
+        }
+
+        await _redis.set_key(key=sms_entry.phone_number, value=json.dumps(sms_data), ttl=300)
+        await _redis.set_key(f"sms:{sms_entry.phone_number}", value=str(sms_entry.code), ttl=300)
+        await _websocket_manager.send_sms_update(sms_entry.phone_number, sms_data)
+
+        device_info = await _redis.hgetall(f"device:{sms_entry.phone_number}")
+        slack_channel = device_info.get("slack_channel", "")
+        if slack_channel and len(slack_channel) == 11 and slack_channel.startswith("C"):
+            await SlackApp.post_message({
+                'channel': slack_channel,
+                'blocks': [
+                    {
+                        "type": "section",
+                        "text": {
+                            "type": "mrkdwn",
+                            "text": "*인증번호 수신 알림*"
+                        }
+                    },
+                    {
+                        "type": "divider"
+                    },
+                    {
+                        "type": "section",
+                        "fields": [
+                            {
+                                "type": "mrkdwn",
+                                "text": f"*단말번호:*\n{sms_entry.phone_number}"
+                            },
+                            {
+                                "type": "mrkdwn",
+                                "text": f"*인증번호:*\n{sms_entry.code}"
+                            },
+                            {
+                                "type": "mrkdwn",
+                                "text": f"*수신 시간:*\n{kor_time}"
+                            }
+                        ]
+                    }
+                ]
+            })
+
+
+        send_log("debug", f"SMS 전달 Phone - {sms_entry.phone_number} Code - {sms_entry.code} Message - {sms_entry.message} Channel - {slack_channel}", "SMS - Slack")
+        return {"message": "SMS 전달 successfully"}
+    except Exception as e:
+        send_log("ERROR", f"Error: {e}", "SMS API")
+        raise HTTPException(status_code=500, detail=str(e))
+```
+> 슬랙 채널에 인증문자 알림
+> 
+![Slack 메세지 발송](https://github.com/user-attachments/assets/fc758acd-43a9-411b-9d5a-054e7002416d)
+
+>API를 통해서도 해당 번호의 최근 10분 내 인증문자 가져올수 있도록 하여, 다른 자동화에서도 쉽게 사용할 수 있도록 추가 API를 추가 합니다.
+```
+@router.get("/get/{phone_number}", name="해당 번호의 SMS code 가져오기", description="해당 번호의 최근 수신된 인증번호와 관련 정보를 가져옵니다.")
+async def get_code(phone_number: str):
+    _redis =  await RedisDriver.create()
+    try:
+        data_json = await _redis.get_key(f"sms:{phone_number}")
+
+        logging.info(f"get phone number data_json: {data_json}")
+        if data_json is None:
+            return {"message": f"{phone_number} 에 대한 정보가 없습니다."}
+
+        data = json.loads(data_json)
+
+        return data
+
+    except Exception as e:
+        send_log("ERROR", f"Error: {e}", "SMS API")
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+2. `WebSocket` 통신이다 보니 세션관리가 필요하여 Redis를 통해 세션관리를 하며, 연결 해제를 위한 여러 조건을 두어 불필요한 세션을 정리 할수 있도록 합니다. 사용 특성 상 즉시 수신문자 확인 후 종료할 것이라 생각하여 최대 세션 유지 시간은 30분으로 잡았고, 웹 브라우저 새로고침, 종료 시에도 즉시 세션정리 되도록 하였습니다. 그리하여 Client에서 인증문자 수신 시 활성화되어 있는 모든 세션에 신규 문자 알림을 띄우도록 하여 페이지를 통해서 바로바로 확인 할 수 있습니다. 
+
+> 동시 문자 수신 알림
+
+![문자 수신 알림](https://github.com/user-attachments/assets/2093a2ab-d93e-4c51-9775-99c78a21eaa4)
+
+
+## Android Client
+
+![Android SMS Receiver Application](https://github.com/user-attachments/assets/3d720f1d-9933-47b2-8708-346281823831)
+
+
+1. Android Receive Application은 해당 단말에 대한 설명, 관리자, 슬랙 채널 입력가능하며, 서버 연결/해제, 기능 중지, 서버 연결 상태를 확인 할 수 있는 Inferface로 구성되어 있습니다.
+
+
+
+
+
+
 
 최근 ChatGPT의 발전으로 IT 업계에는 많은 변화가 이루어졌습니다. 특히, QA 업계에서는 많은 사람들이 AI가 우리의 자리를 대체할지 걱정했지만, LLM(대규모 언어 모델)은 아직까지는 단어 예측 모델로, 학습한 것 외에는 창의적인 것에는 한계가 존재합니다. AI는 아직까지는 우리를 대체하지 못할 것이지만, AI를 올바르게 사용하지 못하는 사람들은 금방 대체될 가능성이 큽니다.
 
