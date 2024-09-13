@@ -50,7 +50,7 @@ pin: true
 
 - Web Server: fastapi와 redis를 활용하여 도커화된 서버로 구축. WebSocket 통신을 통해 - Android 클라이언트와 실시간으로 통신.
 - 데이터 관리: 인증번호는 저장하지 않고 Redis에 10분간 TTL(Time-To-Live) 설정하여 유지.
-- 이벤트 관리: Kafka를 통해 모든 상태 정보와 SMS 수신 이벤트를 비동기로 전달.
+
 
 
 >시스템 아키텍처
