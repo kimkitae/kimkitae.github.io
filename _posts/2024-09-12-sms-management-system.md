@@ -4,7 +4,7 @@ author: KimKitae
 date: 2024-09-12 12:00:00 +9000
 categories: [Automation, TestPlatform]
 tags: [Testing, TestPlatform]
-pin: true
+pin: false
 ---
 
 테스트 자동화를 진행할 때, SMS 인증번호를 확인하는 과정이 번거롭고 비효율적일 수 있습니다. 테스트폰을 직접 찾아서 확인하거나, 다른 사람이 소지한 테스트폰에 요청하는 과정이 필요한 경우도 있습니다. 이러한 문제를 해결하기 위해 SMS 수신 내용을 자동으로 처리하고, 인증번호를 Slack 채널로 전달하는 안드로이드 앱을 구현하였습니다.

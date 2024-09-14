@@ -37,7 +37,7 @@ pin: true
      - **데이터베이스 (MariaDB)**:
        - 로그 데이터를 비동기로 데이터베이스에 저장합니다.
      - **Redis Publish**:
-       - 로그 데이터를 Redis의 `'log'` 채널에 발행하여 실시간으로 웹 클라이언트에 전송합니다.
+       - 로그 데이터를 Redis의 `'log'` 채널에 발행하여 실시간으로 Web UI에 전송합니다.
 
 5. **Redis Pub/Sub 시스템**:
    - **Publish**:
@@ -46,20 +46,20 @@ pin: true
      - WebSocket 매니저가 `'log'` 채널을 구독하여 실시간 로그 데이터를 수신합니다.
 
 6. **WebSocket 매니저 (FastAPI)**:
-   - 웹 클라이언트와의 WebSocket 연결을 관리합니다.
-   - Redis로부터 수신한 로그 데이터를 연결된 모든 웹 클라이언트에 전송합니다.
+   - Web UI와의 WebSocket 연결을 관리합니다.
+   - Redis로부터 수신한 로그 데이터를 연결된 모든 Web UI에 전송합니다.
 
-7. **웹 클라이언트 (Web UI)**:
+7. **Web UI(웹 클라이언트)**:
    - WebSocket을 통해 실시간 로그 데이터를 수신합니다.
    - 사용자에게 로그 데이터를 표시하며, 서비스명, 태그, 로그 레벨 등에 따라 필터링할 수 있습니다.
    - 일시정지 및 재개 기능을 통해 실시간 업데이트를 제어할 수 있습니다.
 
 **전체 흐름 요약**:
 
-- **로그 발생**: 서비스 애플리케이션에서 로그가 발생하면 API 서버로 로그 데이터를 전송합니다.
+- **로그 발생**: 서비스 애플리케이션에서 API 서버로 로그 데이터를 전송합니다.
 - **로그 전달**: API 서버는 로그 데이터를 Kafka를 통해 비동기로 전달합니다.
-- **로그 처리**: Kafka Consumer는 로그 데이터를 데이터베이스에 저장하고, Redis를 통해 웹 클라이언트에 실시간으로 전달합니다.
-- **로그 표시**: 웹 클라이언트는 WebSocket을 통해 수신한 로그 데이터를 사용자에게 표시합니다.
+- **로그 처리**: Kafka Consumer는 로그 데이터를 데이터베이스에 저장하고, Redis를 통해 활성화된 Web UI에 실시간으로 전달합니다.
+- **로그 표시**: Web UI는 WebSocket을 통해 수신한 로그 데이터를 사용자에게 표시합니다.
 
 ![플로우 다이얼그램](https://github.com/user-attachments/assets/50756ef1-3923-4192-b24e-05c856126939)
 
@@ -179,7 +179,7 @@ async def send(self, key: str, value: str, topic: str):
 
 ### 4. Kafka 컨슈머 처리
 
-Kafka 컨슈머를 통해 수신한 메시지를 처리하고, 데이터베이스에 저장하며, Redis를 통해 실시간으로 웹에 전송합니다.
+Kafka 컨슈머를 통해 수신한 메시지를 처리하고, 데이터베이스에 저장하며, Redis를 통해 실시간으로 Web UI에 전송합니다.
 
 ```python
 async def consume_messages(self, topic_name, redis, consumer):
@@ -287,7 +287,7 @@ async def handle_log_web(self, client_id: str):
 
 ## Web UI 구현하기
 
-웹 UI는 사용자가 로그를 실시간으로 확인할 수 있도록 간단하게 구성되었습니다.
+Web UI는 사용자가 로그를 실시간으로 확인할 수 있도록 간단하게 구성되었습니다.
 
 ![Log Viewer](https://github.com/user-attachments/assets/b34b3cfe-7a0e-475a-8d58-8f84924220c1)
 
