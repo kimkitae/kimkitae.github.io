@@ -55,9 +55,9 @@ _기간: [2019/01] - [2024/09]_
   - **성과**: [1. 마케팅 부서의 여러 광고 매체에서의 데이터를 Google Sheet로 수집하여, 필요한 데이터 가공 후 Big Query로 저장하여 연간 리소스 비용 대폭 감축, 2. IT팀 업무 중 사용자 계정 생성 / 삭제 에 대해 Slackbot을 통해 계정 생성/삭제 요청을 받아 담당자가 승인 또는 반려 에 따라 이력 저장 및 동작하도록 하여 해당 업무 간소화, Workato 주최 TechTalk 패널 참석]
 
 - **프로젝트명**: [자동화 리그레션 프로세스 자동화]
-  - **역할**: [Jira Flow 정립, QE API서버 구현, TestRail API 구현, JIRA API 구현, TestReport API 구현]
-  - **사용 기술**: fastapi, python, jira, Google sheet api, Celery, Redis
-  - **성과**: [기존 매 릴리즈 때마다 직접 해당 버전의 릴리즈 티켓을 OS별 생성, Test MileStone 생성, 테스트 결과를 매 릴리즈 일정(Google Sheet api)에 따라 OS별 Jira의 Release 생성 / 이전 버전 Released 처리, 완료되지 않은 하위 티켓은 신규 Release로 자동 이관, Test MileStone 자동생성 / 이전 버전 종료 하여 테스트 계획 전 구간을 자동화 처리, 유지보수에 따른 티켓 생성에 대한 Flow를 별도로 처리, 특정 타입 티켓으로 Prefix로 ios, and 입력 시 매 Interval로 API에 의해 해당 OS 릴리즈 하위티켓으로 자동연결, 테스트 종료 후 TestReport 전송 또한 자동화 처리 하여, 최소한으로 유지보수에 대한 작업만 개입하게 하여 리그레션 과정을 자동화 하였습니다.]
+  - **역할**: [Jira Flow 정립, QE API서버 구현, TestRail API 구현, JIRA API 구현, TestReport API 구현, Jenkins Pipeline 구현]
+  - **사용 기술**: fastapi, python, jira, Google sheet api, Celery, Redis, Jenkins
+  - **성과**: [기존 매 릴리즈 때마다 직접 해당 버전의 릴리즈 티켓을 OS별 생성, Test MileStone 생성, 테스트 결과를 매 릴리즈 일정(Google Sheet api)에 따라 OS별 Jira의 Release 생성 / 이전 버전 Released 처리, 완료되지 않은 하위 티켓은 신규 Release로 자동 이관, Test MileStone 자동생성 / 이전 버전 종료 하여 테스트 계획 전 구간을 자동화 처리, 유지보수에 따른 티켓 생성에 대한 Flow를 별도로 처리, 특정 타입 티켓으로 Prefix로 ios, and 입력 시 매 Interval로 API에 의해 해당 OS 릴리즈 하위티켓으로 자동연결, 테스트 종료 후 TestReport 전송 또한 자동화 처리, 주기적으로 릴리즈 브렌치의 커밋내역 비교하여, 자동 빌드 후 자동 테스트 수행적용하여, 최소한으로 유지보수에 대한 작업만 개입하게 하여 리그레션 과정을 자동화 하였습니다.]
 
 - **프로젝트명**: [Mobile Platform팀과 테스트 개선 작업]
   - **역할**: [iOS 자동화에 대한 테스트 개선 작업을 위한 다양한 방법 제시 및 적용하여 결과 보고]
