@@ -99,7 +99,7 @@ _기간: [2019/01] - [2024/09]_
   - **성과**: [BlackBox 툴의 단점인 Test Object 변경에 따른 추적 불가를 해결하여 최초 테스트 1회 수행 후 Test Object 변경사항 확인 한 뒤 유지보수 후 정식 테스트를 수행하는 시간을 대폭 단축, Built-in 에선 빌드 시 즉시 Test Obeject 변경 여부 확인이 가능, 리소스 사용량 감소와 idlingResouce 적용으로 전반적인 테스팅 속도 향상, 자동화 프로세스를 개발 프로세스에 통합하여, UI 자동화 개발 및 운영 프로세스 정립, 2주 1회 릴리즈 배포를 1주 1회로 배포 주기 단축하는데 큰 기여]
 
 - **프로젝트명**: [Appium Android, iOS 자동화 개발]
-  - **역할**: [Jenkins와 Appium을 이용하여 Android, iOS Regression을 자동화 구현]
+  - **역할**: [Jenkins와 Appium을 이용하여 Android, iOS Regression을 자동화 구현, TA팀 필요성에 대한 개발팀 내 PPT 진행]
   - **사용 기술**: Jenkins, Appium(Java), Junit
   - **성과**: [요기요 앱에 대한 최초 Regression 자동화 구현 및 자동화 팀 신설]
 
