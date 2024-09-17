@@ -64,7 +64,7 @@ _기간: [2019/01] - [2024/09]_
   - **사용 기술**: fastapi, Python
   - **성과**: [새로운 Object Locator전략 제시, API를 통해 실제 서버에서 받는 데이터를 통해 UI 오브젝트에 접근하도록 하여 항상 Identifier 의존성으로 단순 누락/변경에 의한 실패율을 감소, 통합 API를 구현하여, 주문완료 등의 다양한 테스트 절차를 간단한 API호출로 완료하도록 하여 해당 스텝의 테스트시간을 30초 이상 단축하여 전체 테스트 리그레션 시간 대폭 단축, 상태 flag를 적용하여, 각 상태 flag 값에 따라 매 BeforeClass, BeforeTestCase, AferTestCase, AfterClass 동작을 동적으로 하도록 하여 테스트 초기화 시간 단측 및 최적화]
 
-- **프로젝트명**: [자동화 커버리지 향상을 위한 신규 자동화 툴 도입 및 기존 Katalon 코드 컨버팅](https://kimkitae.github.io/posts/mobile-automation/#%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%8F%84%EC%A0%84-api-%EB%B0%8F-gpt%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9E%90%EB%8F%99%ED%99%94)
+- **프로젝트명**: [자동화 커버리지 향상을 위한 신규 자동화 툴 도입 및 기존 Katalon 코드 컨버팅](https://kimkitae.github.io/posts/mobile-automation/#katalon-%EB%8F%84%EA%B5%AC%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%BD%94%EB%93%9C-%EC%97%86%EB%8A%94-%EC%9E%90%EB%8F%99%ED%99%94)
   - **역할**: [다양한 자동화 툴 벤치마킹 및 파일럿 테스트 진행, 자동화 도입을 위한 제안서 작성, 셋업]
   - **성과**: [Codeless 툴인 Katalon 도입하여 QE 구성원들도 직접 자동화 시나리오 작성할 수 있도록 하여 단기간 내 테스트 커버리지 대폭 향상(Android 기준 전체 커버리지율 50% -> 80%), 기존 Built-in 으로 구현한 모든 자동화 코드를 Katalon 으로 단기간 컨버팅 완료하여 신속하게 적용 및 정상화(Working day 24일)]
 
