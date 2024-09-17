@@ -29,10 +29,9 @@ order: 4
 
 _기간: [2019/01] - [2024/09]_
 
-- **프로젝트명**: [업무 내 LLM 적용]
+- **프로젝트명**: [LLM 이용한 자동화 스크립트 자동생성](https://kimkitae.github.io/posts/quick-start-rag-and-llm-for-automation/)
   - **역할**: [LLM를 업무에 적용하기 위한 기획, 구현]
   - **사용 기술**: python, slackbot-bolt, openai, rag
-  - **링크**: [https://kimkitae.github.io/posts/quick-start-rag-and-llm-for-automation/]
   - **성과**: [주 커뮤니케이션이 자주 발생하는 부분에 대한 LLM 적용, 스크립트 작성에 대한 함수 질문, 간단한 스크립트 완성, 테스트 케이스 지표에 대한 질의응답을 Rag 방식을 통해 LLM로 답변을 생성하여 커뮤니케이션 비용 단축, QE API의 Web UI 외에도 Slackbot을 통해 단순 봇 호출과 질문으로 동작할수있도록 인터페이스 제공하여 사용성 향상, 간단한 스크립트 작성에 한해 질문에 대한 스크립트 작성율은 90% 도달, 개인적으로 사이드 프로젝트로 진행하던 프로젝트로 완벽히 끝내진 못하고 가능성을 확인해볼 수 있는 성과]
 
 - **프로젝트명**: [Windows 프로그램 내 WebView 크로미움 자동화]
@@ -40,16 +39,14 @@ _기간: [2019/01] - [2024/09]_
   - **사용 기술**: python, pytest, javascript, Appium Windows Desktop
   - **성과**: [Debugging port를 통한 WebSocket통신으로 자동화 구현, 요구하는 시나리오에 대한 자동화 구현 (요구사항 대비 94% 완료), FE팀과의 React 빌드 시 마다 ID가 동적으로 변경되는 부분에 대한 대안과 필요성에 대한 리뷰로 문제를 해결할 수 있는 방안 마련]
 
-- **프로젝트명**: [SMS 인증 관리 통합 페이지 기획 및 개발]
+- **프로젝트명**: [SMS 인증 관리 통합 페이지 기획 및 개발](https://kimkitae.github.io/posts/sms-management-system/)
   - **역할**: [SMS Receive할 Android Application 개발, 인증문자 확인을 위한 Web, Backend 구현]
   - **사용 기술**: Kotlin, fastapi, Redis, JavaScript
-  - **링크**: [https://kimkitae.github.io/posts/sms-management-system/]
   - **성과**: [누구나 보유 중인 테스트 유심폰에 APK를 설치하여 해당 번호로 인증번호가 필요한 경우 통합 관리 페이지를 통해 수신된 인증문자 확인이 가능, API를 통해 해당 번호의 인증번호 호출가능하도록 하여 자동화 스크립트 내에서도 본인인증 가능하도록 하여 테스트 커버리지를 향상]
 
-- **프로젝트명**: [LogViewer 기획 및 개발]
+- **프로젝트명**: [LogViewer 기획 및 개발](https://kimkitae.github.io/posts/log-view-system/)
   - **역할**: [api를 통해 log를 전달하고 한곳에서 logviewer를 할 수 있도록 자동화 플랫폼 기획 및 구현]
   - **사용 기술**: fastapi, Redis, kafka, JavaScript
-  - **링크**: [https://kimkitae.github.io/posts/log-view-system/]
   - **성과**: [QE 구성원들이 구현한 간단한 자동화 시스템에도 간단히 API 호출만으로 Log 메시지를 전달하여, 메인 QE API서버에서 각 서비스멸 로그내역을 확인 할 수 있도록하여, 기존 에러 처리 및 로그 내역 확인을 위한 커뮤니케이션 비용을 대폭 경감]
 
 - **프로젝트명**: [Workato 업무 자동화 구현]
@@ -233,31 +230,6 @@ _기간: [2013/12] - [2014/07]_
 - [정보기기운용기능사], [한국산업인력공단], [2005]
 - [정보처리기능사], [한국산업인력공단], [2004]
 - [워드프로세스 1급], [대한상공회의소], [2004]
-
----
-
-## 📝 개인 프로젝트
-
-### [SMS Receive Android Application]
-- **설명**: [SMS 수신 중 인증문자 4/6 자리 만 추출하여 WebSocket으로 전달, 단말 등록/해제를 위한 API 호출]
-- **링크**: []
-- **사용 기술**: kotlin
-
-### [SMS 통합 관리 페이지]
-- **설명**: [FastApi를 통해 구현한 Web Server로 위 Android Application과 WebSocket 통신연결하여 Web UI로 등록된 단말 정보 및 SMS 인증 문자 확인 할 수 있도록 페이지 제공]
-- **링크**: []
-- **사용 기술**: JavaScript, Redis, Fastapi, Python
-
-### [통합 Log Message Viewer 페이지]
-- **설명**: [FastApi를 통해 Log 메시지 저장 API 제공, Kafka, Redis 이용하여 Web UI 내 해당 Log Message를 확인 수 있도록하여, 다양한 자동화 툴에서 간단하게 적용가능 및 중앙에서 로그 확인 가능]
-- **링크**: []
-- **사용 기술**: JavaScript, Redis, Fastapi, Python, Kafka
-
-### [RAG 활용한 LLM으로 자동화 스크립트 생성]
-- **설명**: [구현한 자동화 스크립트들을 벡터화 하여 RAG를 활용해 사용자 질의에 대한 LLM이 자동화 자동 생성]
-- **링크**: []
-- **사용 기술**: Slack-bolt, python, R2R
-
 
 ---
 
