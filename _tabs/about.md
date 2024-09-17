@@ -59,12 +59,12 @@ _기간: [2019/01] - [2024/09]_
   - **사용 기술**: fastapi, python, jira, Google sheet api, Celery, Redis, Jenkins
   - **성과**: [기존 매 릴리즈 때마다 직접 해당 버전의 릴리즈 티켓을 OS별 생성, Test MileStone 생성, 테스트 결과를 매 릴리즈 일정(Google Sheet api)에 따라 OS별 Jira의 Release 생성 / 이전 버전 Released 처리, 완료되지 않은 하위 티켓은 신규 Release로 자동 이관, Test MileStone 자동생성 / 이전 버전 종료 하여 테스트 계획 전 구간을 자동화 처리, 유지보수에 따른 티켓 생성에 대한 Flow를 별도로 처리, 특정 타입 티켓으로 Prefix로 ios, and 입력 시 매 Interval로 API에 의해 해당 OS 릴리즈 하위티켓으로 자동연결, 테스트 종료 후 TestReport 전송 또한 자동화 처리, 주기적으로 릴리즈 브렌치의 커밋내역 비교하여, 자동 빌드 후 자동 테스트 수행적용하여, 최소한으로 유지보수에 대한 작업만 개입하게 하여 리그레션 과정을 자동화 하였습니다.]
 
-- **프로젝트명**: [Mobile Platform팀과 테스트 개선 작업]
+- **프로젝트명**: [Mobile Platform팀과 테스트 개선 작업](https://kimkitae.github.io/posts/mobile-automation/#%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%8F%84%EC%A0%84-api-%EB%B0%8F-gpt%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9E%90%EB%8F%99%ED%99%94)
   - **역할**: [iOS 자동화에 대한 테스트 개선 작업을 위한 다양한 방법 제시 및 적용하여 결과 보고]
   - **사용 기술**: fastapi, Python
   - **성과**: [새로운 Object Locator전략 제시, API를 통해 실제 서버에서 받는 데이터를 통해 UI 오브젝트에 접근하도록 하여 항상 Identifier 의존성으로 단순 누락/변경에 의한 실패율을 감소, 통합 API를 구현하여, 주문완료 등의 다양한 테스트 절차를 간단한 API호출로 완료하도록 하여 해당 스텝의 테스트시간을 30초 이상 단축하여 전체 테스트 리그레션 시간 대폭 단축, 상태 flag를 적용하여, 각 상태 flag 값에 따라 매 BeforeClass, BeforeTestCase, AferTestCase, AfterClass 동작을 동적으로 하도록 하여 테스트 초기화 시간 단측 및 최적화]
 
-- **프로젝트명**: [자동화 커버리지 향상을 위한 신규 자동화 툴 도입 및 기존 Katalon 코드 컨버팅]
+- **프로젝트명**: [자동화 커버리지 향상을 위한 신규 자동화 툴 도입 및 기존 Katalon 코드 컨버팅](https://kimkitae.github.io/posts/mobile-automation/#%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%8F%84%EC%A0%84-api-%EB%B0%8F-gpt%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9E%90%EB%8F%99%ED%99%94)
   - **역할**: [다양한 자동화 툴 벤치마킹 및 파일럿 테스트 진행, 자동화 도입을 위한 제안서 작성, 셋업]
   - **성과**: [Codeless 툴인 Katalon 도입하여 QE 구성원들도 직접 자동화 시나리오 작성할 수 있도록 하여 단기간 내 테스트 커버리지 대폭 향상(Android 기준 전체 커버리지율 50% -> 80%), 기존 Built-in 으로 구현한 모든 자동화 코드를 Katalon 으로 단기간 컨버팅 완료하여 신속하게 적용 및 정상화(Working day 24일)]
 
@@ -73,7 +73,7 @@ _기간: [2019/01] - [2024/09]_
   - **사용 기술**: Python, Postman(JavaScript), Jenkins
   - **성과**: [각 트라이브 별 담당하는 프로젝트에 대한 리그레션을 자동화로 검증 할수 있도록 기획 및 구현가능하도록 교육 제공하여 모든 트라이브의 QE들 완성률 100% 완료, Jenkins를 이용한 자동 검증을 통해 전반적인 배포 후 검증단계 까지 절차 간소화, 사내 구성원들 자동화역량 강화]
 
-- **프로젝트명**: [알림음 자동화 구현]
+- **프로젝트명**: [알림음 자동화 구현](https://kimkitae.github.io/posts/compare-sounds-automation/)
   - **역할**: [서비스 내 알림음에 대한 자동화 요구사항에 따른 기술 검토 및 구현]
   - **사용 기술**: Docker, python, Appium(Python)
   - **성과**: [Docker를 이용한 음악인식 서비스를 적용하여, 단말의 소리를 녹음하여, 이를 mp3로 추출, 음악인식하고 매칭하여 실제 알림음 송출여부 확인 할 수 있도록 자동화 완료하여 다양한 서비스 내 알림음 자동화 적용]
@@ -98,12 +98,12 @@ _기간: [2019/01] - [2024/09]_
   - **사용 기술**: Python, Appium(Java), Slack API
   - **성과**: [매 배포 시 Slackbot을 통해 모니터링/리그레션 자동 수행 제공, 테스트 수행 결과 알림으로 매 배포 시 30분을 메뉴얼로 확인하던 프로세스를 자동화하여, QE 온콜자 및 배포 개발자들의 리소스 경감, 프로세스화 하여 각 MSA 별 자동화 테스트 적용]
 
-- **프로젝트명**: [Espresso, XCUITest를 이용한 Regression 자동화 개발]
+- **프로젝트명**: [Espresso, XCUITest를 이용한 Regression 자동화 개발](https://kimkitae.github.io/posts/mobile-automation/#appium%EA%B3%BC-native-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC%EC%9D%98-%EB%B9%84%EA%B5%90)
   - **역할**: [Built-in Test Framework를 이용하여 자동화 개발]
   - **사용 기술**: Kotlin, Swift
   - **성과**: [BlackBox 툴의 단점인 Test Object 변경에 따른 추적 불가를 해결하여 최초 테스트 1회 수행 후 Test Object 변경사항 확인 한 뒤 유지보수 후 정식 테스트를 수행하는 시간을 대폭 단축, Built-in 에선 빌드 시 즉시 Test Obeject 변경 여부 확인이 가능, 리소스 사용량 감소와 idlingResouce 적용으로 전반적인 테스팅 속도 향상, 자동화 프로세스를 개발 프로세스에 통합하여, UI 자동화 개발 및 운영 프로세스 정립, 2주 1회 릴리즈 배포를 1주 1회로 배포 주기 단축하는데 큰 기여]
 
-- **프로젝트명**: [Appium Android, iOS 자동화 개발]
+- **프로젝트명**: [Appium Android, iOS 자동화 개발](https://kimkitae.github.io/posts/mobile-automation/#%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%9E%90%EB%8F%99%ED%99%94%EC%9D%98-%EC%B2%AB-%EA%B2%BD%ED%97%98)
   - **역할**: [Jenkins와 Appium을 이용하여 Android, iOS Regression을 자동화 구현, TA팀 필요성에 대한 개발팀 내 PPT 진행]
   - **사용 기술**: Jenkins, Appium(Java), Junit
   - **성과**: [요기요 앱에 대한 최초 Regression 자동화 구현 및 자동화 팀 신설]
