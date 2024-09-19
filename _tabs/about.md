@@ -25,7 +25,7 @@ order: 4
 ## 💼 경력
 
 ### [위대한상상], [팀원]
-- **주요 업무**: [Automation Engineer로 QA 전반적인 자동화 구축]
+- **주요 업무**: [Automation Engineer로 QA 전반적인 자동화 구축](https://techblog.yogiyo.co.kr/%EC%9A%94%EA%B8%B0%EC%9A%94-r-d-center%EC%9D%98-%EC%9E%90-%EB%8F%99%ED%99%94-%EB%8B%98%EC%9D%84-%EC%86%8C%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4-e74c7ee34428?gi=830a9c6a770a)
 
 _기간: [2019/01] - [2024/09]_
 
