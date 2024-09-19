@@ -102,6 +102,7 @@ _기간: [2019/01] - [2024/09]_
   - **역할**: [Built-in Test Framework를 이용하여 자동화 개발]
   - **사용 기술**: Kotlin, Swift
   - **성과**: [BlackBox 툴의 단점인 Test Object 변경에 따른 추적 불가를 해결하여 최초 테스트 1회 수행 후 Test Object 변경사항 확인 한 뒤 유지보수 후 정식 테스트를 수행하는 시간을 대폭 단축, Built-in 에선 빌드 시 즉시 Test Obeject 변경 여부 확인이 가능, 리소스 사용량 감소와 idlingResouce 적용으로 전반적인 테스팅 속도 향상, 자동화 프로세스를 개발 프로세스에 통합하여, UI 자동화 개발 및 운영 프로세스 정립, 2주 1회 릴리즈 배포를 1주 1회로 배포 주기 단축하는데 큰 기여]
+  - **참고링크**: [iOS UI Test](https://techblog.yogiyo.co.kr/%EC%9D%BC%ED%95%98%EA%B3%A0-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-ios-ui-test-61830646d091)
 
 - **프로젝트명**: [Appium Android, iOS 자동화 개발](https://kimkitae.github.io/posts/mobile-automation/#%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%9E%90%EB%8F%99%ED%99%94%EC%9D%98-%EC%B2%AB-%EA%B2%BD%ED%97%98)
   - **역할**: [Jenkins와 Appium을 이용하여 Android, iOS Regression을 자동화 구현, TA팀 필요성에 대한 개발팀 내 PPT 진행]
