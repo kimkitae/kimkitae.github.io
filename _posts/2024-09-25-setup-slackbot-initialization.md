@@ -235,3 +235,5 @@ Slackbot에서는 두 가지 종류의 토큰을 사용합니다:
 
 ---
 이번 포스트에서는 Slackbot의 생성부터 기본적인 실행까지의 과정을 살펴보았습니다. 다음 포스트에서는 각 Features의 상세 설정과 복잡한 기능 구현에 대해 다뤄보겠습니다. 감사합니다.
+
+연관링크 - [SlackBot 내 LLM을 통한 자동 스크립트 생성](https://kimkitae.github.io/posts/quick-start-rag-and-llm-for-automation/)
