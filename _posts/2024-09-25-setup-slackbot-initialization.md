@@ -97,7 +97,7 @@ Slack은 Web API, Events API, Socket Mode 등 다양한 API를 제공합니다.
 
 
 ![Invited Bot](https://github.com/user-attachments/assets/2d0463c9-91ad-423d-a236-f65f5b5070e0)
-
+- 메세지 전달와 같은 동작을 위해선 해당 채널에 봇이 초대 되어 있어야 합니다.
 ---
 
 # Slackbot 실행하기
