@@ -4,7 +4,7 @@ author: KimKitae
 date: 2024-09-15 12:00:00 +9000
 categories: [Automation, TestPlatform]
 tags: [Testing, TestPlatform]
-pin: true
+pin: false
 ---
 
 # 간단한 로그 뷰어 시스템 구현하기
