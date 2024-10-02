@@ -8,7 +8,7 @@ order: 4
 # [김기태]
 
 - **이메일**: [daearcdo@kimkitae.com]
-- **LinkedIn**: [https://www.linkedin.com/public-profile/settings]
+- **LinkedIn**: [https://www.linkedin.com/in/kitae-kim-88597817a]
 - **블로그/포트폴리오**: [https://kimkitae.github.io/]
 
 ---
