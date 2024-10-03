@@ -10,6 +10,7 @@ order: 4
 - **이메일**: [daearcdo@kimkitae.com](mailto:daearcdo@kimkitae.com)
 - **LinkedIn**: [https://www.linkedin.com/in/kitae-kim-88597817a]()
 - **블로그/포트폴리오**: [https://kimkitae.github.io/](https://kimkitae.github.io/)
+- **문의사항** [문의하기](https://qna.kimkitae.com/help/3691219236)
 
 ---
 
