@@ -1,7 +1,7 @@
 ---
 title: 윈도우 노트북에 Ubuntu 설치하기(맥에서 부팅 이미지 만들팅)
 author: KimKitae
-date: 2024-10-10 12:00:00 +9000
+date: 2024-10-25 12:00:00 +9000
 categories: [server]
 tags: [ubuntu]
 pin: false

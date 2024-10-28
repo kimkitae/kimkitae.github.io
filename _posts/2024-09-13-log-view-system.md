@@ -3,7 +3,7 @@ title: 간단한 LogViewer 구현 및 운영하기
 author: KimKitae
 date: 2024-09-15 12:00:00 +9000
 categories: [Automation, TestPlatform]
-tags: [Testing, TestPlatform]
+tags: [TestPlatform]
 pin: false
 ---
 

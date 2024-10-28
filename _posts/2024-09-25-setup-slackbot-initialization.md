@@ -2,8 +2,8 @@
 title: SlackBot 구축부터 활용까지 - 환경 설정하기
 author: KimKitae
 date: 2024-09-25 12:00:00 +9000
-categories: [TestPlatform, SlackBot]
-tags: [TestPlatform, SlackBot]
+categories: [Automation, SlackBot]
+tags: [SlackBot]
 pin: true
 ---
 
