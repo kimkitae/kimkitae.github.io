@@ -105,5 +105,4 @@ No rasterization or browser check was performed in this worker tier; root owns P
 - The original notification-sound post does not specify which audio capture path it used. The corrected post treats audio as a separate prerequisite and does not guess the path.
 - The historical Mobile MCP package version is not recorded in the source. The corrected post points to upstream instructions and asks readers to record the resolved version.
 - The archive link uses revision `bbcc4f1`; this worker did not fetch the Git host to verify the commit URL resolves.
-- The DevelopSense author's name is not stated in the source or the review; the note cites the publication and date only.
-
+- The original Korean source lacked attribution. Opus recheck verified Michael Bolton on the DevelopSense page; the final notes now name the author as well as the publication and date.
