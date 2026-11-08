@@ -7,29 +7,32 @@ last_modified_at: 2026-11-08
 lang: en
 permalink: /en/posts/mobile-mcp-setup-guide/
 translation_url: /posts/mobile-mcp-setup-guide/
-description: Connecting an MCP-based mobile automation server to Cursor and Claude Desktop, with simulator and emulator checks and a realistic look at the limits.
+description: Connecting an MCP-based mobile tool to Cursor and Claude Desktop, separating exploration from deterministic regression, and why a model's completion message is not evidence.
 categories: [Automation, MobileTest]
 tags: [Mobile-MCP, MCP, Cursor, Claude, Appium, 모바일테스트]
 ---
 
-MCP (Model Context Protocol) is a protocol that lets AI tools call external systems and tools. This article walks through connecting an MCP-based mobile automation server to Cursor and Claude Desktop and checking it against an iOS simulator and an Android emulator. The ability to run tests in natural language is interesting, but stability and reproducibility are still being verified.
+MCP (Model Context Protocol) lets AI tools call external systems and tools. Attached to mobile automation, it lets you say “find this button and tap it” in natural language. That is convenient, and the risk sits in the same place: the model saying “done” is not the same as the action having happened. This article covers the connection, then how to separate exploratory use from deterministic regression.
 
-![AI client, MCP server, and iOS/Android devices connected](/assets/img/posts/renewal/mobile-mcp-setup-guide.svg)
+![Exploration, evidence capture, human review, and conversion into a regression scenario, with model completion text outside the evidence boundary](/assets/img/posts/renewal/mobile-mcp-setup-guide.svg)
 
-*Figure 1. Cursor or Claude Desktop exchanges accessibility information and actions with devices through an MCP server.*
+*Figure 1. An exploration result becomes a regression scenario only after evidence and review. Model completion text is not evidence.*
 
-## What MCP does
+## Exploration and regression are different problems
 
-An MCP server exposes a list of tools to an AI client. When the client calls a tool, the server performs the work. For mobile automation, the tools read the accessibility snapshot, list elements, and perform taps, text input, and screenshots. The advantage is that you do not manage sessions and selectors the way you do with Appium.
+| Aspect | Exploratory use | Deterministic regression |
+|---|---|---|
+| Goal | Understand the screen and behavior quickly | Confirm the same result repeats |
+| Input | Natural-language instruction | Fixed scenario and data |
+| Judgment | A person checks screen and logs | Automated assertions and failure evidence |
+| On failure | Decide the next attempt | Classify the cause and reproduce |
+| Best stage | New features, quick checks | Repeated pre-release verification |
 
-The risk is assuming it works the same way in every app. Screens without accessibility labels or with heavy WebView usage can be hard to identify, and coordinate taps are sensitive to resolution. For regression tests that need reproducibility, it is safer to treat this as a supporting tool for now.
+MCP-based tools are strong on the left. They read the accessibility snapshot, list elements, and perform taps, input, and screenshots without managing sessions and selectors the way Appium does. On the right they remain a supporting tool: the same instruction does not guarantee the same result, and model judgment cannot replace an assertion.
 
-## Prerequisites
+## Setting up against current upstream
 
-- **Node.js**: needed to run the server; LTS is recommended.
-- **Xcode Command Line Tools**: iOS simulator and build tools.
-- **Android Studio + Platform Tools**: `adb` and emulators.
-- **AI client**: Cursor or Claude Desktop.
+Package names and tool lists change. The configuration here is an example from the time of writing; before installing, check the current guidance in the [Mobile MCP repository](https://github.com/mobile-next/mobile-mcp). Its documentation covers listing connected devices and includes Mobilewright examples; specific tool names vary by version.
 
 ```bash
 node --version
@@ -37,15 +40,7 @@ xcode-select -p
 adb version
 ```
 
-Package names and CLI options can change. Before installing, check the [Mobile MCP repository](https://github.com/mobile-next/mobile-mcp) and the npm package page for current instructions, then record the version actually resolved in your environment. The configuration below uses `@latest`; because that value changes over time, record the resolved version separately if reproducibility matters. The MCP specification itself is documented at [modelcontextprotocol.io](https://modelcontextprotocol.io/).
-
-## Cursor configuration
-
-Cursor reads MCP servers from `mcp.json` in its user configuration directory.
-
-```bash
-mkdir -p ~/.cursor
-```
+Cursor can use the user-level `~/.cursor/mcp.json` and the project-level `.cursor/mcp.json`. Record which one you registered.
 
 ```json
 {
@@ -58,56 +53,56 @@ mkdir -p ~/.cursor
 }
 ```
 
-Restart Cursor completely after saving. If the server does not appear, run the command in a terminal to see the error.
+Claude Desktop on macOS uses `~/Library/Application Support/Claude/claude_desktop_config.json`. Merge the `mcpServers` object with existing configuration and check the JSON syntax.
 
-## Claude Desktop configuration
+`@latest` points at different versions over time. If reproducibility matters, record the version actually resolved after installation and pin it when repeating an experiment.
 
-On macOS, the file is `~/Library/Application Support/Claude/claude_desktop_config.json`. Add the server in the same shape.
+## Device and permission boundaries
 
-```json
-{
-  "mcpServers": {
-    "mobile-mcp": {
-      "command": "npx",
-      "args": ["-y", "@mobilenext/mobile-mcp@latest"]
-    }
-  }
-}
-```
+- **iOS simulator**: list and boot with `xcrun simctl`. Physical devices need trust approval.
+- **Android emulator**: record the AVD name and API level. Physical devices need USB debugging and a working driver.
+- **Organizational policy**: use only allowed test devices. Exploring a phone signed into a company account can change account state.
 
-Restart Claude Desktop after saving. If you already have configuration, merge the `mcpServers` object and check the JSON syntax.
+A model easily treats “not in the accessibility tree” as “not on screen.” Buttons without labels, WebView internals, and canvas-rendered content may not appear. Coordinate taps are sensitive to resolution and display scale. “I could not find the element” therefore means **the accessibility tree did not contain it**, not that the screen does not.
 
-## Connecting devices
+## Demand evidence, not completion text
 
-List and boot an iOS simulator:
+MCP tool results can include text summaries, images, and structured results. Model prose such as “tapped” or “opened settings” must be distinguished from the tool output actually observed; the prose itself is not proof of screen state. Keep at least these:
 
-```bash
-xcrun simctl list devices
-xcrun simctl boot "iPhone 16"
-open -a Simulator
-```
+1. **Before and after screenshots**: compare whether the screen changed and whether it is the same screen.
+2. **Accessibility snapshot**: record the target element's identifier and position.
+3. **Device log or app state**: check for crashes and screen transitions.
+4. **Business state**: confirm the outcome through an API or database read.
 
-Start an Android emulator:
+A screenshot alone cannot prove the right button was pressed; a snapshot alone cannot prove the screen changed. Both must point the same way before counting the action as done.
 
-```bash
-emulator -list-avds
-emulator -avd Pixel_7_API_34
-adb devices
-```
+## Turning an explored flow into a regression scenario
 
-For physical devices, enable trust on iOS and USB debugging on Android. Use only test devices that your organization allows.
+The steps below illustrate the workflow. They are not tied to a specific app or account; they show how exploration becomes a deterministic test.
 
-## A practical check
+1. **Explore**: ask, “In Settings, turn the notification toggle off and back on.”
+2. **Record**: keep the element identifiers used, transitions, elapsed time, and failed attempts. Running the same instruction twice is a smoke check; two matching runs do not prove determinism.
+3. **Review**: a person checks screenshots and snapshots and confirms the identifier does not collide with another element. If it does, do not use it in regression.
+4. **Pin**: move the preconditions (device model, OS version, app build, locale, initial permission state), actions, and assertions into the existing framework's scenario format. If considering a new route, compare the upstream README's Mobilewright example too. This revision did not execute a scenario with that tool.
+5. **Verify**: run the scenario twice. If the second run fails, check waits, environment, unstable locators, and product defects as well as missing cleanup. One failure does not prove the cleanup step is missing.
 
-Once connected, you can ask the AI client:
+The important artifact is not “the model succeeded” but “a reviewed, reproducible sequence remains.” Saving the natural-language instruction as the test means the same instruction behaves differently when the model or UI changes.
 
-```text
-List the available mobile devices and running simulators.
-List the UI elements on the current screen, then open Settings > General.
-```
+## Destructive actions and permissions
 
-Compare the device names and elements in the response with the actual screen. Before trusting automation, reproduce the same action manually and inspect what information is left when it fails. Natural-language commands are convenient, but “the same command always produces the same result” is a separate question.
+MCP tools operate real devices. Payment, account deletion, and logout need confirmation even during exploration. Decide these in advance:
 
-## Limits and summary
+- Limit tools and apps, and use test accounts only.
+- Require human confirmation for destructive actions.
+- Retain tool-call logs and failure screenshots.
+- Have a person review model-generated scenarios before execution.
 
-This approach is useful for exploratory testing, quick screen checks, and repetitive input. It is not yet sufficient for security-sensitive flows such as payment and authentication, or for precise regression checks. If you adopt it, build tool-call logs, failure screenshots, and reproducible scenarios first, and divide responsibilities with Appium or native tests. The package name and commands here are examples from the time of writing; check the current documentation before installing.
+Security-sensitive flows should not be delegated to MCP exploration yet. “AI replaces QA” is not a claim this article supports. What the tool saves is time on exploration and repetitive input.
+
+## Verification boundary
+
+This revision did not run the MCP server against an emulator or device. It reflects the repository's current documentation and examples; tool names and result formats vary by version. After installing, verify the connection, the device list, one tap, and one screenshot yourself.
+
+## Summary
+
+MCP-based mobile tools lower the cost of exploration. Turning the result into regression verification needs action evidence, human review, and reproducible preconditions. Do not use the model's completion message as an assertion; keep screenshots, snapshots, and business state together.

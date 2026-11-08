@@ -1,42 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="640" viewBox="0 0 720 640" role="img" aria-labelledby="title desc">
-  <title id="title">Four stages of my mobile automation</title>
-  <desc id="desc">A 2x2 grid: Appium black-box control with locator failures at run time; Espresso and XCUITest with ids referenced in app source; Katalon low-code page objects; API state setup with fewer locators to maintain.</desc>
-  <rect width="720" height="640" fill="#fbfaf7"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="840" viewBox="0 0 640 840" role="img" aria-labelledby="title desc">
+  <title id="title">One mobile test, three jobs</title>
+  <desc id="desc">State is prepared through an API, one business action runs through the UI, and evidence combines a screenshot with the expected value from the API. Cleanup deletes the created data. Each step proves a different thing, so its failure means something different.</desc>
+  <rect width="640" height="840" fill="#fbfaf7"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/>
+    </marker>
+  </defs>
   <g font-family="system-ui, -apple-system, sans-serif">
-    <text x="360" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#2f4858">Four stages of my mobile automation</text>
+    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#1f2d36">One test, three jobs</text>
+    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#4a5a64">Each step fails for a different reason</text>
 
-    <rect x="16" y="76" width="336" height="240" rx="16" fill="#2f4858"/>
-    <circle cx="56" cy="120" r="24" fill="#ffffff"/>
-    <text x="56" y="128" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">1</text>
-    <text x="92" y="130" font-size="28" font-weight="700" fill="#ffffff">Appium</text>
-    <text x="34" y="188" font-size="18" fill="#d9e2e8">black-box UI control</text>
-    <text x="34" y="228" font-size="18" fill="#d9e2e8">drives the app from outside</text>
-    <text x="34" y="260" font-size="18" fill="#d9e2e8">missing ids fail at that step</text>
+    <rect x="60" y="110" width="520" height="130" rx="16" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
+    <text x="320" y="154" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">1. Prepare state via API</text>
+    <text x="320" y="190" text-anchor="middle" font-size="22" fill="#3f4f59">create the order, keep its id</text>
+    <text x="320" y="220" text-anchor="middle" font-size="22" fill="#3f4f59">proves: the data, not the UI</text>
 
-    <rect x="368" y="76" width="336" height="240" rx="16" fill="#4f6d7a"/>
-    <circle cx="408" cy="120" r="24" fill="#ffffff"/>
-    <text x="408" y="128" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">2</text>
-    <text x="444" y="130" font-size="28" font-weight="700" fill="#ffffff">Native</text>
-    <text x="386" y="188" font-size="18" fill="#e8eff3">Espresso · XCUITest</text>
-    <text x="386" y="228" font-size="18" fill="#e8eff3">ids referenced in app source</text>
-    <text x="386" y="260" font-size="18" fill="#e8eff3">build flagged them earlier</text>
+    <line x1="320" y1="240" x2="320" y2="274" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="16" y="356" width="336" height="240" rx="16" fill="#e3ecec" stroke="#7a9e9f" stroke-width="2"/>
-    <circle cx="56" cy="400" r="24" fill="#ffffff" stroke="#7a9e9f" stroke-width="2"/>
-    <text x="56" y="408" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">3</text>
-    <text x="92" y="410" font-size="28" font-weight="700" fill="#2f4858">Katalon</text>
-    <text x="34" y="468" font-size="18" fill="#40595f">low-code on Appium</text>
-    <text x="34" y="508" font-size="18" fill="#40595f">page objects per screen</text>
-    <text x="34" y="540" font-size="18" fill="#40595f">more people write tests</text>
+    <rect x="60" y="276" width="520" height="130" rx="16" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
+    <text x="320" y="320" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">2. One business UI action</text>
+    <text x="320" y="356" text-anchor="middle" font-size="22" fill="#3f4f59">open cart, apply the coupon</text>
+    <text x="320" y="386" text-anchor="middle" font-size="22" fill="#3f4f59">proves: the user path works</text>
 
-    <rect x="368" y="356" width="336" height="240" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
-    <circle cx="408" cy="400" r="24" fill="#ffffff" stroke="#c9a227" stroke-width="2"/>
-    <text x="408" y="408" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">4</text>
-    <text x="444" y="410" font-size="28" font-weight="700" fill="#2f4858">API + AI</text>
-    <text x="386" y="468" font-size="18" fill="#5d5323">state setup via API</text>
-    <text x="386" y="508" font-size="18" fill="#5d5323">UI only where it matters</text>
-    <text x="386" y="540" font-size="18" fill="#5d5323">fewer locators to maintain</text>
+    <line x1="320" y1="406" x2="320" y2="440" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <text x="360" y="622" text-anchor="middle" font-size="18" fill="#5d6b75">Each stage removed a failure mode from the previous one</text>
+    <rect x="60" y="442" width="520" height="130" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="320" y="486" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">3. Assert and attach evidence</text>
+    <text x="320" y="522" text-anchor="middle" font-size="22" fill="#3f4f59">screenshot + API expected value</text>
+    <text x="320" y="552" text-anchor="middle" font-size="22" fill="#3f4f59">proves: what failed, and what was expected</text>
+
+    <line x1="320" y1="572" x2="320" y2="606" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="60" y="608" width="520" height="130" rx="16" fill="#2f4858"/>
+    <text x="320" y="652" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">4. Clean up</text>
+    <text x="320" y="688" text-anchor="middle" font-size="22" fill="#d9e2e8">delete the order, keep the log</text>
+    <text x="320" y="718" text-anchor="middle" font-size="22" fill="#d9e2e8">proves: the next run starts empty</text>
+
+    <text x="320" y="790" text-anchor="middle" font-size="22" fill="#4a5a64">If step 2 fails, step 1 was already verified.</text>
+    <text x="320" y="820" text-anchor="middle" font-size="22" fill="#4a5a64">A passing API call alone does not prove the UI.</text>
   </g>
 </svg>

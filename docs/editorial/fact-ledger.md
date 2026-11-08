@@ -60,6 +60,51 @@ The DevelopSense author name is not stated in the source or the review, so the n
 
 Removed as unsupported: observed intermittent embedding API failures, "we never allowed execution" in the actual build, example annotation work, and a diagnostic history. Auto-execution exclusion is now a recommendation.
 
+### RAG depth rewrite: source, current docs, synthetic reproduction
+
+Historical source lines:
+
+| Claim | Source evidence | Treatment |
+|---|---|---|
+| Local Llama 3 via Ollama, `mxbai-embed-large`, FAISS HNSW, Slackbot with retrieved snippets | `../source/_posts/2024-08-02-quick-start-rag-and-llm-for-automation.md:23,37,64,117,237,255` | Retained as 2024 implementation, not current recommendation. |
+| `create_index` appends a successful embedding and its chunk in the same branch; logs failures and checks equal dimensions | same source, `create_index` block | Retained as a paired-metadata invariant. No alignment bug is claimed in that code. |
+| Chunk parameters 100 and overlap 25, capped by `[:max_chunks_per_script]` default 10 | same source, `create_index` signature and slice | Retained. `chunk_text` is undefined, so units and algorithm are unproven; the cap can exclude later code. |
+| Search filter is `if i < len(scripts)`; score is `1 / (1 + distance)`; `truncate_context` slices strings with default 9000, call site 3000 | same source, `search_scripts` and `truncate_context` | Retained as the historical code path. Current article explains the consequences. |
+| A separate test-case Q&A service used LLM keyword extraction and pre-generated keyword data to reduce context | same source, final paragraph | Restored as an actual deterministic-lookup alternative, not a new experiment. |
+| Ollama request puts `temperature`, `top_p`, `max_tokens` at the top level | same source, `ask_ollama` request body | Treated as an unknown 2024 server behavior; not asserted to be correct or rejected. |
+
+Current documentation:
+
+| Claim | Source | Treatment |
+|---|---|---|
+| FAISS pads missing labels with `-1` when fewer neighbors than `k` exist | https://faiss.ai/cpp_api/struct/structfaiss_1_1IndexFlat.html | Used to explain the reproduction. |
+| FAISS L2 indexes return squared L2; cosine is normalized dot product | https://github.com/facebookresearch/faiss/wiki/MetricType-and-distances | Used for metric consistency and the non-probability warning. |
+| `/api/generate` puts runtime controls under `options`; generation limit is `num_predict` | https://docs.ollama.com/api/generate | Labeled current API advice, not a claim about the 2024 server. |
+| No local Ollama binary or runtime was found | Root environment check | No live embedding or generation test is claimed. |
+
+New synthetic reproduction (2026-11-08):
+
+| Observed/derived fact | Evidence | Treatment |
+|---|---|---|
+| Python 3.12, `faiss-cpu 1.15.1`, `numpy 2.5.4`; two synthetic 2-D vectors and two synthetic chunks | `../rag-original-bug-reproduction.json`; root venv `../rag-lab-venv` | Labeled synthetic; proves label handling, not retrieval quality. |
+| `k=5` returns labels `[0, 1, -1, -1, -1]` for both `IndexFlatL2(2)` and `IndexHNSWFlat(2, 32)` | same JSON, both cases | Reproduced result. |
+| Original filter maps to `[cancel_order.py, archive_order.py, archive_order.py, archive_order.py, archive_order.py]`; the last chunk appears four times total (one real hit plus three `-1` copies). Bounded filter yields `[cancel_order.py, archive_order.py]` | same JSON, both cases | Reproduced result. |
+| Synthetic fixtures produce squared L2 distances 0.01 and 0.81 for the two real neighbors | `examples/rag-search-diagnostics/lab.py` fixtures | Derived from the published vectors; the vectors are synthetic, not actual embeddings, and this is not a production measurement. |
+| Empty-index fixture keeps two metadata records with zero vectors, so the original filter maps all five `-1` labels to the last chunk; `create_index` returns `(None, None)` when no embedding exists, and empty metadata would raise `IndexError` instead of inventing a chunk | `examples/rag-search-diagnostics/lab.py`, `test_lab.py`, `README.md` | Deliberately inconsistent split-load boundary, not a normal historical path. Bounds alone do not detect same-length reordered metadata. |
+| 1,100-character cap example assumes complete 100-character windows with stride 75: 14 complete windows, first 10 cover characters 0–775; partial-tail handling is undefined in the original | article worked example | Illustrative convention only, not a claim about the original helper's exact window count. |
+| Original joins the top three chunk `content` strings with spaces, then truncates at 3000 characters. Under the illustrative 100-character assumption, three chunks plus two separators total at most 302 characters, so the cut cannot explain a missing signature. `chunk_text` is undefined, so units and returned lengths are unknown; the source does not prove a historical truncation event. Larger chunk configurations can make the string limit relevant | `../source/_posts/2024-08-02-quick-start-rag-and-llm-for-automation.md`, `truncate_context` and `search_scripts`; F1 review | Qualified correction: diagnose small chunks and omitted paths first; count real characters and target-model tokens before blaming truncation. |
+| The reproduction deliberately uses `ntotal=2 < k=5`. The original 2024 HNSW index size is unknown, so no claim that the bug triggered in production. A large index is not sufficient safety: IVF with low `nprobe` can search too few candidates, and HNSW with low `efSearch` or a candidate-removing filter can also pad | FAISS FAQ section “What does it mean when a search returns -1 ids?” https://github.com/facebookresearch/faiss/wiki/FAQ; https://faiss.ai/cpp_api/struct/structfaiss_1_1Index.html; F2 review | Applicability stated in KO/EN/Naver and README. Filtered-search generalization depends on index/filter implementation and is not measured. |
+| Padded distances are float32-max-like, about `3.4028e38`; the article's `1 / (1 + d²)` printed with `{score:.4f}` displays `0.0000`, not necessarily mathematically zero. A repeated last path plus `0.0000` is a hint, not proof; confirm raw `-1` labels | `lab.py` / reproduction output; F3 review | Qualified correction: keep correct arithmetic; describe the display rounding and diagnostic limit. |
+| The original caller already has an `if results` / not-found branch. Accepting `-1` keeps the result list non-empty when metadata remains, so that branch is bypassed. `create_index` returns `(None, None)` when no embedding exists; inconsistent empty-index metadata is a separate split-load fixture | `../source/_posts/2024-08-02-...`; `test_lab.py`; F4 review | Accepted recommendation; no claim that the empty-metadata case was a normal historical path. |
+| Exact-key lookup is a dictionary or SQL equality lookup; SQLite FTS is lexical ranked retrieval, not deterministic unique-record lookup. The original keyword extraction still uses an LLM, so the service is not fully deterministic unless the extracted key is validated | `../source/_posts/2024-08-02-quick-start-rag-and-llm-for-automation.md`, final paragraph; current article | Distinguishes exact-key, full-text lexical, and semantic vector search; no unmeasured hybrid improvement claim. |
+| Academy AX table (attendance count, make-up rule, leave approval) is illustrative | article section | Explicitly not a deployment or actual-institutional-data claim. |
+| Lab tests assert Flat/HNSW padding, original and bounded mapping, empty index with retained metadata, out-of-range positive label, and metric identity | `examples/rag-search-diagnostics/test_lab.py` | Execution belongs to the review environment; not claimed as passed here. |
+| New figure `rag-padding-bug.svg` shows the reproduced flow at 640x1210 with visible labels at 22px or larger | `assets/img/posts/renewal/rag-padding-bug.svg` | Source added; browser and PNG raster checks belong to the review environment. |
+
+Review disposition: F2 (applicability), F4 (existing not-found branch), F5 (independent Naver lesson), and F6/F7 (wording, coverage, figure label) are accepted as written. F1 and F3 are accepted with qualification: F1's claim that truncation ran in the original configuration is not supported because `chunk_text` is undefined and the illustrative 100-character chunks total far less than 3000 characters; F3's `0.0` is a four-decimal display of a float32-max-like distance and a diagnostic hint, not mathematical zero or proof.
+
+Removed as unsupported in this rewrite: a live semantic retrieval test, LLM answer-quality measurement, production performance numbers, a historical failure actually observed in 2024, and any claim about how an unknown 2024 Ollama server parsed top-level runtime parameters.
+
 ## Sound: screen recording has no audio
 
 | Corrected claim | Source evidence | Treatment |
@@ -106,3 +151,8 @@ No rasterization or browser check was performed in this worker tier; root owns P
 - The historical Mobile MCP package version is not recorded in the source. The corrected post points to upstream instructions and asks readers to record the resolved version.
 - The archive link uses revision `bbcc4f1`; this worker did not fetch the Git host to verify the commit URL resolves.
 - The original Korean source lacked attribution. Opus recheck verified Michael Bolton on the DevelopSense page; the final notes now name the author as well as the publication and date.
+
+
+## RAG abstention clarification after campaign review
+
+The original search_scripts explicitly removes threshold filtering with filtered_results = results. A nonempty successful index search can return nearest neighbors for an unrelated question. The existing empty-list branch is not a validated relevance/abstention policy. KO, EN and Naver now distinguish this from the -1 bounds bug and recommend unrelated-question negative controls without inventing a universal cutoff or a measured abstention score.

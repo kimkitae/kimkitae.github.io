@@ -28,3 +28,4 @@ package-lock.json
 #assets/js/dist
 .DS_Store
 .omc/
+__pycache__/

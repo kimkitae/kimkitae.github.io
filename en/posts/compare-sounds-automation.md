@@ -7,22 +7,24 @@ last_modified_at: 2026-11-08
 lang: en
 permalink: /en/posts/compare-sounds-automation/
 translation_url: /posts/compare-sounds-automation/
-description: Using worldveil/dejavu audio fingerprints to verify a notification sound, with the screen-recording audio limitation and a separate capture path made explicit.
+description: Using worldveil/dejavu audio fingerprints to verify a notification sound while separating capture failure, sound occurrence, false matches, and business completion.
 categories: [Automation, Testing]
 tags: [Testing, Automation]
 ---
 
-Whether a notification sound played is hard to confirm visually. The screen may show nothing, and the sound disappears when the test ends. This article describes using audio fingerprints to identify a notification sound in an automated check. First, a correction: an earlier version of this post introduced `appbaseio/dejavu` from Docker Hub as an audio fingerprint tool. That project is an Elasticsearch data viewer. Audio fingerprinting uses [`worldveil/dejavu`](https://github.com/worldveil/dejavu).
+A notification sound leaves no trace on screen, so it is tempting to end verification with “the sound matched.” That single result actually hides four different questions: did the recording capture audio at all, did the sound occur, was it the expected sound, and did the user receive the notification? This article describes verifying notification sounds with audio fingerprints, and what I would add if rebuilding it today.
 
-![Audio recording, extraction, fingerprinting, and matching against a reference database](/assets/img/posts/renewal/compare-sounds-automation.svg)
+First, a correction. The original post introduced `appbaseio/dejavu` from Docker Hub as an audio fingerprint tool. That project is an Elasticsearch data viewer. Audio fingerprinting uses [`worldveil/dejavu`](https://github.com/worldveil/dejavu).
 
-*Figure 1. Extract audio from a file that contains sound, fingerprint it, and compare it with known notification sounds.*
+![Four branches: audio stream present, sound present, false-match check, and business completion](/assets/img/posts/renewal/compare-sounds-automation.svg)
 
-## What an audio fingerprint is
+*Figure 1. The four questions need different evidence. If the first one fails, the rest prove nothing.*
 
-An audio fingerprint does not compare waveforms directly. It extracts prominent peaks in time and frequency, turns them into hashes, and stores those hashes in a database. Given a short recording, it counts how many hashes overlap with a reference. That is why it survives some compression and background noise.
+## What a fingerprint answers
 
-`worldveil/dejavu` provides this process in Python. It can fingerprint a directory of reference audio and recognize a file or microphone input. Installation and run commands should be taken from the current README. The original environment ran PostgreSQL through docker-compose and used the `songs` and `fingerprints` tables.
+An audio fingerprint does not compare waveforms. It extracts prominent peaks in time and frequency, turns them into hashes, and counts how many hashes overlap between a short recording and a reference. That is why it tolerates some compression and background noise.
+
+`worldveil/dejavu` provides this in Python. The original environment ran PostgreSQL through Docker Compose and used the `songs` and `fingerprints` tables. Installation and run commands should come from the current README.
 
 ```python
 from dejavu import Dejavu
@@ -35,35 +37,69 @@ djv = Dejavu(config)
 djv.fingerprint_directory("reference_sounds/", [".mp3", ".wav"])
 ```
 
-This is an abbreviated example of the shape, not a guarantee that every key is current. Check the library version and supported databases before running it.
+This is an abbreviated example of the shape. Configuration keys and supported databases vary by library version.
 
-## The recording must contain audio
+## First check: does the recording contain audio?
 
-The first thing to check is whether the recording contains sound at all. Android's `adb shell screenrecord` records video only and does not include audio. Appium's Android screen recording has the same limitation. To verify a notification sound, use a microphone or a separate recorder with audio enabled. The original post does not state exactly which capture path it used.
+Android's `adb shell screenrecord` records video only and includes no audio ([official documentation](https://developer.android.com/tools/adb#screenrecord)). Appium's Android screen recording often uses the same command, so check the resulting file rather than assuming. The original states only that the device's Screen Recording was used; whether that file contained audio cannot be verified here.
 
-The verification flow is:
-
-1. Run the scenario that triggers the notification with Appium.
-2. Record the notification interval with a microphone or an audio-enabled recorder.
-3. Retrieve the recording; for a device file, `adb pull` can be used.
-4. Extract audio only if the file has an audio stream.
-5. Recognize the extracted audio with `worldveil/dejavu` and check whether it matches the reference.
+Run this only after confirming the file exists:
 
 ```bash
-# Apply only to a file that contains an audio stream
+ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 notification.mp4
+```
+
+Empty output means there is no audio stream. That is not “the notification did not play”; it is “the capture path did not record sound.” Extract only when a stream exists.
+
+```bash
 ffmpeg -i notification.mp4 -vn -acodec pcm_s16le notification.wav
 ```
 
-If using MoviePy, version 2.x imports `VideoFileClip` from `moviepy`; the 1.x `moviepy.editor` path was removed in 2.x. See the [MoviePy migration guide](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html). The primary example here uses FFmpeg.
+Then check whether the extracted file is silent. This command is meaningful only when an audio stream exists, and it does not exercise the matching algorithm.
 
-A recording that includes audio also contains ambient noise and other system sounds. A practical approach is to fingerprint the reference under several conditions and treat a match score above a threshold as success. The threshold depends on device, microphone position, volume, and OS audio processing, so a single hard-coded value is not advisable.
+```bash
+ffmpeg -i notification.wav -af volumedetect -f null -
+```
 
-## Observation and limits
+If `mean_volume` and `max_volume` are extremely low, look at the recorder, permissions, and volume settings first. Matching a silent file returns “no match,” and reading that as “no notification” points at the wrong cause.
 
-In one home environment with a TV on and family members talking, the notification still matched. That is an observation in a specific environment, not a performance guarantee. Results vary with the recording path, microphone, volume, and audio processing.
+## Choose a threshold with positive and negative controls
 
-The method also tells you that the sound occurred, not that the notification reached the user correctly. It should be combined with UI checks. In production, you would need reference audio management, threshold monitoring, and a policy for retaining failed recordings.
+Dejavu returns a matched reference and a score. The hard question is the cutoff. Do not copy one from a tutorial: the distribution depends on the device, microphone position, volume, ambient noise, and OS audio processing.
 
-## Summary
+Collect four kinds of samples in your own environment instead.
 
-Audio fingerprints are a useful supporting signal for sounds that are hard to see. First check that the recording actually contains audio; extraction cannot apply to a file with no sound stream. When choosing a tool, do not confuse projects with similar names. Start with one short file using the official examples before adding it to a suite.
+| Kind | Example | Expectation |
+|---|---|---|
+| Positive | The expected notification actually plays | High score against the reference |
+| Negative A | Only other system sounds | Low score |
+| Negative B | The notification does not play | Low score |
+| Confuser | A different notification from the same app | Distinguishable |
+
+If the lowest positive score sits clearly above the highest negative score, put the threshold between them. If the distributions overlap, no threshold on those samples separates them without error; a policy must trade false positives against false negatives, add a UI or API check, or change the recording conditions and signal. This procedure does not promise any accuracy figure.
+
+Keep the samples used to choose the threshold separate from the samples used to validate it. Choosing and validating on the same samples cannot support a generalization claim. The original observation — matching despite a TV and family conversation — is one environment's result, not performance under all noise.
+
+Once a threshold exists, log the score and the version of the reference audio. A score alone cannot explain why a run passed after the reference changed.
+
+## A diagnostic table
+
+| Symptom | Look at first | Meaning |
+|---|---|---|
+| Always “no match” | `ffprobe` output, signal presence, reference and time window | “No match” alone does not prove capture failure; check stream, signal, and reference in order |
+| Mostly silence | Volume settings, microphone permission, recording start time | Cannot judge whether the sound occurred |
+| Low positive and negative scores | Whether the reference is the actual notification | Reference mismatch or conversion loss |
+| High negative score | Score gap against the confuser | False match; separate references or change the checkpoint |
+| Match passes but the user sees nothing | UI screenshot, API state | Sound and notification display are separate |
+
+“The right event happened but a different sound played” and “no sound played” are different failures. Both can score poorly against a single reference, so that score alone cannot distinguish them. Registering other notification sounds as references lets you check for a match to a different sound. Use the scenario step and time window to narrow down whether the cause lies in configuration, the sound asset, or audio acquisition.
+
+## Sound is not business completion
+
+The sound occurring does not prove the notification was displayed correctly or the order was processed. Combine audio with UI or API checks. On failure, keep the original and extracted audio, the reference used, the score, and the scenario step. Keeping only the recording loses the comparison basis.
+
+## Verification boundary
+
+The command patterns were checked only on synthetic files. With FFmpeg 8.1, a video-only MP4 produced empty `ffprobe -select_streams a:0` output, a silent WAV reported `pcm_s16le` with mean/max -91.0dB, and a 440Hz tone reported -21.1/-18.1dB. That is a narrow check that stream selection and `volumedetect` behave as documented. Real device recording, Dejavu recognition, threshold accuracy, processing time, and business completion were not tested, and no recommended thresholds are given.
+
+Three things are immediately actionable: check for an audio stream before matching, set the threshold from positive and negative controls, and retain both the recording and the reference on failure. With those, “did it make a sound” and “did the check fail” stop being the same question.
