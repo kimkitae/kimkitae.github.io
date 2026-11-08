@@ -33,6 +33,16 @@ tail_includes:
         </span>
       {% endif %}
 
+      <!-- language switch -->
+      {% if page.translation_url %}
+        <span>
+          <i class="fas fa-language fa-fw me-1"></i>
+          <a href="{{ page.translation_url | relative_url }}">
+            {% if page.lang == 'en' %}한국어로 읽기{% else %}Read in English{% endif %}
+          </a>
+        </span>
+      {% endif %}
+
       {% if page.image %}
         {% capture src %}src="{{ page.image.path | default: page.image }}"{% endcapture %}
         {% capture class %}class="preview-img{% if page.image.no_bg %}{{ ' no-bg' }}{% endif %}"{% endcapture %}
@@ -97,6 +107,9 @@ tail_includes:
 
   <div class="content">
     {{ content }}
+    <p class="mt-4">
+      <a href="{{ '/contact/' | relative_url }}">{% if page.lang == 'en' %}Discuss an automation or AX problem with Kitae at KFlowLabs{% else %}자동화나 AX 과제에 대해 김기태·KFlowLabs에 문의하기{% endif %}</a>
+    </p>
   </div>
 
   <div class="post-tail-wrapper text-muted">

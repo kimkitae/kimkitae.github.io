@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1020" viewBox="0 0 640 1020" role="img" aria-labelledby="title desc">
+  <title id="title">Physical test automation experiment</title>
+  <desc id="desc">Hardware was assembled, but the software integration was not finished. The dashed proposed flow uses Appium, a Raspberry Pi camera, and an Arduino-driven XY plotter, with a feedback check from Appium or the camera.</desc>
+  <rect width="640" height="1020" fill="#fbfaf7"/>
+  <defs>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/></marker>
+    <marker id="b" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#b85c5c"/></marker>
+  </defs>
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <text x="320" y="48" text-anchor="middle" font-size="30" font-weight="700" fill="#2f4858">Physical test automation experiment</text>
+
+    <rect x="60" y="90" width="520" height="126" rx="18" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
+    <text x="320" y="136" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Completed: hardware assembled</text>
+    <text x="320" y="174" text-anchor="middle" font-size="22" fill="#5d6b75">XY plotter, servos, Arduino</text>
+    <text x="320" y="202" text-anchor="middle" font-size="22" fill="#5d6b75">camera module</text>
+
+    <rect x="60" y="266" width="520" height="126" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="312" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Proposed: Appium controls app</text>
+    <text x="320" y="350" text-anchor="middle" font-size="22" fill="#5d6b75">launch and object check</text>
+
+    <rect x="60" y="442" width="520" height="126" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="488" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Proposed: camera reads screen</text>
+    <text x="320" y="526" text-anchor="middle" font-size="22" fill="#5d6b75">Raspberry Pi finds target</text>
+
+    <rect x="60" y="618" width="520" height="126" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="664" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Proposed: Arduino + plotter</text>
+    <text x="320" y="702" text-anchor="middle" font-size="22" fill="#5d6b75">serial coordinates, servo tap</text>
+
+    <rect x="60" y="794" width="520" height="126" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="840" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Proposed: result check</text>
+    <text x="320" y="878" text-anchor="middle" font-size="22" fill="#5d6b75">Appium or camera confirms</text>
+
+    <line x1="320" y1="216" x2="320" y2="256" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="320" y1="392" x2="320" y2="432" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="320" y1="568" x2="320" y2="608" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="320" y1="744" x2="320" y2="784" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+
+    <path d="M60 857 L24 857 L24 329 L52 329" fill="none" stroke="#b85c5c" stroke-width="3" marker-end="url(#b)"/>
+
+    <text x="320" y="960" text-anchor="middle" font-size="22" fill="#5d6b75">Solid: hardware assembled. Dashed: proposed integration.</text>
+    <text x="320" y="992" text-anchor="middle" font-size="22" fill="#5d6b75">Feedback check is intended, not verified end to end.</text>
+  </g>
+</svg>

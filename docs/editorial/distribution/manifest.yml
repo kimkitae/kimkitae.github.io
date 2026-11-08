@@ -1,0 +1,141 @@
+# Distribution manifest. All channel statuses are prepared, not published.
+# naver: manual upload from docs/editorial/distribution/naver/<slug>.md
+# naver images: export each source SVG to the mapped PNG, then upload the PNG.
+# medium: official import of the live English URL, then set canonical if needed
+# dev: reuse English Markdown without Jekyll front matter, set canonical_url
+version: 2
+status: prepared_not_scheduled
+channels:
+  naver:
+    status: pending
+    source: docs/editorial/distribution/naver/<slug>.md
+    image_source: assets/img/posts/renewal/<slug>.svg
+    image_export: naver-images/<slug>.svg.png
+    upload_note: Upload the exported PNG, not the SVG. Place it after the introduction or the section named in the draft. Record the published URL and date after upload.
+  medium:
+    status: pending
+    source: live English URL at /en/posts/<slug>/
+    method: official Medium import, which attaches the original URL and date
+  dev:
+    status: pending
+    source: live English Markdown with Jekyll front matter removed
+    method: Forem API or manual post with canonical_url set to the English page
+campaign:
+  name: naver_weekly_ax_selection
+  status: planned_not_scheduled
+  weekly_order:
+    - mobile-automation
+    - setup-slackbot-initialization
+    - quick-start-rag-and-llm-for-automation
+    - compare-sounds-automation
+    - sms-management-system
+    - log-view-system
+    - mobile-mcp-setup-guide
+    - makingAutomationTesterWhoNeverBeTired
+  archive_reference:
+    - testing1
+    - testing2
+    - webdriveragent-upgrade
+    - automation1
+    - automation2
+    - making-booting-image-ubuntu-on-mac
+    - mount-volumes-nfs-and-smb-from-nas-copy
+    - setting-network-setting
+  state: No Naver platform ID or publication date is recorded. Nothing is scheduled or published by this manifest.
+articles:
+  - slug: mobile-automation
+    korean: /posts/mobile-automation/
+    english: /en/posts/mobile-automation/
+    naver: docs/editorial/distribution/naver/mobile-automation.md
+    naver_image: naver-images/mobile-automation.svg.png
+    campaign: weekly
+  - slug: makingAutomationTesterWhoNeverBeTired
+    korean: /posts/makingAutomationTesterWhoNeverBeTired/
+    english: /en/posts/makingAutomationTesterWhoNeverBeTired/
+    naver: docs/editorial/distribution/naver/makingAutomationTesterWhoNeverBeTired.md
+    naver_image: naver-images/makingAutomationTesterWhoNeverBeTired.svg.png
+    campaign: weekly
+  - slug: compare-sounds-automation
+    korean: /posts/compare-sounds-automation/
+    english: /en/posts/compare-sounds-automation/
+    naver: docs/editorial/distribution/naver/compare-sounds-automation.md
+    naver_image: naver-images/compare-sounds-automation.svg.png
+    campaign: weekly
+  - slug: quick-start-rag-and-llm-for-automation
+    korean: /posts/quick-start-rag-and-llm-for-automation/
+    english: /en/posts/quick-start-rag-and-llm-for-automation/
+    naver: docs/editorial/distribution/naver/quick-start-rag-and-llm-for-automation.md
+    naver_image: naver-images/quick-start-rag-and-llm-for-automation.svg.png
+    campaign: weekly
+  - slug: sms-management-system
+    korean: /posts/sms-management-system/
+    english: /en/posts/sms-management-system/
+    naver: docs/editorial/distribution/naver/sms-management-system.md
+    naver_image: naver-images/sms-management-system.svg.png
+    campaign: weekly
+  - slug: log-view-system
+    korean: /posts/log-view-system/
+    english: /en/posts/log-view-system/
+    naver: docs/editorial/distribution/naver/log-view-system.md
+    naver_image: naver-images/log-view-system.svg.png
+    campaign: weekly
+  - slug: setup-slackbot-initialization
+    korean: /posts/setup-slackbot-initialization/
+    english: /en/posts/setup-slackbot-initialization/
+    naver: docs/editorial/distribution/naver/setup-slackbot-initialization.md
+    naver_image: naver-images/setup-slackbot-initialization.svg.png
+    campaign: weekly
+  - slug: testing1
+    korean: /posts/testing1/
+    english: /en/posts/testing1/
+    naver: docs/editorial/distribution/naver/testing1.md
+    naver_image: naver-images/testing1.svg.png
+    campaign: archive_reference
+  - slug: testing2
+    korean: /posts/testing2/
+    english: /en/posts/testing2/
+    naver: docs/editorial/distribution/naver/testing2.md
+    naver_image: naver-images/testing2.svg.png
+    campaign: archive_reference
+  - slug: webdriveragent-upgrade
+    korean: /posts/webdriveragent-upgrade/
+    english: /en/posts/webdriveragent-upgrade/
+    naver: docs/editorial/distribution/naver/webdriveragent-upgrade.md
+    naver_image: naver-images/webdriveragent-upgrade.svg.png
+    campaign: archive_reference
+  - slug: automation1
+    korean: /posts/automation1/
+    english: /en/posts/automation1/
+    naver: docs/editorial/distribution/naver/automation1.md
+    naver_image: naver-images/automation1.svg.png
+    campaign: archive_reference
+  - slug: automation2
+    korean: /posts/automation2/
+    english: /en/posts/automation2/
+    naver: docs/editorial/distribution/naver/automation2.md
+    naver_image: naver-images/automation2.svg.png
+    campaign: archive_reference
+  - slug: making-booting-image-ubuntu-on-mac
+    korean: /posts/making-booting-image-ubuntu-on-mac/
+    english: /en/posts/making-booting-image-ubuntu-on-mac/
+    naver: docs/editorial/distribution/naver/making-booting-image-ubuntu-on-mac.md
+    naver_image: naver-images/making-booting-image-ubuntu-on-mac.svg.png
+    campaign: archive_reference
+  - slug: mount-volumes-nfs-and-smb-from-nas-copy
+    korean: /posts/mount-volumes-nfs-and-smb-from-nas-copy/
+    english: /en/posts/mount-volumes-nfs-and-smb-from-nas-copy/
+    naver: docs/editorial/distribution/naver/mount-volumes-nfs-and-smb-from-nas-copy.md
+    naver_image: naver-images/mount-volumes-nfs-and-smb-from-nas-copy.svg.png
+    campaign: archive_reference
+  - slug: setting-network-setting
+    korean: /posts/setting-network-setting/
+    english: /en/posts/setting-network-setting/
+    naver: docs/editorial/distribution/naver/setting-network-setting.md
+    naver_image: naver-images/setting-network-setting.svg.png
+    campaign: archive_reference
+  - slug: mobile-mcp-setup-guide
+    korean: /posts/mobile-mcp-setup-guide/
+    english: /en/posts/mobile-mcp-setup-guide/
+    naver: docs/editorial/distribution/naver/mobile-mcp-setup-guide.md
+    naver_image: naver-images/mobile-mcp-setup-guide.svg.png
+    campaign: weekly

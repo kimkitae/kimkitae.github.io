@@ -1,113 +1,49 @@
 ---
-title: Mobile-MCP로 시작하는 모바일 테스트 자동화 - Cursor와 Claude Desktop 연결하기
+title: Mobile MCP로 시작하는 모바일 테스트 자동화 - Cursor와 Claude Desktop 연결하기
 author: KimKitae
-date: 2025-07-15 12:00:00 +9000
+date: 2025-07-15 12:00:00 +0900
+last_modified_at: 2026-11-08
+description: MCP 기반 모바일 자동화 도구를 Cursor와 Claude Desktop에 연결하고, 시뮬레이터·에뮬레이터에서 확인하는 과정을 정리합니다.
 categories: [Automation, MobileTest]
 tags: [Mobile-MCP, MCP, Cursor, Claude, Appium, 모바일테스트]
+translation_url: /en/posts/mobile-mcp-setup-guide/
 pin: true
 ---
 
-최근 AI 기술의 발전으로 개발 생산성이 크게 향상되고 있습니다. 특히 MCP(Model Context Protocol)의 등장으로 Claude, Cursor 같은 AI 도구들이 외부 시스템과 직접 연동할 수 있게 되었습니다. 오늘은 Mobile Next MCP를 이용해서 모바일 앱 테스트를 자동화하는 방법을 초보자도 쉽게 따라할 수 있도록 단계별로 설명해드리겠습니다.
+MCP(Model Context Protocol)는 AI 도구가 외부 시스템과 도구를 호출할 수 있게 해 주는 규약입니다. 이 글은 MCP 기반 모바일 자동화 서버를 Cursor와 Claude Desktop에 연결하고, iOS 시뮬레이터와 Android 에뮬레이터에서 동작을 확인하는 과정을 정리합니다. 자연어로 테스트를 실행할 수 있다는 가능성은 흥미롭지만, 아직 안정성과 재현성을 검증 중인 영역이라는 점을 전제로 읽어 주세요.
 
----
+![AI 클라이언트, MCP 서버, iOS/Android 단말 사이의 연결 구조](/assets/img/posts/renewal/mobile-mcp-setup-guide.svg)
 
-# Mobile Next MCP란 무엇인가?
+*그림 1. Cursor나 Claude Desktop이 MCP 서버를 통해 단말의 접근성 정보와 조작 명령을 주고받는 구조.*
 
-Mobile Next MCP Server는 MCP(Model Context Protocol)를 기반으로 한 차세대 모바일 테스트 자동화 도구입니다. 기존의 복잡한 프레임워크 대신 **접근성 스냅샷(accessibility snapshots)**을 활용하여 AI와 모바일 디바이스를 연결해주는 혁신적인 도구입니다.
+## MCP가 하는 일
 
-## Mobile Next MCP의 주요 특징
+MCP 서버는 AI 클라이언트에 도구 목록을 제공하고, 클라이언트가 도구를 호출하면 실제 작업을 수행합니다. 모바일 자동화에서는 화면의 접근성 스냅샷을 읽고, 요소를 나열하고, 탭·입력·스크린샷 같은 동작을 실행하는 도구가 제공됩니다. Appium처럼 세션과 셀렉터를 직접 관리하지 않아도 된다는 점이 장점입니다.
 
-- **AI 친화적**: Claude, Cursor 같은 AI 도구와 자연스럽게 연동
-- **플랫폼 독립적**: iOS와 Android 모두 하나의 인터페이스로 지원
-- **빠르고 가벼움**: 네이티브 접근성 트리를 활용하여 빠른 실행
-- **시각적 분석**: 화면에 실제로 렌더링된 내용을 분석하여 적절한 동작 결정
-- **구조화된 데이터**: 화면에 보이는 모든 정보를 체계적으로 추출 가능
-- **자연어 명령**: 복잡한 코드 대신 자연어로 테스트 시나리오 작성
+반대로 모든 앱에서 동일하게 동작한다고 가정하면 안 됩니다. 접근성 레이블이 없거나 WebView가 많은 화면에서는 요소 식별이 어려울 수 있고, 좌표 기반 탭은 해상도에 민감합니다. 자동화의 재현성이 필요한 회귀 테스트에는 아직 보조 수단으로 쓰는 편이 안전합니다.
 
----
+## 사전 준비
 
-# 사전 준비사항
+- **Node.js**: 서버 실행에 필요합니다. LTS 버전을 권장합니다.
+- **Xcode Command Line Tools**: iOS 시뮬레이터와 빌드 도구.
+- **Android Studio + Platform Tools**: `adb`와 에뮬레이터.
+- **AI 클라이언트**: Cursor 또는 Claude Desktop.
 
-Mobile Next MCP를 사용하기 전에 다음 도구들이 설치되어 있어야 합니다.
-
-## 1. 필수 소프트웨어 설치
-
-### Node.js 설치
 ```bash
-# Node.js 최신 LTS 버전 설치 (공식 웹사이트에서 다운로드)
-node --version  # 설치 확인
-```
-
-### iOS 개발 도구 설치 (iOS 테스트용)
-```bash
-# Xcode command line tools 설치
-xcode-select --install
-
-# 설치 확인
+node --version
 xcode-select -p
-```
-
-### Android 개발 도구 설치 (Android 테스트용)
-```bash
-# Android Studio 설치 후 Platform Tools 설정
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/tools
-
-# ADB 설치 확인
 adb version
 ```
 
-## 2. AI 도구 설치
+패키지 이름과 CLI 옵션은 배포 상태에 따라 달라질 수 있습니다. 설치 전에 [Mobile MCP 저장소](https://github.com/mobile-next/mobile-mcp)와 npm 패키지 페이지의 현재 안내를 확인하고, 설치 후 실제로 해석된 버전을 기록하세요. 아래 설정은 `@latest`를 사용하지만, 그 값이 가리키는 버전은 시점에 따라 달라지므로 재현성이 필요하면 실행 환경에서 확인한 버전을 별도로 남기는 편이 좋습니다. MCP 자체의 규약은 [공식 문서](https://modelcontextprotocol.io/)에서 확인할 수 있습니다.
 
-- **Cursor**: [공식 웹사이트](https://cursor.sh)에서 다운로드
-- **Claude Desktop**: [Anthropic 웹사이트](https://claude.ai/download)에서 다운로드
+## Cursor 설정
 
----
-
-# Mobile Next MCP 설치하기
-
-## 1. NPM을 통한 설치
+Cursor는 사용자 설정 디렉터리의 `mcp.json`에서 MCP 서버를 등록합니다.
 
 ```bash
-# Mobile Next MCP 설치
-npm install -g @mobilenext/mobile-mcp@latest
-```
-
-## 2. 설치 확인
-
-```bash
-# 설치 확인 (실행 테스트)
-npx @mobilenext/mobile-mcp@latest --help
-```
-
----
-
-# Cursor에서 Mobile Next MCP 설정하기
-
-## 1. MCP 서버 설정 파일 생성
-
-Cursor에서 Mobile Next MCP를 사용하려면 설정 파일을 만들어야 합니다.
-
-### macOS/Linux의 경우:
-```bash
-# 설정 디렉토리 생성
 mkdir -p ~/.cursor
-
-# 설정 파일 생성
-touch ~/.cursor/mcp.json
 ```
-
-### Windows의 경우:
-```bash
-# 설정 디렉토리 생성
-mkdir %USERPROFILE%\.cursor
-
-# 설정 파일 생성
-type nul > %USERPROFILE%\.cursor\mcp.json
-```
-
-## 2. mcp.json 파일 설정
 
 ```json
 {
@@ -120,27 +56,11 @@ type nul > %USERPROFILE%\.cursor\mcp.json
 }
 ```
 
-## 3. Cursor 재시작
+저장 후 Cursor를 완전히 종료했다가 다시 실행합니다. 서버가 목록에 보이지 않으면 명령을 터미널에서 직접 실행해 오류 메시지를 확인하세요.
 
-설정 파일을 저장한 후 Cursor를 완전히 종료하고 다시 실행합니다.
+## Claude Desktop 설정
 
----
-
-# Claude Desktop에서 Mobile Next MCP 설정하기
-
-## 1. Claude Desktop 설정 파일 위치
-
-### macOS:
-```
-~/Library/Application Support/Claude/claude_desktop_config.json
-```
-
-### Windows:
-```
-%APPDATA%\Claude\claude_desktop_config.json
-```
-
-## 2. 설정 파일 편집
+macOS 기준 설정 파일은 `~/Library/Application Support/Claude/claude_desktop_config.json`입니다. 같은 형식으로 서버를 추가합니다.
 
 ```json
 {
@@ -153,241 +73,39 @@ type nul > %USERPROFILE%\.cursor\mcp.json
 }
 ```
 
-## 3. Claude Desktop 재시작
+저장 후 Claude Desktop을 재시작합니다. 기존 설정이 있다면 `mcpServers` 객체를 합치는 방식으로 편집하고, JSON 문법 오류가 없는지 확인하세요.
 
-설정을 저장한 후 Claude Desktop을 재시작합니다.
+## 단말 연결
 
----
-
-# 디바이스 연결 및 준비
-
-## 1. iOS 시뮬레이터 설정
+iOS 시뮬레이터는 `xcrun simctl`로 확인하고 부팅합니다.
 
 ```bash
-# 사용 가능한 시뮬레이터 목록 확인
-xcrun simctl list
-
-# 시뮬레이터 부팅
+xcrun simctl list devices
 xcrun simctl boot "iPhone 16"
-
-# 시뮬레이터 앱에서 확인
 open -a Simulator
 ```
 
-## 2. Android 에뮬레이터 설정
+Android 에뮬레이터는 다음처럼 실행합니다.
 
 ```bash
-# 에뮬레이터 목록 확인
 emulator -list-avds
-
-# 에뮬레이터 실행
 emulator -avd Pixel_7_API_34
-
-# 또는 Android Studio에서 직접 실행
-```
-
-## 3. 실제 디바이스 연결
-
-### iOS 디바이스:
-- USB로 Mac에 연결
-- "이 컴퓨터를 신뢰하시겠습니까?" 승인
-- Xcode에서 디바이스 인식 확인
-
-### Android 디바이스:
-```bash
-# USB 디버깅 활성화 후 연결
-adb devices
-
-# 디바이스가 목록에 나타나는지 확인
-```
-
----
-
-# 실제 사용 예제
-
-## 1. 디바이스 연결 확인
-
-먼저 연결 가능한 디바이스가 있는지 확인해봅시다.
-
-```
-사용 가능한 모바일 디바이스나 시뮬레이터를 확인해줘
-```
-
-AI 응답 예시:
-- iPhone 16 시뮬레이터 (연결됨)
-- Galaxy S24 (USB 연결됨)
-- Pixel 7 에뮬레이터 (실행 중)
-
-## 2. 앱 실행하기
-
-```
-iPhone 시뮬레이터에서 설정 앱을 실행해줘
-```
-
-## 3. 화면 스크린샷 및 정보 확인
-
-```
-현재 화면의 스크린샷을 찍고, 화면에 있는 모든 UI 요소들을 나열해줘
-```
-
-## 4. 기본 자동화 시나리오
-
-```
-다음 단계를 실행해줘:
-1. 설정 앱 실행
-2. "일반" 메뉴 탭하기
-3. "정보" 메뉴 탭하기
-4. 디바이스 모델명 확인
-5. 스크린샷 저장
-```
-
-## 5. 앱 스토어 검색 시나리오
-
-```
-앱 스토어에서 다음 작업을 진행해줘:
-1. 앱 스토어 앱 실행
-2. 검색 탭으로 이동
-3. "Instagram" 검색
-4. 첫 번째 검색 결과 정보 확인
-5. 각 단계별로 스크린샷 저장
-```
-
----
-
-# Mobile Next MCP의 핵심 명령어들
-
-## 디바이스 관리 명령어
-- `mobile_list_apps`: 설치된 모든 앱 목록 확인
-- `mobile_launch_app`: 특정 앱 실행 (Bundle ID/Package Name 사용)
-- `mobile_terminate_app`: 실행 중인 앱 종료
-- `mobile_get_screen_size`: 화면 크기 정보 확인
-
-## 상호작용 명령어
-- `mobile_list_elements_on_screen`: 화면의 모든 UI 요소 목록
-- `mobile_element_tap`: 접근성 레이블로 요소 탭하기
-- `mobile_tap`: 특정 좌표 탭하기
-- `mobile_type_text`: 텍스트 입력하기
-
-## 정보 수집 명령어
-- `mobile_take_screenshot`: 스크린샷 촬영
-- `mobile_get_source`: UI 구조를 XML 형식으로 가져오기
-
----
-
-# 고급 활용 팁
-
-## 1. 조건부 테스트 실행
-
-```
-만약 로그인이 되어 있지 않다면 먼저 로그인을 진행하고,
-로그인이 되어 있다면 바로 메인 화면에서 원하는 작업을 시작해줘
-```
-
-## 2. 반복 작업 자동화
-
-```
-다음 작업을 3번 반복해줘:
-1. 앱 새로고침
-2. 5초 대기
-3. 로딩이 완료되었는지 확인
-4. 결과 스크린샷 저장
-```
-
-## 3. 크로스 플랫폼 비교 테스트
-
-```
-iOS와 Android에서 같은 앱의 동일한 기능을 테스트하고 비교해줘:
-1. 로그인 플로우의 차이점
-2. UI 레이아웃 비교
-3. 성능 차이 분석
-```
-
-## 4. 접근성 테스트
-
-```
-현재 화면의 접근성을 확인해줘:
-1. 모든 버튼에 적절한 레이블이 있는지 확인
-2. 텍스트 크기가 적절한지 확인
-3. 색상 대비가 충분한지 확인
-```
-
----
-
-# 문제 해결 가이드
-
-## 자주 발생하는 문제들
-
-### 1. 디바이스 연결 실패
-```bash
-# iOS 시뮬레이터 재시작
-xcrun simctl shutdown all
-xcrun simctl boot "iPhone 16"
-
-# Android 디바이스 재연결
-adb kill-server
-adb start-server
 adb devices
 ```
 
-### 2. MCP 서버 연결 오류
-- 설정 파일 경로 재확인
-- JSON 문법 오류 검사
-- Node.js 버전 확인 (최신 LTS 권장)
+실제 단말을 사용할 때는 iOS의 경우 신뢰 설정, Android의 경우 USB 디버깅을 활성화해야 합니다. 회사 정책상 허용된 테스트 단말만 사용하세요.
 
-### 3. 앱 실행 실패
-- Bundle ID (iOS) 또는 Package Name (Android) 정확성 확인
-- 앱이 실제로 설치되어 있는지 확인
-- 디바이스 권한 설정 확인
+## 실제 확인 예시
 
-### 4. 요소 인식 실패
-- 앱이 완전히 로드될 때까지 대기
-- 접근성 설정 활성화 확인
-- 스크린샷을 통한 시각적 확인
+연결이 되면 AI 클라이언트에 다음과 같이 요청할 수 있습니다.
 
----
+```text
+사용 가능한 모바일 디바이스와 실행 중인 시뮬레이터를 확인해줘.
+현재 화면의 UI 요소를 나열하고, 설정 앱의 "일반" 메뉴로 이동해줘.
+```
 
-# Mobile Next MCP의 장점
+응답에 표시되는 기기 이름과 화면 요소가 실제와 맞는지 확인하세요. 자동화를 신뢰하기 전에 수동으로 같은 동작을 재현해 보고, 실패했을 때 어떤 정보가 남는지 확인하는 것이 중요합니다. 자연어 명령은 편리하지만, 같은 명령이 항상 같은 결과를 내는지는 별개의 문제입니다.
 
-## 기존 방식 대비 개선점
+## 한계와 정리
 
-### 1. **단순함과 효율성**
-- 복잡한 테스트 프레임워크 학습 불필요
-- 자연어로 테스트 시나리오 작성 가능
-- 빠른 프로토타이핑과 테스트 가능
-
-### 2. **플랫폼 통합성**
-- iOS와 Android를 하나의 인터페이스로 제어
-- 크로스 플랫폼 테스트의 일관성 보장
-- 플랫폼별 특수한 지식 불필요
-
-### 3. **AI 친화적 설계**
-- LLM이 이해하기 쉬운 구조화된 데이터 제공
-- 컴퓨터 비전 모델 없이도 정확한 제어 가능
-- 자연어 명령의 정확한 해석과 실행
-
----
-
-# 마무리
-
-Mobile Next MCP는 모바일 테스트 자동화의 새로운 패러다임을 제시합니다. 복잡한 코드나 테스트 프레임워크 학습 없이도, 단순히 자연어 명령으로 정교한 모바일 앱 테스트를 수행할 수 있습니다.
-
-## 이 기술이 가져오는 변화
-
-- **개발 시간 단축**: 테스트 케이스 작성과 실행 시간이 대폭 줄어듭니다
-- **접근성 향상**: 개발자가 아닌 QA 팀이나 기획자도 쉽게 테스트를 만들 수 있습니다
-- **품질 일관성**: 자동화를 통해 사람의 실수를 줄이고 일관된 테스트 품질을 유지합니다
-- **비용 효율성**: 복잡한 테스트 인프라 구축 없이도 고품질 테스트 가능
-
-Mobile Next MCP는 여전히 발전하고 있는 기술이지만, 모바일 앱 개발과 테스트의 미래를 바꿀 큰 잠재력을 가지고 있습니다. 지금부터 차근차근 익혀두시면 향후 업무 효율성을 크게 높일 수 있을 것입니다.
-
-다음 포스트에서는 Mobile Next MCP를 활용한 실제 프로젝트 사례와 더 고급스러운 활용법에 대해 다뤄보겠습니다.
-
----
-
-## 참고 자료
-
-- [MCP 공식 문서](https://modelcontextprotocol.io/)
-- [Mobile Next MCP GitHub](https://github.com/mobilenext/mobile-mcp)
-- [Cursor MCP 설정 가이드](https://cursor.sh/docs)
-- [Claude Desktop MCP 설정](https://docs.anthropic.com/claude/docs/desktop-mcp)
-- [Apidog Mobile Next MCP 가이드](https://apidog.com/blog/mobile-next-mcp-server/)
+이 방식은 탐색적 테스트, 빠른 화면 확인, 반복 입력에는 유용합니다. 반면 결제·인증처럼 보안이 중요한 흐름이나 정밀한 회귀 검증에는 아직 부족합니다. 운영에 도입한다면 도구 호출 로그, 실패 스크린샷, 재현 가능한 시나리오를 남기는 구조를 먼저 만들고, Appium이나 네이티브 테스트와 역할을 나누는 편이 현실적입니다. 이 글의 패키지 이름과 명령은 작성 시점의 정보를 바탕으로 한 예시이며, 설치 전 최신 문서를 확인해야 합니다.

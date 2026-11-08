@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="640" viewBox="0 0 720 640" role="img" aria-labelledby="title desc">
+  <title id="title">Four stages of my mobile automation</title>
+  <desc id="desc">A 2x2 grid: Appium black-box control with locator failures at run time; Espresso and XCUITest with ids referenced in app source; Katalon low-code page objects; API state setup with fewer locators to maintain.</desc>
+  <rect width="720" height="640" fill="#fbfaf7"/>
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <text x="360" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#2f4858">Four stages of my mobile automation</text>
+
+    <rect x="16" y="76" width="336" height="240" rx="16" fill="#2f4858"/>
+    <circle cx="56" cy="120" r="24" fill="#ffffff"/>
+    <text x="56" y="128" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">1</text>
+    <text x="92" y="130" font-size="28" font-weight="700" fill="#ffffff">Appium</text>
+    <text x="34" y="188" font-size="18" fill="#d9e2e8">black-box UI control</text>
+    <text x="34" y="228" font-size="18" fill="#d9e2e8">drives the app from outside</text>
+    <text x="34" y="260" font-size="18" fill="#d9e2e8">missing ids fail at that step</text>
+
+    <rect x="368" y="76" width="336" height="240" rx="16" fill="#4f6d7a"/>
+    <circle cx="408" cy="120" r="24" fill="#ffffff"/>
+    <text x="408" y="128" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">2</text>
+    <text x="444" y="130" font-size="28" font-weight="700" fill="#ffffff">Native</text>
+    <text x="386" y="188" font-size="18" fill="#e8eff3">Espresso · XCUITest</text>
+    <text x="386" y="228" font-size="18" fill="#e8eff3">ids referenced in app source</text>
+    <text x="386" y="260" font-size="18" fill="#e8eff3">build flagged them earlier</text>
+
+    <rect x="16" y="356" width="336" height="240" rx="16" fill="#e3ecec" stroke="#7a9e9f" stroke-width="2"/>
+    <circle cx="56" cy="400" r="24" fill="#ffffff" stroke="#7a9e9f" stroke-width="2"/>
+    <text x="56" y="408" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">3</text>
+    <text x="92" y="410" font-size="28" font-weight="700" fill="#2f4858">Katalon</text>
+    <text x="34" y="468" font-size="18" fill="#40595f">low-code on Appium</text>
+    <text x="34" y="508" font-size="18" fill="#40595f">page objects per screen</text>
+    <text x="34" y="540" font-size="18" fill="#40595f">more people write tests</text>
+
+    <rect x="368" y="356" width="336" height="240" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <circle cx="408" cy="400" r="24" fill="#ffffff" stroke="#c9a227" stroke-width="2"/>
+    <text x="408" y="408" text-anchor="middle" font-size="24" font-weight="700" fill="#2f4858">4</text>
+    <text x="444" y="410" font-size="28" font-weight="700" fill="#2f4858">API + AI</text>
+    <text x="386" y="468" font-size="18" fill="#5d5323">state setup via API</text>
+    <text x="386" y="508" font-size="18" fill="#5d5323">UI only where it matters</text>
+    <text x="386" y="540" font-size="18" fill="#5d5323">fewer locators to maintain</text>
+
+    <text x="360" y="622" text-anchor="middle" font-size="18" fill="#5d6b75">Each stage removed a failure mode from the previous one</text>
+  </g>
+</svg>

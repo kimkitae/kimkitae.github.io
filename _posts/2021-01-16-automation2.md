@@ -1,20 +1,20 @@
 ---
-title: Espresso Android 연습하기
+title: Espresso Android 연습 프로젝트
 author: KimKitae
 date: 2021-01-16 00:34:00 +0800
+last_modified_at: 2026-11-08
+description: Espresso로 Android 화면의 요소 클릭과 Assertion을 연습할 수 있도록 만든 예제 저장소 소개입니다.
 categories: [Automation, Android, Espresso]
 tags: [Espresso]
+translation_url: /en/posts/automation2/
 ---
 
-<div markdown="0"><a href="https://github.com/kimkitae/PracticeAutomationEspressoAndroid" class="btn btn-info">Project 바로가기</a></div>
+Espresso를 이용해 Android 자동화의 기초를 연습할 수 있도록 만든 예제 저장소입니다. 화면 요소를 찾아 클릭하고, 상태를 검증하는 가장 단순한 흐름을 다룹니다.
 
---- 
+![Espresso Android 연습 프로젝트의 빌드와 테스트 흐름](/assets/img/posts/renewal/automation2.svg)
 
+*그림 1. Android Studio에서 빌드한 뒤 Espresso 테스트로 화면 동작을 검증하는 흐름.*
 
-Espresso 이용한 안드로이드 자동화 기초적 부분을 설명해주기 위해 만든 프로젝트 입니다.
-(간단하게 Element 클릭, Assertion에 대한 기초를 연습해 보실 수 있습니다.)
+- 저장소: [PracticeAutomationEspressoAndroid](https://github.com/kimkitae/PracticeAutomationEspressoAndroid)
 
-설치 방법은 README 참조 해주세요.
-Android Studio 설치 및 SDK Manager 설치 완료 가정 하에 설명되어 있으니 설치 및 Emulator 생성 완료 해주세요.
-
-Apple 개발자 등록이 되어 있지 않아 샘플용 IPA를 만들수가 없어 XCUITest는 제외 합니다.
+Android Studio와 SDK Manager, 에뮬레이터가 준비된 상태를 가정합니다. 자세한 설치는 README를 참고하세요. Apple 개발자 등록이 없어 XCUITest용 샘플은 포함하지 않았습니다. 예제는 작성 당시 버전을 기준으로 하므로, 최신 Gradle과 Android SDK에서 빌드할 때는 의존성 버전을 확인해야 합니다.

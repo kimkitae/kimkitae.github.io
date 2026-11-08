@@ -1,133 +1,101 @@
 ---
 title: NAS와 Ubuntu 서버 간 네트워크 볼륨 마운트하기(NFS, SMB)
 author: KimKitae
-date: 2024-10-28 12:00:00 +9000
+date: 2024-10-28 12:00:00 +0900
+last_modified_at: 2026-11-08
+description: Ubuntu 서버에서 NFS와 SMB로 NAS 공유 폴더를 마운트하는 방법과 자격 증명 파일 권한, 자동 마운트 주의점을 정리합니다.
 categories: [server]
 tags: [ubuntu, nas]
+translation_url: /en/posts/mount-volumes-nfs-and-smb-from-nas-copy/
 pin: false
 ---
 
-`DS920+` 네트워크 스토리지를 이용하여 Ubuntu 서버에 네트워크 볼륨으로 마운트하는 방법을 설명합니다.
-네트워크 볼륨 마운트 시 2가지 프로토콜 `NFS`, `SMB`를 사용 할 수 있습니다.
+NAS의 공유 폴더를 Ubuntu 서버에 마운트하는 방법을 정리합니다. NFS와 SMB는 설정 방식이 다르므로, 사용할 프로토콜을 먼저 정하고 해당 절만 따라가는 것이 좋습니다. 아래 IP와 경로는 설명을 위한 예시이며, 실제 환경의 값으로 바꿔야 합니다.
 
-# NFS
-## NAS 설정
-1. `DSM` 접속하여, `제어판` 진입, `NFS 서비스 활성화` 클릭
-![NFS 설정](https://image.kimkitae.com/images/ubuntu%2Fnas-nfs-panel.png?quality=50)
+![NAS의 NFS/SMB 설정, Ubuntu 패키지 설치, 임시 마운트, fstab 등록, 검증으로 이어지는 흐름](/assets/img/posts/renewal/mount-volumes-nfs-and-smb-from-nas-copy.svg)
 
-2. `공유 폴더` 진입, 공유 하고자 하는 폴더 선택 후 `편집` 버튼 클릭, `NFS 권한` 탭 진입
-![NFS 설정](https://image.kimkitae.com/images/ubuntu%2Fnas-folder-nfs-setting.png?quality=50)
-- **호스트이름 또는 IP** : 해당 폴더로 마운트 하고자 하는 클라이언트의 IP를 입력합니다. (특정 IP 대역에 있는 클라이언트만 접근 가능하도록 설정 가능)
-- **권한** : 해당 폴더에 접근 할 수 있는 권한을 설정합니다.
-- **Squash** : 폴더 내 파일 권한을 설정합니다. (`Admin에 모든 사용자 매핑` 선택 시 폴더 내 파일 권한이 모두 동일하게 설정됩니다.)
-- **암호화** : 폴더 내 파일 암호화 여부를 설정합니다.
-- **비동기 활성화** : 체크하여 비동기 통신을 활성화 합니다.
+*그림 1. NFS와 SMB를 각각 설정하고, 임시 마운트로 확인한 뒤 자동 마운트를 등록하는 순서.*
 
-## Ubuntu 서버 설정
-### NFS 패키지 설치
-먼저, NFS를 마운트하려면 nfs-common 패키지가 설치되어 있어야 합니다.
+## NFS 설정
+
+NAS 관리 화면에서 NFS 서비스를 활성화하고, 공유 폴더의 NFS 권한에 클라이언트 서버의 IP를 등록합니다. 가능하면 특정 IP만 허용하고, 모든 사용자에게 쓰기 권한을 주는 설정은 피하세요.
+
+Ubuntu에는 `nfs-common`이 필요합니다.
+
 ```bash
 sudo apt update
 sudo apt install nfs-common
+sudo mkdir -p /mnt/nas-nfs
 ```
 
-### 마운트할 디렉터리 만들기
-NFS 공유를 마운트할 디렉터리를 만들어야 합니다. 예를 들어, `/mnt/nfs_share` 디렉터리를 생성합니다:
+먼저 임시로 마운트해 연결을 확인합니다. 아래 `192.0.2.10`은 문서용 예시 주소입니다.
+
 ```bash
-sudo mkdir -p /mnt/nfs_share
+sudo mount -t nfs 192.0.2.10:/volume1/shared /mnt/nas-nfs
+findmnt /mnt/nas-nfs
 ```
 
-### NFS 마운트 명령 실행 (임시 사용)
-다음 명령을 사용하여 NFS 서버의 공유 디렉터리를 마운트합니다. 여기서는 NFS 서버의 IP 주소가 192.168.0.180이고, 마운트할 NFS 디렉터리가 /volume1/shared라고 가정합니다:
-```bash
-sudo mount -t nfs 192.168.0.180:/volume1/shared /mnt/nfs_share
-```
-### NFS 자동 마운트 설정
-#### fstab 파일 수정
-/etc/fstab 파일을 수정하여 NFS 마운트를 설정합니다:
-```bash
-sudo vim /etc/fstab
-```
-#### fstab 파일에 NFS 마운트 설정 추가
-/etc/fstab 파일의 마지막 줄에 NFS 서버와 마운트할 디렉터리 정보를 추가합니다. 아래는 예시입니다:
-```bash
-192.168.0.180:/volume1/shared /mnt/nfs_share nfs defaults 0 0
-```
-- **192.168.0.180:/volume1/shared**: NFS 서버 IP와 공유 폴더 경로
-- **/mnt/nfs_share**: 로컬에서 마운트할 디렉터리
-- **nfs**: 파일 시스템 유형
-- **defaults**: 기본 마운트 옵션
-- **0 0**: 덤프와 파일 시스템 체크 옵션(일반적으로 0으로 설정)
-#### 마운트 실행
-fstab 파일을 수정한 후, 다음 명령을 사용하여 fstab 파일에 추가된 설정을 반영하고 NFS를 마운트합니다:
-```bash
-sudo mount -a
+정상임을 확인한 뒤 `/etc/fstab`에 추가합니다.
+
+```fstab
+192.0.2.10:/volume1/shared /mnt/nas-nfs nfs defaults,_netdev 0 0
 ```
 
----
-# SMB
-## NAS 설정
-1. `DSM` 접속하여, `제어판` 진입, `SMB 서비스 활성화` 클릭
-![SMB 설정](https://image.kimkitae.com/images/ubuntu%2Fnas-smb-panel.png?quality=50)
+`_netdev`는 네트워크가 준비된 뒤 마운트하라는 뜻입니다. 적용 전에 `sudo mount -a`로 문법과 연결을 확인하고, 오류가 나면 fstab을 바로 수정하세요.
 
-## Ubuntu 서버 설정
-### 필수 패키지 설치
-SMB 파일 시스템을 마운트하려면 cifs-utils 패키지를 설치해야 합니다:
+## SMB 설정
+
+SMB는 `cifs-utils`가 필요합니다.
+
 ```bash
 sudo apt update
 sudo apt install cifs-utils
+sudo mkdir -p /mnt/nas-smb
 ```
-### 마운트할 디렉터리 만들기
-SMB 공유를 마운트할 디렉터리를 생성합니다. 예를 들어 /mnt/smb_share라는 디렉터리를 생성합니다:
+
+임시 마운트로 먼저 확인합니다. 비밀번호를 명령행에 직접 쓰면 셸 기록과 프로세스 목록에 남을 수 있으므로, 아래처럼 자격 증명 파일을 사용하는 편이 안전합니다.
+
 ```bash
-sudo mkdir -p /mnt/smb_share
+sudo mkdir -p /etc/samba
+sudo install -m 600 /dev/null /etc/samba/credentials-nas
+sudo tee /etc/samba/credentials-nas >/dev/null <<'EOF'
+username=your_user
+password=your_password
+EOF
 ```
 
-### SMB 마운트 명령 실행(임시 사용)
-SMB 공유를 마운트하려면 다음 명령을 사용합니다:
+파일 소유자는 root, 권한은 `0600`이어야 합니다.
+
 ```bash
-sudo mount -t cifs -o username=your_username,password=your_password,iocharset=utf8 //192.168.0.180/volume1/shared /mnt/smb_share
+sudo chown root:root /etc/samba/credentials-nas
+sudo chmod 600 /etc/samba/credentials-nas
+sudo mount -t cifs //192.0.2.10/shared /mnt/nas-smb \
+  -o credentials=/etc/samba/credentials-nas,iocharset=utf8,uid=1000,gid=1000,file_mode=0775,dir_mode=0775
 ```
 
-- **username=사용자이름,password=비밀번호**: SMB 공유에 접근할 때 사용할 사용자 이름과 비밀번호
-- **//192.168.0.180/shared_folder**: SMB 서버의 IP 주소와 공유 폴더 이름
-- **/mnt/smb_share**: 로컬 마운트 포인트
+SMB의 경로는 `//서버/공유이름` 형식입니다. NFS처럼 `서버:/볼륨/경로`를 쓰는 것이 아니므로 혼동하지 마세요. `uid`와 `gid`는 실제 로컬 사용자 값으로 바꿉니다.
 
-### SMB 자동 마운트 설정
-#### fstab 파일 수정
-/etc/fstab 파일을 수정하여 SMB 마운트를 설정합니다:
+자동 마운트는 `/etc/fstab`에 추가합니다.
+
+```fstab
+//192.0.2.10/shared /mnt/nas-smb cifs credentials=/etc/samba/credentials-nas,iocharset=utf8,uid=1000,gid=1000,file_mode=0775,dir_mode=0775,_netdev 0 0
+```
+
+`password=`를 fstab에 직접 쓰면 파일을 읽을 수 있는 사용자에게 비밀번호가 노출됩니다. 자격 증명 파일 방식이 권장되는 이유입니다. `mount -a`로 확인하고, 부팅 후 자동 마운트가 되는지 재부팅으로 검증하세요.
+
+## 해제와 문제 해결
+
 ```bash
-sudo vim /etc/fstab
-```
-#### fstab 파일에 SMB 마운트 설정 추가
-fstab 파일의 마지막 줄에 다음과 같은 형식으로 SMB 공유 설정을 추가합니다:
-```bash
-//192.168.0.180/shared_folder /mnt/smb_share cifs username=사용자이름,password=비밀번호,iocharset=utf8,uid=1000,gid=1000,file_mode=0775,dir_mode=0775 0 0
-```
-- **192.168.0.180:/volume1/shared**: NFS 서버 IP와 공유 폴더 경로
-- **/mnt/nfs_share**: 로컬에서 마운트할 디렉터리
-- **nfs**: 파일 시스템 유형
-- **defaults**: 기본 마운트 옵션
-- **0 0**: 덤프와 파일 시스템 체크 옵션(일반적으로 0으로 설정)
-
-- **//192.168.0.180/shared_folder**: SMB 서버의 IP 주소와 공유 폴더 이름
-- **/mnt/smb_share**: 로컬 마운트 포인트
-- **cifs**: 파일 시스템 유형
-- **username=사용자이름,password=비밀번호**: SMB 접근을 위한 사용자 이름과 비밀번호
-- **uid=1000,gid=1000**: 로컬 사용자의 UID와 GID
-- **file_mode=0775,dir_mode=0775**: 파일과 디렉터리의 권한 설정
-
-#### 마운트 실행
-fstab 파일을 수정한 후, 다음 명령을 사용하여 fstab 파일에 추가된 설정을 반영하고 NFS를 마운트합니다:
-```bash
-sudo mount -a
+sudo umount /mnt/nas-nfs
+sudo umount /mnt/nas-smb
 ```
 
----
+마운트가 되지 않으면 다음 순서로 확인합니다.
 
-## 네트워크 볼륨 연결 해제
-```bash
-sudo umount /mnt/nfs_share
-sudo umount /mnt/smb_share
-```
-- `umount`명령어를 사용하여 연결 해제 하고자 하는 디렉터리를 입력합니다.
+- NAS에서 해당 프로토콜 서비스가 활성화되어 있는가
+- 클라이언트 IP가 NAS의 허용 목록에 있는가
+- `showmount -e <NAS_IP>`(NFS) 또는 `smbclient -L //<NAS_IP>`(SMB)로 공유 목록이 보이는가
+- 방화벽에서 NFS/SMB 포트가 열려 있는가
+- 자격 증명 파일 권한이 `0600`인가
+
+NFS와 SMB 중 하나만 사용한다면 다른 절의 설정은 추가하지 마세요. 두 프로토콜을 동시에 설정할 때는 마운트 지점과 fstab 항목을 명확히 구분해야 합니다.

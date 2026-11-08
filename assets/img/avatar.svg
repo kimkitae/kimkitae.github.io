@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">KFlowLabs avatar</title>
+  <desc id="desc">Simple monogram with the letters K and F.</desc>
+  <rect width="128" height="128" rx="24" fill="#2f4858"/>
+  <text x="64" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="700" fill="#f6f1e7" text-anchor="middle">KF</text>
+</svg>

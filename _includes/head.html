@@ -50,6 +50,13 @@
 
   {{ seo_tags }}
 
+  {% if page.translation_url %}
+    {% assign _lang = page.lang | default: 'ko' %}
+    {% if _lang == 'en' %}{% assign _other_lang = 'ko' %}{% else %}{% assign _other_lang = 'en' %}{% endif %}
+    <link rel="alternate" hreflang="{{ _lang }}" href="{{ page.url | absolute_url }}">
+    <link rel="alternate" hreflang="{{ _other_lang }}" href="{{ page.translation_url | absolute_url }}">
+  {% endif %}
+
   <title>
     {%- unless page.layout == 'home' -%}
       {{ page.title | append: ' | ' }}

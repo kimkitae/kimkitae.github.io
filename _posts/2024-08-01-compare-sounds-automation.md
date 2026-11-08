@@ -1,112 +1,67 @@
 ---
-title: 알림음 확인 자동화 (Sound 자동화)
+title: 알림음 확인 자동화 - 오디오 지문으로 소리 매칭하기
 author: KimKitae
-date: 2024-08-01 14:00:00 +9000
+date: 2024-08-01 14:00:00 +0900
+last_modified_at: 2026-11-08
+description: worldveil/dejavu 오디오 지문으로 알림음을 매칭하되, 화면 녹화에는 소리가 없다는 전제와 별도 오디오 녹음 경로를 함께 정리합니다.
 categories: [Automation, Testing]
-tags: [Testing]
+tags: [Testing, Automation]
+translation_url: /en/posts/compare-sounds-automation/
 pin: false
 ---
 
-## 시작하기
-Shazam이나 네이버 노래 검색 기능과 유사한 Dejavu라는 Docker 서비스를 이용하여, 소리 매칭을 통해 알림음 자동화 검증을 진행하기로 합니다. 
+알림음이 정상적으로 재생됐는지는 눈으로 확인하기 어렵습니다. 화면에는 표시가 남지 않고, 소리는 테스트가 끝난 뒤 사라지기 때문입니다. 이 글은 오디오 지문(fingerprint)으로 알림음을 식별해 자동 검증에 사용한 경험을 정리합니다. 먼저 바로잡을 점이 있습니다. 예전 글에서 Docker Hub의 `appbaseio/dejavu`를 오디오 지문 도구로 소개했는데, 그것은 Elasticsearch 데이터 뷰어입니다. 오디오 지문에는 [`worldveil/dejavu`](https://github.com/worldveil/dejavu)를 사용해야 합니다.
 
-## Dejavu 사용하기
-[dejavu](https://hub.docker.com/r/appbaseio/dejavu/)는 오디오 데이터를 지문(fingerprint)으로 변환하여 데이터베이스에 저장하고, 이후 오디오 파일과 매칭시켜 식별할 수 있는 도구입니다.
+![오디오 녹음, 소리 추출, 지문 생성, 기준 알림음 매칭으로 이어지는 흐름](/assets/img/posts/renewal/compare-sounds-automation.svg)
 
-Docker Compose를 사용하면 로컬 환경에 쉽게 설치하고 실행할 수 있습니다.
+*그림 1. 소리를 함께 기록한 파일에서 오디오를 추출해 지문을 만들고, 미리 저장한 알림음과 비교하는 과정.*
 
-```
-docker-compose build
-docker-compose up -d
-```
-위 명령어를 실행하면 postgres를 포함한 여러 컨테이너가 실행됩니다. 다음으로, 검증의 기준이 될 사운드 파일을 데이터베이스에 적재합니다.
+## 오디오 지문이란
 
-```
-dejavu=# \dt
-            List of relations
- Schema |     Name     | Type  |  Owner   
---------+--------------+-------+----------
- public | fingerprints | table | postgres
- public | songs        | table | postgres
-(2 rows)
-```
-```
-dejavu=# select * from fingerprints limit 5;
-          hash          | song_id | offset |        date_created        |       date_modified        
-------------------------+---------+--------+----------------------------+----------------------------
- \g567abrb567h89ef971n29 |       1 |    137 | 2021-01-20 14:22:55.20012 | 2021-01-20 14:22:55.20013
-```
-이렇게 하면 사운드 파일이 데이터베이스에 적재된 것을 확인할 수 있습니다.
+오디오 지문은 소리의 파형을 그대로 비교하지 않습니다. 주파수와 시간축에서 특징적인 피크를 뽑아 해시로 바꾸고, 그 해시를 데이터베이스에 저장합니다. 이후 짧은 녹음에서 같은 해시가 얼마나 겹치는지를 세어 원본과 매칭합니다. 압축이나 주변 소음이 섞여도 어느 정도 견디는 이유입니다.
 
-## 오디오 특성화 (Fingerprint 생성)
-간단한 함수를 통해 디렉토리 내 음악 파일들을 오디오 특성화하여 데이터베이스에 저장할 수 있습니다.
+`worldveil/dejavu`는 이 과정을 Python으로 제공합니다. 기준 음원을 디렉터리 단위로 지문화하고, 마이크나 파일 입력으로 인식할 수 있습니다. 설치와 실행 방법은 저장소의 현재 문서를 기준으로 확인하는 것이 안전합니다. 원문 환경은 docker-compose로 PostgreSQL을 함께 실행하고 `songs`, `fingerprints` 테이블을 사용했습니다.
 
-```
+```python
 from dejavu import Dejavu
 
-djv.fingerprint_directory("test_sound/", [".mp3"], 3)
-```
-## 오디오 인식
-오디오 인식을 위해서는 음악 파일 또는 마이크 입력을 사용하는 두 가지 방법이 있습니다.
-
-- 파일 인식
-
-```
-$ python dejavu.py --recognize file notification.wav
+config = {
+    "database": {"host": "127.0.0.1", "user": "dejavu", "password": "change-me", "database": "dejavu"},
+    "database_type": "postgres",
+}
+djv = Dejavu(config)
+djv.fingerprint_directory("reference_sounds/", [".mp3", ".wav"])
 ```
 
+위 코드는 구조를 설명하기 위한 축약 예시입니다. 실제 설정 키와 지원 데이터베이스는 라이브러리 버전에 따라 다를 수 있으므로, 실행 전에 공식 README를 확인해야 합니다.
+
+## 소리를 먼저 녹음해야 한다
+
+검증 흐름에서 가장 먼저 확인할 것은 “녹음 파일에 소리가 들어 있는가”입니다. Android의 `adb shell screenrecord`는 영상만 기록하며 오디오를 포함하지 않습니다. Appium의 Android 화면 녹화도 같은 제약을 갖습니다. 따라서 알림음을 검증하려면 마이크 입력이나 오디오가 활성화된 별도 녹음기를 함께 사용해야 합니다. 원문에는 당시 어떤 녹음 경로를 사용했는지 명시되어 있지 않습니다.
+
+검증 흐름은 다음과 같습니다.
+
+1. Appium으로 알림이 발생하는 시나리오를 실행합니다.
+2. 마이크 또는 오디오가 포함된 녹음기로 알림음 구간을 기록합니다.
+3. 녹음 파일을 가져옵니다. 단말 파일이면 `adb pull`을 사용할 수 있습니다.
+4. 파일에 오디오 스트림이 있으면 추출합니다.
+5. 추출한 파일을 `worldveil/dejavu`로 인식해 기준 알림음과 매칭되는지 확인합니다.
+
+```bash
+# 오디오 스트림이 있는 파일에만 적용
+ffmpeg -i notification.mp4 -vn -acodec pcm_s16le notification.wav
 ```
-from dejavu.logic.recognizer.file_recognizer import FileRecognizer
 
-song = djv.recognize(FileRecognizer, "notification.wav")
-```
+MoviePy를 쓴다면 2.x에서는 `from moviepy import VideoFileClip`을 사용합니다. 1.x의 `moviepy.editor` 경로는 2.x에서 제거되었으므로, [MoviePy 업데이트 안내](https://zulko.github.io/moviepy/getting_started/updating_to_v2.html)를 확인하세요. 이 글의 기본 예시는 FFmpeg입니다.
 
-- 마이크 인식
+오디오를 함께 녹음한 파일에는 주변 소음과 다른 시스템음도 들어갑니다. 그래서 기준 음원을 여러 환경에서 미리 지문화해 두고, 매칭 점수가 일정 수준 이상인지를 보는 방식이 현실적입니다. 점수 임계값은 기기와 녹음 환경에 따라 달라지므로 고정값을 권하지 않습니다.
 
-```
-from dejavu.logic.recognizer.microphone_recognizer import MicrophoneRecognizer
+## 당시 관찰과 한계
 
-song = djv.recognize(MicrophoneRecognizer, seconds=10)  # 기본값은 10초
-```
+집에서 TV가 켜져 있고 가족이 대화하는 환경에서도 알림음이 매칭된 적이 있습니다. 다만 이것은 특정 환경에서의 관찰이지, 모든 소음 조건에서 보장되는 성능 수치는 아닙니다. 녹음 경로, 마이크 위치, 볼륨, 운영체제의 오디오 처리에 따라 결과가 달라질 수 있습니다.
 
-```
-$ python dejavu.py --recognize mic 10
-```
+또한 이 방식은 “알림음이 났다”는 사실은 알려 주지만, “알림이 사용자에게 올바르게 전달됐다”는 것까지 보장하지 않습니다. 소리 매칭은 UI 검증과 함께 사용해야 의미가 있습니다. 운영에 넣는다면 기준 음원 관리, 임계값 모니터링, 실패 시 원본 녹음을 보관하는 정책이 필요합니다.
 
-이렇게 Python 코드를 통해 구현하거나 간단한 명령어로 오디오 인식을 수행할 수 있습니다.
+## 정리
 
-## 테스트하기
-요구사항에 따라 시나리오 내에서 해당 알림음이 정상적으로 송출되는지를 확인하기 위해 아래 단계를 진행합니다.
-
-- **시나리오 작성** : Appium을 이용하여 시나리오를 작성합니다.
-- **알림음 송출 전 스크린 녹화 시작** : 알림음이 송출되기 전 단계에서 단말의 `Screen Recording`을 시작합니다.
-- **알림음 송출 후 스크린 녹화 종료** : 알림음 송출 이후 `Screen Recording`을 종료를 하게 되면 단말 내 특정 폴더 내 저장됩니다. 이후 `ADB pull` 을 통해 생성된 파일을 가져옵니다.
-- **파일 형식 변환** : 녹화된 `MP4` 파일을 `MP3` 또는 필요한 형식으로 변환합니다.
-- **사운드 매칭 수행** : `python dejavu.py --fingerprint ./test_sound/ notification.mp3` 명령어를 사용하여, 이전에 생성된 파일과 비교합니다.
-이후 `Return` 값을 통해 매칭되는 파일이 있는지 확인할 수 있습니다. 
-
-실제로, 집에서 TV가 켜져 있고 가족들이 대화를 나누는 환경에서도 녹음된 알림음 소리 파일이 정확히 서버 파일과 매칭될 정도로 정확도가 높았습니다.
-
-
-**파일변환** 은 아래의 Python 코드로 변환이 가능합니다.
-
-```
-# 모듈 설치: !pip install moviepy
-from moviepy.editor import VideoFileClip
-
-def extract_audio_from_video(video_file_path, audio_file_path):
-    # mp4 등 비디오 파일 불러오기
-    video = VideoFileClip(video_file_path)
-    
-    # 오디오를 추출하여 mp3 파일로 저장
-    video.audio.write_audiofile(audio_file_path)
-
-video_file = 'your_video.mp4'  # 변환하고 싶은 비디오 파일의 경로
-audio_file = 'output_audio.mp3'  # 저장할 오디오 파일의 경로, 이름 지정
-
-extract_audio_from_video(video_file, audio_file)
-``` 
-
-## 결론
-이 과정을 통해 앱에서 특정 구간에 지정된 알림음이 정확히 송출되는지를 자동으로 검증할 수 있었습니다. 이 방법은 환경 소음이 있는 상황에서도 정확하게 동작할 만큼 신뢰도가 높았습니다. 
-사운드 관련 간단하게 자동화를 해야 한다면 위의 방법으로도 해보시길 추천드립니다.
+오디오 지문은 눈으로 확인하기 어려운 알림음 검증에 유용한 보조 수단입니다. 다만 화면 녹화만으로는 소리를 얻을 수 없다는 전제를 먼저 확인해야 하고, 오디오가 없는 파일에는 추출 단계를 적용할 수 없습니다. 도구를 고를 때는 이름이 비슷한 다른 프로젝트와 혼동하지 않는 것도 중요합니다. 도입 전에는 공식 저장소의 예제로 짧은 파일 하나부터 검증해 보시길 권합니다.

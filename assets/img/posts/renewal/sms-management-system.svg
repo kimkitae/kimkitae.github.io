@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="680" viewBox="0 0 640 680" role="img" aria-labelledby="title desc">
+  <title id="title">SMS management system</title>
+  <desc id="desc">A test phone forwards SMS codes to an internal FastAPI and WebSocket server with a 10-minute Redis TTL, which sends Slack alerts and serves recent codes to an automation API.</desc>
+  <rect width="640" height="680" fill="#fbfaf7"/>
+  <defs>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/></marker>
+  </defs>
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <text x="320" y="48" text-anchor="middle" font-size="30" font-weight="700" fill="#2f4858">SMS management system</text>
+
+    <rect x="20" y="92" width="290" height="190" rx="18" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
+    <text x="165" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Test phone</text>
+    <text x="165" y="178" text-anchor="middle" font-size="22" fill="#5d6b75">SMS receiver app</text>
+
+    <rect x="330" y="92" width="290" height="190" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="475" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Internal server</text>
+    <text x="475" y="178" text-anchor="middle" font-size="22" fill="#5d6b75">FastAPI + WebSocket</text>
+    <text x="475" y="206" text-anchor="middle" font-size="22" fill="#5d6b75">Redis 10-min TTL</text>
+
+    <rect x="20" y="342" width="290" height="190" rx="18" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
+    <text x="165" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">Slack alert</text>
+    <text x="165" y="428" text-anchor="middle" font-size="22" fill="#5d6b75">registered channel</text>
+
+    <rect x="330" y="342" width="290" height="190" rx="18" fill="#2f4858"/>
+    <text x="475" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">Automation API</text>
+    <text x="475" y="428" text-anchor="middle" font-size="22" fill="#d9e2e8">recent code lookup</text>
+
+    <line x1="310" y1="187" x2="322" y2="187" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+    <path d="M475 282 L475 312 L165 312 L165 334" fill="none" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="475" y1="282" x2="475" y2="334" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+
+    <text x="320" y="600" text-anchor="middle" font-size="22" fill="#5d6b75">Source structure: test phone to server.</text>
+    <text x="320" y="632" text-anchor="middle" font-size="22" fill="#5d6b75">Access control and approved devices are advice.</text>
+  </g>
+</svg>
