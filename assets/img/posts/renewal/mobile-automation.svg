@@ -1,43 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="840" viewBox="0 0 640 840" role="img" aria-labelledby="title desc">
   <title id="title">One mobile test, three jobs</title>
   <desc id="desc">State is prepared through an API, one business action runs through the UI, and evidence combines a screenshot with the expected value from the API. Cleanup deletes the created data. Each step proves a different thing, so its failure means something different.</desc>
-  <rect width="640" height="840" fill="#fbfaf7"/>
+  <rect width="640" height="840" fill="#F7F9FB"/>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/>
+      <path d="M0,0 L10,4 L0,8 z" fill="#006779"/>
     </marker>
   </defs>
   <g font-family="system-ui, -apple-system, sans-serif">
-    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#1f2d36">One test, three jobs</text>
-    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#4a5a64">Each step fails for a different reason</text>
+    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#172B3A">One test, three jobs</text>
+    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#526573">Each step fails for a different reason</text>
 
-    <rect x="60" y="110" width="520" height="130" rx="16" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
-    <text x="320" y="154" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">1. Prepare state via API</text>
-    <text x="320" y="190" text-anchor="middle" font-size="22" fill="#3f4f59">create the order, keep its id</text>
-    <text x="320" y="220" text-anchor="middle" font-size="22" fill="#3f4f59">proves: the data, not the UI</text>
+    <rect x="60" y="110" width="520" height="130" rx="4" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
+    <text x="320" y="154" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">1. Prepare state via API</text>
+    <text x="320" y="190" text-anchor="middle" font-size="22" fill="#526573">create the order, keep its id</text>
+    <text x="320" y="220" text-anchor="middle" font-size="22" fill="#526573">proves: the data, not the UI</text>
 
-    <line x1="320" y1="240" x2="320" y2="274" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="240" x2="320" y2="274" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="276" width="520" height="130" rx="16" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="320" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">2. One business UI action</text>
-    <text x="320" y="356" text-anchor="middle" font-size="22" fill="#3f4f59">open cart, apply the coupon</text>
-    <text x="320" y="386" text-anchor="middle" font-size="22" fill="#3f4f59">proves: the user path works</text>
+    <rect x="60" y="276" width="520" height="130" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="320" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">2. One business UI action</text>
+    <text x="320" y="356" text-anchor="middle" font-size="22" fill="#526573">open cart, apply the coupon</text>
+    <text x="320" y="386" text-anchor="middle" font-size="22" fill="#526573">proves: the user path works</text>
 
-    <line x1="320" y1="406" x2="320" y2="440" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="406" x2="320" y2="440" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="442" width="520" height="130" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
-    <text x="320" y="486" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">3. Assert and attach evidence</text>
-    <text x="320" y="522" text-anchor="middle" font-size="22" fill="#3f4f59">screenshot + API expected value</text>
-    <text x="320" y="552" text-anchor="middle" font-size="22" fill="#3f4f59">proves: what failed, and what was expected</text>
+    <rect x="60" y="442" width="520" height="130" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="320" y="486" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">3. Assert and attach evidence</text>
+    <text x="320" y="522" text-anchor="middle" font-size="22" fill="#526573">screenshot + API expected value</text>
+    <text x="320" y="552" text-anchor="middle" font-size="22" fill="#526573">proves: what failed, and what was expected</text>
 
-    <line x1="320" y1="572" x2="320" y2="606" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="572" x2="320" y2="606" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="608" width="520" height="130" rx="16" fill="#2f4858"/>
+    <rect x="60" y="608" width="520" height="130" rx="4" fill="#101416"/>
     <text x="320" y="652" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">4. Clean up</text>
-    <text x="320" y="688" text-anchor="middle" font-size="22" fill="#d9e2e8">delete the order, keep the log</text>
-    <text x="320" y="718" text-anchor="middle" font-size="22" fill="#d9e2e8">proves: the next run starts empty</text>
+    <text x="320" y="688" text-anchor="middle" font-size="22" fill="#F4F6F5">delete the order, keep the log</text>
+    <text x="320" y="718" text-anchor="middle" font-size="22" fill="#F4F6F5">proves: the next run starts empty</text>
 
-    <text x="320" y="790" text-anchor="middle" font-size="22" fill="#4a5a64">If step 2 fails, step 1 was already verified.</text>
-    <text x="320" y="820" text-anchor="middle" font-size="22" fill="#4a5a64">A passing API call alone does not prove the UI.</text>
+    <text x="320" y="790" text-anchor="middle" font-size="22" fill="#526573">If step 2 fails, step 1 was already verified.</text>
+    <text x="320" y="820" text-anchor="middle" font-size="22" fill="#526573">A passing API call alone does not prove the UI.</text>
   </g>
 </svg>

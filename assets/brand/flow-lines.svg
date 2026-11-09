@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title">
+  <title id="title">K-FLOW LABS three-service flow motif</title>
+  <g fill="none" stroke="#A9D7CD" stroke-width="3">
+    <path d="M0 720H660C910 720 1030 200 1280 200H1600"/>
+    <path d="M0 760H660C910 760 1030 240 1280 240H1600"/>
+    <path d="M0 800H660C910 800 1030 280 1280 280H1600"/>
+  </g>
+</svg>

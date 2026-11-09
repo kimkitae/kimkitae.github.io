@@ -1,39 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="660" viewBox="0 0 640 660" role="img" aria-labelledby="title desc">
   <title id="title">NFS and SMB mount paths</title>
   <desc id="desc">A NAS share is mounted over NFS or SMB, tested temporarily, then recorded in fstab with a protected credentials file for SMB.</desc>
-  <rect width="640" height="660" fill="#fbfaf7"/>
+  <rect width="640" height="660" fill="#F7F9FB"/>
   <defs>
-    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/></marker>
+    <marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#006779"/></marker>
   </defs>
   <g font-family="system-ui, -apple-system, sans-serif">
-    <text x="320" y="48" text-anchor="middle" font-size="30" font-weight="700" fill="#2f4858">NFS and SMB mount paths</text>
+    <text x="320" y="48" text-anchor="middle" font-size="30" font-weight="700" fill="#101416">NFS and SMB mount paths</text>
 
-    <rect x="20" y="92" width="290" height="190" rx="18" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="165" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">NAS share</text>
-    <text x="165" y="178" text-anchor="middle" font-size="22" fill="#5d6b75">enable the protocol</text>
-    <text x="165" y="206" text-anchor="middle" font-size="22" fill="#5d6b75">allow client access</text>
+    <rect x="20" y="92" width="290" height="190" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="165" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#101416">NAS share</text>
+    <text x="165" y="178" text-anchor="middle" font-size="22" fill="#526573">enable the protocol</text>
+    <text x="165" y="206" text-anchor="middle" font-size="22" fill="#526573">allow client access</text>
 
-    <rect x="330" y="92" width="290" height="190" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
-    <text x="475" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">NFS</text>
-    <text x="475" y="178" text-anchor="middle" font-size="22" fill="#5d6b75">server:/volume/path</text>
-    <text x="475" y="206" text-anchor="middle" font-size="22" fill="#5d6b75">install nfs-common</text>
+    <rect x="330" y="92" width="290" height="190" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="475" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#101416">NFS</text>
+    <text x="475" y="178" text-anchor="middle" font-size="22" fill="#526573">server:/volume/path</text>
+    <text x="475" y="206" text-anchor="middle" font-size="22" fill="#526573">install nfs-common</text>
 
-    <rect x="20" y="342" width="290" height="190" rx="18" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
-    <text x="165" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#2f4858">SMB</text>
-    <text x="165" y="428" text-anchor="middle" font-size="22" fill="#5d6b75">//server/share</text>
-    <text x="165" y="456" text-anchor="middle" font-size="22" fill="#5d6b75">install cifs-utils</text>
-    <text x="165" y="484" text-anchor="middle" font-size="22" fill="#5d6b75">0600 credentials file</text>
+    <rect x="20" y="342" width="290" height="190" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="165" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#101416">SMB</text>
+    <text x="165" y="428" text-anchor="middle" font-size="22" fill="#526573">//server/share</text>
+    <text x="165" y="456" text-anchor="middle" font-size="22" fill="#526573">install cifs-utils</text>
+    <text x="165" y="484" text-anchor="middle" font-size="22" fill="#526573">0600 credentials file</text>
 
-    <rect x="330" y="342" width="290" height="190" rx="18" fill="#2f4858"/>
+    <rect x="330" y="342" width="290" height="190" rx="4" fill="#101416"/>
     <text x="475" y="390" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">fstab</text>
-    <text x="475" y="428" text-anchor="middle" font-size="22" fill="#d9e2e8">mount -a verify</text>
-    <text x="475" y="456" text-anchor="middle" font-size="22" fill="#d9e2e8">use _netdev</text>
+    <text x="475" y="428" text-anchor="middle" font-size="22" fill="#F4F6F5">mount -a verify</text>
+    <text x="475" y="456" text-anchor="middle" font-size="22" fill="#F4F6F5">use _netdev</text>
 
-    <line x1="310" y1="187" x2="322" y2="187" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
-    <line x1="165" y1="282" x2="165" y2="334" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
-    <line x1="475" y1="282" x2="475" y2="334" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
-    <line x1="310" y1="437" x2="322" y2="437" stroke="#4f6d7a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="310" y1="187" x2="322" y2="187" stroke="#006779" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="165" y1="282" x2="165" y2="334" stroke="#006779" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="475" y1="282" x2="475" y2="334" stroke="#006779" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="310" y1="437" x2="322" y2="437" stroke="#006779" stroke-width="3" marker-end="url(#a)"/>
 
-    <text x="320" y="592" text-anchor="middle" font-size="22" fill="#5d6b75">Test a temporary mount before editing fstab.</text>
+    <text x="320" y="592" text-anchor="middle" font-size="22" fill="#526573">Test a temporary mount before editing fstab.</text>
   </g>
 </svg>

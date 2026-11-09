@@ -1,65 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="900" viewBox="0 0 640 900" role="img" aria-labelledby="title desc">
   <title id="title">Storage and live delivery are separate paths</title>
   <desc id="desc">Clients send logs to FastAPI, then Kafka, then a consumer that saves to MariaDB and publishes to Redis. The history path serves filtered queries and fills gaps after pause or resume. The live path updates the screen but a publish failure leaves the log only in history. Pause stops display, not collection.</desc>
-  <rect width="640" height="900" fill="#fbfaf7"/>
+  <rect width="640" height="900" fill="#F7F9FB"/>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/>
+      <path d="M0,0 L10,4 L0,8 z" fill="#006779"/>
     </marker>
   </defs>
   <g font-family="system-ui, -apple-system, sans-serif">
-    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#1f2d36">Two paths, two failures</text>
-    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#4a5a64">Storage and live delivery break separately</text>
+    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#172B3A">Two paths, two failures</text>
+    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#526573">Storage and live delivery break separately</text>
 
-    <rect x="60" y="104" width="520" height="76" rx="14" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="138" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Automation clients</text>
-    <text x="320" y="166" text-anchor="middle" font-size="22" fill="#3f4f59">LogEntry over HTTP</text>
+    <rect x="60" y="104" width="520" height="76" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="138" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Automation clients</text>
+    <text x="320" y="166" text-anchor="middle" font-size="22" fill="#526573">LogEntry over HTTP</text>
 
-    <line x1="320" y1="180" x2="320" y2="204" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="180" x2="320" y2="204" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="206" width="520" height="76" rx="14" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="240" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">FastAPI</text>
-    <text x="320" y="268" text-anchor="middle" font-size="22" fill="#3f4f59">service names in a Redis set</text>
+    <rect x="60" y="206" width="520" height="76" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="240" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">FastAPI</text>
+    <text x="320" y="268" text-anchor="middle" font-size="22" fill="#526573">service names in a Redis set</text>
 
-    <line x1="320" y1="282" x2="320" y2="306" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="282" x2="320" y2="306" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="308" width="520" height="76" rx="14" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
-    <text x="320" y="342" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Kafka topic: log</text>
+    <rect x="60" y="308" width="520" height="76" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="320" y="342" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Kafka topic: log</text>
     <text x="320" y="370" text-anchor="middle" font-size="22" fill="#5d5323">buffers bursts, one consumer</text>
 
-    <line x1="320" y1="384" x2="320" y2="408" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="384" x2="320" y2="408" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="410" width="520" height="88" rx="14" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="444" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Consumer</text>
-    <text x="320" y="474" text-anchor="middle" font-size="22" fill="#3f4f59">saves first, then publishes</text>
+    <rect x="60" y="410" width="520" height="88" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="444" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Consumer</text>
+    <text x="320" y="474" text-anchor="middle" font-size="22" fill="#526573">saves first, then publishes</text>
 
-    <path d="M320 498 L320 516 L170 516 L170 536" fill="none" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
-    <path d="M320 516 L470 516 L470 536" fill="none" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M320 498 L320 516 L170 516 L170 536" fill="none" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M320 516 L470 516 L470 536" fill="none" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="40" y="538" width="260" height="112" rx="14" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
-    <text x="170" y="572" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">MariaDB</text>
-    <text x="170" y="604" text-anchor="middle" font-size="22" fill="#3f4f59">save fails →</text>
-    <text x="170" y="632" text-anchor="middle" font-size="22" fill="#3f4f59">no history at all</text>
+    <rect x="40" y="538" width="260" height="112" rx="4" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
+    <text x="170" y="572" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">MariaDB</text>
+    <text x="170" y="604" text-anchor="middle" font-size="22" fill="#526573">save fails →</text>
+    <text x="170" y="632" text-anchor="middle" font-size="22" fill="#526573">no history at all</text>
 
-    <rect x="340" y="538" width="260" height="112" rx="14" fill="#fdecea" stroke="#b3261e" stroke-width="2"/>
-    <text x="470" y="572" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Redis Pub/Sub</text>
+    <rect x="340" y="538" width="260" height="112" rx="4" fill="#fdecea" stroke="#b3261e" stroke-width="2"/>
+    <text x="470" y="572" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Redis Pub/Sub</text>
     <text x="470" y="604" text-anchor="middle" font-size="22" fill="#7a1f1a">publish fails →</text>
     <text x="470" y="632" text-anchor="middle" font-size="22" fill="#7a1f1a">history only</text>
 
-    <line x1="170" y1="650" x2="170" y2="678" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
-    <line x1="470" y1="650" x2="470" y2="678" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="170" y1="650" x2="170" y2="678" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="470" y1="650" x2="470" y2="678" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="40" y="680" width="260" height="112" rx="14" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="170" y="714" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Filter query</text>
-    <text x="170" y="746" text-anchor="middle" font-size="22" fill="#3f4f59">fills gaps after</text>
-    <text x="170" y="774" text-anchor="middle" font-size="22" fill="#3f4f59">pause or resume</text>
+    <rect x="40" y="680" width="260" height="112" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="170" y="714" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Filter query</text>
+    <text x="170" y="746" text-anchor="middle" font-size="22" fill="#526573">fills gaps after</text>
+    <text x="170" y="774" text-anchor="middle" font-size="22" fill="#526573">pause or resume</text>
 
-    <rect x="340" y="680" width="260" height="112" rx="14" fill="#2f4858"/>
+    <rect x="340" y="680" width="260" height="112" rx="4" fill="#101416"/>
     <text x="470" y="714" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">WebSocket UI</text>
-    <text x="470" y="746" text-anchor="middle" font-size="22" fill="#d9e2e8">pause = display only</text>
-    <text x="470" y="774" text-anchor="middle" font-size="22" fill="#d9e2e8">a gap needs a DB read</text>
+    <text x="470" y="746" text-anchor="middle" font-size="22" fill="#F4F6F5">pause = display only</text>
+    <text x="470" y="774" text-anchor="middle" font-size="22" fill="#F4F6F5">a gap needs a DB read</text>
 
-    <text x="320" y="844" text-anchor="middle" font-size="22" fill="#4a5a64">Pub/Sub does not replay missed messages.</text>
-    <text x="320" y="876" text-anchor="middle" font-size="22" fill="#4a5a64">The database is the only history.</text>
+    <text x="320" y="844" text-anchor="middle" font-size="22" fill="#526573">Pub/Sub does not replay missed messages.</text>
+    <text x="320" y="876" text-anchor="middle" font-size="22" fill="#526573">The database is the only history.</text>
   </g>
 </svg>

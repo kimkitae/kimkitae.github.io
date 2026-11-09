@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
+  <title id="title">김기태의 AX 작업노트</title>
+  <defs><style>
+@font-face{font-family:KFLDisplay;src:url('fonts/space-grotesk-bold.woff2')}
+text{font-family:'Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif}
+.display{font-family:KFLDisplay,'Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif;font-weight:700}
+.mono{font-family:'IBM Plex Mono','SFMono-Regular',Consolas,monospace}
+</style></defs>
+  <rect width="1024" height="1024" fill="#101416"/>
+  <g transform="translate(355.9 250) scale(1.4)"><path fill="#F4F6F5" d="M0 0h37v66L90 0h45L64 72l79 91H98L37 95v68H0V0Z"/><path fill="#F4F6F5" d="M153 0h67v38h-79v28h64v36h-64v35l-35-35V56L153 0Z"/></g>
+  <text x="512.0" y="650" text-anchor="middle" font-size="64" fill="#F4F6F5" class="display" data-kf-role="title" data-kf-line="1">김기태의</text>
+  <text x="512.0" y="730" text-anchor="middle" font-size="64" fill="#F4F6F5" class="display" data-kf-role="title" data-kf-line="2">AX 작업노트</text>
+</svg>

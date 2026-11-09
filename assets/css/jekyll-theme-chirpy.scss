@@ -8,3 +8,423 @@
 ';
 
 /* append your custom style below */
+
+/* --------------------------------------------------------------------------
+   K-FLOW LABS Flow System V2 — FINAL / USER APPROVED (2026-11-06)
+   Native Chirpy overrides only. Article width and theme behaviour stay intact.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('{{ '/assets/brand/fonts/space-grotesk-bold.woff2' | relative_url }}') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --kf-charcoal: #101416;
+  --kf-offwhite: #f7f9fb;
+  --kf-white-ink: #f4f6f5;
+  --kf-ink: #172b3a;
+  --kf-mint: #a9d7cd;
+  --kf-deepteal: #006779;
+  --kf-muted-light: #526573;
+  --kf-muted-dark: #b5bebd;
+  --kf-divider-light: #cad6df;
+  --kf-divider-dark: #394347;
+  --kf-radius: 0.875rem;
+  --kf-font-display: 'Space Grotesk', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR',
+    sans-serif;
+  --kf-font-body: 'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+@mixin kf-dark-vars {
+  --main-bg: #101416;
+  --mask-bg: #000000;
+  --main-border-color: #394347;
+  --text-color: #d7dedd;
+  --text-muted-color: #b5bebd;
+  --text-muted-highlight-color: #f4f6f5;
+  --heading-color: #f4f6f5;
+  --label-color: #b5bebd;
+  --blockquote-border-color: #394347;
+  --blockquote-text-color: #b5bebd;
+  --link-color: #a9d7cd;
+  --link-underline-color: #394347;
+  --button-bg: #172b3a;
+  --btn-border-color: #394347;
+  --btn-backtotop-color: #f4f6f5;
+  --btn-backtotop-border-color: #394347;
+  --btn-box-shadow: rgba(0, 0, 0, 0.45);
+  --checkbox-color: #b5bebd;
+  --checkbox-checked-color: #a9d7cd;
+  --site-title-color: #f4f6f5;
+  --site-subtitle-color: #b5bebd;
+  --sidebar-bg: #101416;
+  --sidebar-border-color: #1c2427;
+  --sidebar-muted-color: #b5bebd;
+  --sidebar-active-color: #f4f6f5;
+  --sidebar-hover-bg: #1c2427;
+  --sidebar-btn-bg: #172b3a;
+  --sidebar-btn-color: #b5bebd;
+  --avatar-border-color: #a9d7cd;
+  --topbar-bg: rgba(16, 20, 22, 0.88);
+  --topbar-text-color: #f4f6f5;
+  --search-border-color: #394347;
+  --search-icon-color: #b5bebd;
+  --input-focus-border-color: #a9d7cd;
+  --post-list-text-color: #d7dedd;
+  --btn-patinator-text-color: #b5bebd;
+  --btn-paginator-hover-color: #1c2427;
+  --toc-highlight: #a9d7cd;
+  --btn-share-color: #b5bebd;
+  --btn-share-hover-color: #a9d7cd;
+  --card-bg: #161c1f;
+  --card-hovor-bg: #1c2427;
+  --card-shadow: rgba(0, 0, 0, 0.45) 0 2px 6px 0, rgba(169, 215, 205, 0.12) 0 0 0 1px;
+  --footnote-target-bg: #1c3a38;
+  --tb-odd-bg: #141a1d;
+  --tb-even-bg: #101416;
+  --tb-border-color: #394347;
+  --dash-color: #394347;
+  --kbd-wrap-color: #394347;
+  --kbd-text-color: #f4f6f5;
+  --kbd-bg-color: #1c2427;
+  --tag-border: #394347;
+  --tag-shadow: #394347;
+  --tag-hover: #1c2427;
+  --search-tag-bg: #1c2427;
+  --categories-border: #394347;
+  --categories-hover-bg: #1c2427;
+  --categories-icon-hover-color: #a9d7cd;
+  --timeline-color: #394347;
+  --timeline-node-bg: #b5bebd;
+  --timeline-year-dot-color: #101416;
+  --language-border-color: #394347;
+  --highlight-bg-color: #0b0e0f;
+  --highlighter-rouge-color: #f4f6f5;
+  --highlight-lineno-color: #8fa0a0;
+  --inline-code-bg: rgba(255, 255, 255, 0.07);
+  --code-color: #d7dedd;
+  --code-header-text-color: #b5bebd;
+  --code-header-muted-color: #394347;
+  --code-header-icon-color: #8fa0a0;
+}
+
+@mixin kf-light-vars {
+  --main-bg: #f7f9fb;
+  --mask-bg: #c1c3c5;
+  --main-border-color: #cad6df;
+  --text-color: #172b3a;
+  --text-muted-color: #526573;
+  --text-muted-highlight-color: #172b3a;
+  --heading-color: #101416;
+  --label-color: #526573;
+  --blockquote-border-color: #a9d7cd;
+  --blockquote-text-color: #526573;
+  --link-color: #006779;
+  --link-underline-color: #cad6df;
+  --button-bg: #ffffff;
+  --btn-border-color: #cad6df;
+  --btn-backtotop-color: #172b3a;
+  --btn-backtotop-border-color: #cad6df;
+  --btn-box-shadow: rgba(16, 20, 22, 0.08);
+  --checkbox-color: #526573;
+  --checkbox-checked-color: #006779;
+  --img-bg: radial-gradient(circle, #ffffff 0%, #eef3f6 100%);
+  --site-title-color: #f4f6f5;
+  --site-subtitle-color: #b5bebd;
+  --sidebar-bg: #101416;
+  --sidebar-border-color: #101416;
+  --sidebar-muted-color: #b5bebd;
+  --sidebar-active-color: #f4f6f5;
+  --sidebar-hover-bg: #1c2427;
+  --sidebar-btn-bg: #172b3a;
+  --sidebar-btn-color: #b5bebd;
+  --avatar-border-color: #a9d7cd;
+  --topbar-bg: rgba(247, 249, 251, 0.88);
+  --topbar-text-color: #172b3a;
+  --search-border-color: #cad6df;
+  --search-icon-color: #526573;
+  --input-focus-border-color: #006779;
+  --post-list-text-color: #172b3a;
+  --btn-patinator-text-color: #526573;
+  --btn-paginator-hover-color: #e7eef1;
+  --toc-highlight: #006779;
+  --btn-share-color: #526573;
+  --btn-share-hover-color: #006779;
+  --card-bg: #ffffff;
+  --card-hovor-bg: #eef3f6;
+  --card-shadow: rgba(16, 20, 22, 0.05) 0 2px 6px 0,
+    rgba(16, 20, 22, 0.08) 0 0 0 1px;
+  --footnote-target-bg: #d9f0ea;
+  --tb-odd-bg: #ffffff;
+  --tb-even-bg: #f1f5f7;
+  --tb-border-color: #cad6df;
+  --dash-color: #cad6df;
+  --kbd-wrap-color: #cad6df;
+  --kbd-text-color: #172b3a;
+  --kbd-bg-color: #ffffff;
+  --tag-border: #cad6df;
+  --tag-shadow: #cad6df;
+  --tag-hover: #e7eef1;
+  --search-tag-bg: #f1f5f7;
+  --categories-border: #cad6df;
+  --categories-hover-bg: #e7eef1;
+  --categories-icon-hover-color: #006779;
+  --timeline-color: rgba(16, 20, 22, 0.1);
+  --timeline-node-bg: #526573;
+  --timeline-year-dot-color: #ffffff;
+  --language-border-color: #cad6df;
+  --highlight-bg-color: #f1f5f7;
+  --highlighter-rouge-color: #172b3a;
+  --highlight-lineno-color: #526573;
+  --inline-code-bg: rgba(16, 20, 22, 0.06);
+  --code-color: #172b3a;
+  --code-header-text-color: #526573;
+  --code-header-muted-color: #cad6df;
+  --code-header-icon-color: #526573;
+}
+
+html,
+html[data-mode='light'] {
+  @include kf-light-vars;
+}
+
+html[data-mode='dark'] {
+  @include kf-dark-vars;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-mode]) {
+    @include kf-light-vars;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    @include kf-dark-vars;
+  }
+}
+
+body {
+  font-family: var(--kf-font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title,
+.card-title,
+.post-title {
+  font-family: var(--kf-font-display);
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-underline-offset: 0.18em;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--kf-deepteal);
+  outline-offset: 3px;
+}
+
+#sidebar :focus-visible,
+.kf-brand-header :focus-visible {
+  outline-color: var(--kf-mint);
+}
+
+/* Sidebar: strong charcoal field, restrained mark, mint identity accent. */
+#sidebar .site-title {
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.25;
+}
+
+#sidebar ul li.nav-item.active .nav-link {
+  box-shadow: inset 3px 0 0 var(--kf-mint);
+}
+
+#avatar,
+#avatar.rounded-circle {
+  border-radius: 1rem !important;
+  background: var(--kf-charcoal);
+}
+
+#avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Homepage cards, reading links, code and tables. */
+#post-list .post-preview {
+  border: 1px solid var(--main-border-color);
+}
+
+#post-list .card .card-body .card-title {
+  color: var(--heading-color) !important;
+  font-family: var(--kf-font-display);
+}
+
+.highlight {
+  background-color: var(--highlight-bg-color);
+  color: var(--code-color);
+}
+
+.highlight table td {
+  border-color: var(--tb-border-color);
+}
+
+.table-wrapper > table thead {
+  border-bottom-color: var(--main-border-color);
+}
+
+.table-wrapper > table thead th {
+  background-color: var(--tb-even-bg);
+  color: var(--heading-color);
+  font-family: var(--kf-font-display);
+}
+
+#toc-wrapper {
+  border-left-color: var(--main-border-color);
+}
+
+#toc-wrapper .toc-link {
+  color: var(--text-muted-color);
+}
+
+#toc-wrapper .toc-link:hover,
+#toc-wrapper .is-active-link {
+  color: var(--toc-highlight) !important;
+}
+
+/* Single brand header, content-driven; artwork stays in the right portion. */
+.kf-brand-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 2rem 0 1.75rem;
+  padding: clamp(1.25rem, 3.2vw, 2.5rem);
+  border-radius: var(--kf-radius);
+  background:
+    radial-gradient(120% 160% at 100% 0%, rgba(169, 215, 205, 0.12) 0%, transparent 58%),
+    var(--kf-charcoal);
+  color: var(--kf-white-ink);
+}
+
+.kf-brand-header__art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 0;
+  width: 62%;
+  background: url('{{ '/assets/brand/flow-lines.svg' | relative_url }}') right center / cover
+    no-repeat;
+  opacity: 0.62;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 42%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 42%);
+}
+
+.kf-brand-header__body {
+  position: relative;
+  z-index: 1;
+  max-width: 38rem;
+}
+
+.kf-brand-header__lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.25rem;
+}
+
+.kf-brand-header__mark {
+  width: 2.1rem;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.kf-brand-header__wordmark {
+  width: min(12rem, 52vw);
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.kf-brand-header__eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--kf-mint);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.kf-brand-header__title {
+  margin: 0;
+  color: var(--kf-white-ink);
+  font-family: var(--kf-font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: break-word;
+}
+
+.kf-brand-header__line {
+  margin: 0.7rem 0 0;
+  color: var(--kf-mint);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+
+.kf-brand-header__services {
+  margin: 0.55rem 0 0;
+  color: var(--kf-muted-dark);
+  font-size: 0.85rem;
+}
+
+.kf-brand-header__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.kf-brand-header__links a {
+  color: var(--kf-white-ink);
+  border-bottom: 1px solid rgba(169, 215, 205, 0.55);
+}
+
+.kf-brand-header__links a:hover {
+  color: var(--kf-mint);
+  border-bottom-color: var(--kf-mint);
+  text-decoration: none;
+}
+
+@media all and (max-width: 575px) {
+  .kf-brand-header {
+    padding: 1.25rem;
+  }
+
+  .kf-brand-header__art {
+    width: 100%;
+    opacity: 0.3;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 72%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 72%);
+  }
+
+  .kf-brand-header__wordmark {
+    width: 10rem;
+  }
+}

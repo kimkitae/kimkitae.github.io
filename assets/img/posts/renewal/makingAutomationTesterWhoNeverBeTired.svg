@@ -1,60 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="1150" viewBox="0 0 640 1150" role="img" aria-labelledby="title desc">
   <title id="title">Physical test automation experiment, assembled but not integrated</title>
   <desc id="desc">The hardware was assembled. The proposed flow first checks that screen coordinates map to servo commands using three non-collinear calibration points and a fourth-point residual, then has Appium control the app, a camera read the screen, the Arduino drive the plotter, and a completion check use app state or a sensor instead of a fixed sleep. Physical accuracy and latency were not measured.</desc>
-  <rect width="640" height="1150" fill="#fbfaf7"/>
+  <rect width="640" height="1150" fill="#F7F9FB"/>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/>
+      <path d="M0,0 L10,4 L0,8 z" fill="#006779"/>
     </marker>
     <marker id="redArrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
       <path d="M0,0 L10,4 L0,8 z" fill="#b3261e"/>
     </marker>
   </defs>
   <g font-family="system-ui, -apple-system, sans-serif">
-    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#1f2d36">Assembled, not integrated</text>
-    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#4a5a64">Solid is done; dashed is proposed and unchecked</text>
+    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#172B3A">Assembled, not integrated</text>
+    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#526573">Solid is done; dashed is proposed and unchecked</text>
 
-    <rect x="60" y="104" width="520" height="118" rx="16" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="142" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Completed: hardware assembled</text>
-    <text x="320" y="174" text-anchor="middle" font-size="22" fill="#3f4f59">XY plotter, two servos, Arduino</text>
-    <text x="320" y="202" text-anchor="middle" font-size="22" fill="#3f4f59">camera module</text>
+    <rect x="60" y="104" width="520" height="118" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="142" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Completed: hardware assembled</text>
+    <text x="320" y="174" text-anchor="middle" font-size="22" fill="#526573">XY plotter, two servos, Arduino</text>
+    <text x="320" y="202" text-anchor="middle" font-size="22" fill="#526573">camera module</text>
 
-    <line x1="320" y1="222" x2="320" y2="250" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="222" x2="320" y2="250" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="252" width="520" height="126" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
-    <text x="320" y="290" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Gate: coordinate mapping</text>
+    <rect x="60" y="252" width="520" height="126" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="290" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Gate: coordinate mapping</text>
     <text x="320" y="322" text-anchor="middle" font-size="22" fill="#5d5323">three non-collinear points</text>
     <text x="320" y="350" text-anchor="middle" font-size="22" fill="#5d5323">check a fourth point's residual</text>
 
-    <line x1="320" y1="378" x2="320" y2="406" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="378" x2="320" y2="406" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="408" width="520" height="118" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
-    <text x="320" y="446" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Proposed: Appium controls app</text>
+    <rect x="60" y="408" width="520" height="118" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="446" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Proposed: Appium controls app</text>
     <text x="320" y="478" text-anchor="middle" font-size="22" fill="#5d5323">launch and object check</text>
 
-    <line x1="320" y1="526" x2="320" y2="554" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="526" x2="320" y2="554" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="556" width="520" height="118" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
-    <text x="320" y="594" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Proposed: camera reads screen</text>
+    <rect x="60" y="556" width="520" height="118" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="594" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Proposed: camera reads screen</text>
     <text x="320" y="626" text-anchor="middle" font-size="22" fill="#5d5323">Raspberry Pi finds the target</text>
 
-    <line x1="320" y1="674" x2="320" y2="702" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="674" x2="320" y2="702" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="704" width="520" height="118" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
-    <text x="320" y="742" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Proposed: Arduino + plotter</text>
+    <rect x="60" y="704" width="520" height="118" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="742" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Proposed: Arduino + plotter</text>
     <text x="320" y="774" text-anchor="middle" font-size="22" fill="#5d5323">serial coordinates, servo tap</text>
 
-    <line x1="320" y1="822" x2="320" y2="850" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="822" x2="320" y2="850" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="852" width="520" height="126" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
-    <text x="320" y="890" text-anchor="middle" font-size="24" font-weight="700" fill="#1f2d36">Proposed: completion check</text>
+    <rect x="60" y="852" width="520" height="126" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="320" y="890" text-anchor="middle" font-size="24" font-weight="700" fill="#172B3A">Proposed: completion check</text>
     <text x="320" y="922" text-anchor="middle" font-size="22" fill="#5d5323">app state or sensor feedback</text>
     <text x="320" y="950" text-anchor="middle" font-size="22" fill="#5d5323">not a fixed sleep</text>
 
     <path d="M60 915 L28 915 L28 315 L52 315" fill="none" stroke="#b3261e" stroke-width="3" marker-end="url(#redArrow)"/>
     <text x="320" y="1030" text-anchor="middle" font-size="22" fill="#7a1f1a">Recalibrate after moving the device.</text>
-    <text x="320" y="1062" text-anchor="middle" font-size="22" fill="#4a5a64">Affine cannot correct perspective or servo nonlinearity.</text>
-    <text x="320" y="1094" text-anchor="middle" font-size="22" fill="#4a5a64">No physical accuracy or latency was measured.</text>
-    <text x="320" y="1126" text-anchor="middle" font-size="22" fill="#4a5a64">The 2-second wait in the original was a guess.</text>
+    <text x="320" y="1062" text-anchor="middle" font-size="22" fill="#526573">Affine cannot correct perspective or servo nonlinearity.</text>
+    <text x="320" y="1094" text-anchor="middle" font-size="22" fill="#526573">No physical accuracy or latency was measured.</text>
+    <text x="320" y="1126" text-anchor="middle" font-size="22" fill="#526573">The 2-second wait in the original was a guess.</text>
   </g>
 </svg>

@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="1210" viewBox="0 0 640 1210" role="img" aria-labelledby="title desc">
   <title id="title">FAISS -1 padding becomes the last Python chunk</title>
   <desc id="desc">Two indexed chunks searched with k=5 produce the labels 0, 1, -1, -1, -1. The original filter i &lt; len(chunks) accepts -1, so archive_order.py appears four times in total. A bounded filter keeps only two real chunks. LLM generation is not tested in this lab.</desc>
-  <rect width="640" height="1210" fill="#fbfaf7"/>
+  <rect width="640" height="1210" fill="#F7F9FB"/>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#4f6d7a"/>
+      <path d="M0,0 L10,4 L0,8 z" fill="#006779"/>
     </marker>
     <marker id="bad" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
       <path d="M0,0 L10,4 L0,8 z" fill="#b3261e"/>
@@ -14,48 +14,48 @@
     </marker>
   </defs>
   <g font-family="system-ui, -apple-system, sans-serif">
-    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#1f2d36">How -1 duplicates a chunk</text>
-    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#4a5a64">FAISS padding plus a Python negative index</text>
+    <text x="320" y="46" text-anchor="middle" font-size="28" font-weight="700" fill="#172B3A">How -1 duplicates a chunk</text>
+    <text x="320" y="80" text-anchor="middle" font-size="22" fill="#526573">FAISS padding plus a Python negative index</text>
 
-    <rect x="60" y="106" width="520" height="94" rx="16" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="146" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">Index holds 2 chunks</text>
-    <text x="320" y="178" text-anchor="middle" font-size="22" fill="#3f4f59">cancel_order.py, archive_order.py</text>
+    <rect x="60" y="106" width="520" height="94" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="146" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">Index holds 2 chunks</text>
+    <text x="320" y="178" text-anchor="middle" font-size="22" fill="#526573">cancel_order.py, archive_order.py</text>
 
-    <line x1="320" y1="200" x2="320" y2="238" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="200" x2="320" y2="238" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="240" width="520" height="94" rx="16" fill="#e6edf1" stroke="#4f6d7a" stroke-width="2"/>
-    <text x="320" y="280" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">Search with k = 5</text>
-    <text x="320" y="312" text-anchor="middle" font-size="22" fill="#3f4f59">only two neighbours exist</text>
+    <rect x="60" y="240" width="520" height="94" rx="4" fill="#F7F9FB" stroke="#006779" stroke-width="2"/>
+    <text x="320" y="280" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">Search with k = 5</text>
+    <text x="320" y="312" text-anchor="middle" font-size="22" fill="#526573">only two neighbours exist</text>
 
-    <line x1="320" y1="334" x2="320" y2="372" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="334" x2="320" y2="372" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="374" width="520" height="112" rx="16" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
-    <text x="320" y="416" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">labels: 0, 1, -1, -1, -1</text>
-    <text x="320" y="450" text-anchor="middle" font-size="22" fill="#3f4f59">FAISS pads missing hits with -1</text>
+    <rect x="60" y="374" width="520" height="112" rx="4" fill="#f4ecd8" stroke="#c9a227" stroke-width="2"/>
+    <text x="320" y="416" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">labels: 0, 1, -1, -1, -1</text>
+    <text x="320" y="450" text-anchor="middle" font-size="22" fill="#526573">FAISS pads missing hits with -1</text>
 
-    <line x1="320" y1="486" x2="320" y2="524" stroke="#4f6d7a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="320" y1="486" x2="320" y2="524" stroke="#006779" stroke-width="3" marker-end="url(#arrow)"/>
 
-    <rect x="60" y="526" width="520" height="112" rx="16" fill="#fdecea" stroke="#b3261e" stroke-width="2"/>
-    <text x="320" y="568" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">filter: i &lt; len(chunks)</text>
-    <text x="320" y="602" text-anchor="middle" font-size="22" fill="#3f4f59">-1 &lt; 2 is true, so -1 passes</text>
+    <rect x="60" y="526" width="520" height="112" rx="4" fill="#fdecea" stroke="#b3261e" stroke-width="2"/>
+    <text x="320" y="568" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">filter: i &lt; len(chunks)</text>
+    <text x="320" y="602" text-anchor="middle" font-size="22" fill="#526573">-1 &lt; 2 is true, so -1 passes</text>
 
     <line x1="320" y1="638" x2="320" y2="676" stroke="#b3261e" stroke-width="3" marker-end="url(#bad)"/>
 
-    <rect x="60" y="678" width="520" height="112" rx="16" fill="#fdecea" stroke="#b3261e" stroke-width="2"/>
-    <text x="320" y="720" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">Python reads chunks[-1]</text>
-    <text x="320" y="754" text-anchor="middle" font-size="22" fill="#3f4f59">last chunk appears four times total</text>
+    <rect x="60" y="678" width="520" height="112" rx="4" fill="#fdecea" stroke="#b3261e" stroke-width="2"/>
+    <text x="320" y="720" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">Python reads chunks[-1]</text>
+    <text x="320" y="754" text-anchor="middle" font-size="22" fill="#526573">last chunk appears four times total</text>
 
     <line x1="320" y1="790" x2="320" y2="828" stroke="#b3261e" stroke-width="3" marker-end="url(#bad)"/>
 
-    <rect x="60" y="830" width="520" height="112" rx="16" fill="#b3261e"/>
+    <rect x="60" y="830" width="520" height="112" rx="4" fill="#b3261e"/>
     <text x="320" y="872" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">A duplicate chunk in prompt</text>
     <text x="320" y="906" text-anchor="middle" font-size="22" fill="#fdecea">LLM output was not tested</text>
 
     <text x="60" y="990" font-size="26" font-weight="700" fill="#1e6b3a">Fix: bound the label</text>
 
-    <rect x="60" y="1010" width="520" height="112" rx="16" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
-    <text x="320" y="1052" text-anchor="middle" font-size="26" font-weight="700" fill="#1f2d36">0 &lt;= i &lt; len(chunks)</text>
-    <text x="320" y="1086" text-anchor="middle" font-size="22" fill="#3f4f59">also check index.ntotal first</text>
+    <rect x="60" y="1010" width="520" height="112" rx="4" fill="#e7f4ec" stroke="#1e6b3a" stroke-width="2"/>
+    <text x="320" y="1052" text-anchor="middle" font-size="26" font-weight="700" fill="#172B3A">0 &lt;= i &lt; len(chunks)</text>
+    <text x="320" y="1086" text-anchor="middle" font-size="22" fill="#526573">also check index.ntotal first</text>
 
     <line x1="320" y1="1122" x2="320" y2="1150" stroke="#1e6b3a" stroke-width="3" marker-end="url(#good)"/>
 

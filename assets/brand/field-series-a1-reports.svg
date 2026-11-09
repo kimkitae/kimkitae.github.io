@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title">
+  <title id="title">짧은 발화에서 유용한 리포트로</title>
+  <defs><style>
+@font-face{font-family:KFLDisplay;src:url('fonts/space-grotesk-bold.woff2')}
+text{font-family:'Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif}
+.display{font-family:KFLDisplay,'Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif;font-weight:700}
+.mono{font-family:'IBM Plex Mono','SFMono-Regular',Consolas,monospace}
+</style></defs>
+  <rect width="1600" height="900" fill="#F7F9FB"/>
+<defs><clipPath id="flow-760-0-840-900"><rect x="760" y="0" width="840" height="900"/></clipPath></defs>
+<g clip-path="url(#flow-760-0-840-900)" fill="none" stroke="#006779" stroke-width="3" opacity="0.16" transform=""><path d="M0 720H660C910 720 1030 200 1280 200H1600"/><path d="M0 760H660C910 760 1030 240 1280 240H1600"/><path d="M0 800H660C910 800 1030 280 1280 280H1600"/></g>
+  <g transform="translate(110 86) scale(0.5)"><path fill="#121212" d="M78.57 94 45.08 50.84 75.34 18.18H56.94L27.3 51.46V18.18H11.7V94H27.3V68.62L35.1 60.51L59.95 94ZM105.4 72.47V58.43H77.11V72.47ZM169.98 31.18V18.18H116.74V94H132.34V61.34H165.51V48.34H132.34V31.18ZM232.8 94V81H196.5V18.18H180.9V94ZM310.18 56.56C310.18 33.68 295.72 16.94 273.57 16.94C251.31 16.94 237.17 34.3 237.17 56.04C237.17 78.71 251.42 95.25 273.67 95.25C295.72 95.25 310.18 78.71 310.18 56.56ZM294.58 56.46C294.58 71.95 286.15 81.94 273.67 81.94C261.09 81.94 252.77 71.95 252.77 56.04C252.77 40.75 261.09 30.25 273.67 30.25C286.46 30.25 294.58 40.65 294.58 56.46ZM408.77 18.18H392.23L380.9 75.07L368.62 18.18H353.23L341.48 74.97L329.73 18.18H313.19L334.62 94H348.66L361.03 34.82L373.72 94H387.76Z"/><path fill="#2E4053" d="M493.45 94V85.47H456.01V18.18H446.34V94ZM565.31 94 538.69 18.18H526.21L499.17 94H509.46L517.47 71.22H546.7L554.5 94ZM543.99 63.11H519.86L532.34 28.58ZM631.56 72.37C631.56 63.22 627.4 57.7 617.73 53.96C624.59 50.74 628.23 45.12 628.23 37.42C628.23 26.4 620.12 18.18 605.77 18.18H574.98V94H609.2C622.82 94 631.56 84.85 631.56 72.37ZM618.56 38.78C618.56 46.47 614.09 50.84 603.38 50.84H584.66V26.71H603.38C614.09 26.71 618.56 31.08 618.56 38.78ZM621.89 72.47C621.89 79.75 617.42 85.47 608.26 85.47H584.66V59.37H608.26C617.42 59.37 621.89 65.09 621.89 72.47ZM700.72 73.2C700.72 63.84 694.9 56.98 684.6 54.17L665.57 49.07C656.42 46.68 653.09 43.66 653.09 37.84C653.09 30.14 659.85 24.42 670.04 24.42C682.1 24.42 688.97 29.94 688.97 39.82H698.12C698.12 24.94 687.82 16.31 670.35 16.31C653.71 16.31 643.42 25.46 643.42 39.19C643.42 48.45 648.3 54.27 658.29 56.87L677.11 61.86C686.68 64.36 691.05 68.21 691.05 74.14C691.05 82.46 684.81 87.34 671.7 87.34C657.35 87.34 650.28 80.17 650.28 69.35H641.13C641.13 87.24 653.19 95.87 671.08 95.87C690.32 95.87 700.72 86.72 700.72 73.2Z"/></g>
+  <rect x="110" y="200" width="40" height="4" fill="#006779"/>
+  <text x="110" y="244" font-size="18" letter-spacing="3" fill="#006779" class="mono">FIELD SERIES / A1</text>
+  <text x="110" y="360" font-size="84" fill="#172B3A" class="display" data-kf-role="title" data-kf-line="1">짧은 발화에서</text>
+  <text x="110" y="452" font-size="84" fill="#172B3A" class="display" data-kf-role="title" data-kf-line="2">유용한 리포트로</text>
+  <text x="110" y="530" font-size="30" fill="#526573" data-kf-role="subtitle">짧은 발화에서 리포트까지의 과정</text>
+  <path d="M110 744H900" stroke="#CAD6DF"/>
+  <text x="110" y="792" font-size="26" fill="#172B3A" class="display" data-kf-role="author">Kitae Kim</text>
+  <text x="110" y="824" font-size="19" fill="#526573" data-kf-role="role">Co-founder · K-FLOW LABS</text>
+</svg>
