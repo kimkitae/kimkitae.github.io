@@ -3,6 +3,15 @@
 Short art contract for the blog and its cross-channel covers. Prose, routes and
 publication schedules are out of scope.
 
+## Identity
+
+Brand first: the site and artwork lead with KFlowLabs (original K-FLOW LABS
+lockup), and the product is **AX 작업노트** — field notes on AX, workflow
+automation and AI system practice. The personal byline stays small and
+secondary: author 김기태 / Kitae Kim.
+
+Contact: `kimkitae@kflowlabs.com`. Public wordmark: `K-FLOW LABS`.
+
 ## Provenance
 
 Source: K-FLOW LABS / Flow System V2, marked FINAL / USER APPROVED on 2026-11-06.
@@ -58,16 +67,15 @@ prompt/status colors in the theme.
 | --- | --- | --- |
 | GitHub Pages home | native theme + `_includes/kflowlabs-brand-header.html` | Avatar `kf-avatar-dark.svg`; social preview `blog-social.png` |
 | Favicon and PWA | `kf-avatar-dark.svg`, `kf-avatar-dark.png` | 1024×1024 identity; SVG favicon with PNG fallback |
-| GitHub social preview | `assets/brand/blog-social.png` | 1600×900, Korean title two lines, wordmark, low-key contact |
+| GitHub social preview | `assets/brand/blog-social.png` | 1600×900, AX 작업노트 headline, wordmark, low-key contact |
 | Naver blog title | `assets/brand/naver-title.png` (master 1920×480) + `assets/brand/naver-title-773.png` (saved 773×194 derivative) | Top-header layout; the 773×194 derivative is the uploaded width |
 | Naver blog avatar | `assets/brand/kf-avatar-dark.png` | Separate from the ID shared photo; ID photo stays unchanged |
-| Naver mobile cover | `assets/brand/naver-mobile-cover.png` | 1024×1024, charcoal, KF monogram and two-line Korean title |
+| Naver mobile cover | `assets/brand/naver-mobile-cover.png` | 1024×1024, charcoal, KF monogram, KFlowLabs and AX 작업노트 |
 | Medium | `assets/brand/medium-mobile-automation.png` | 1600×900 cover; existing explanatory image and prose stay |
 | Medium wordmark | `assets/brand/medium-wordmark.png` | 1280×320 transparent field, reversed white original wordmark |
 | Prepared field series | `field-series-erp.png`, `field-series-ai-coaching.png`, `field-series-baguio-adaptation.png`, `field-series-a1-reports.png` | 1600×900 covers; prepared assets, not publication authorization |
 
-Contact: `kimkitae@kflowlabs.com`. Public wordmark: `K-FLOW LABS`. Author
-identity: 김기태의 AX 작업노트 · KFlowLabs / Kitae Kim | KFlowLabs.
+Byline author: 김기태 / Kitae Kim | KFlowLabs. Contact: `kimkitae@kflowlabs.com`.
 
 ## Channel language policy
 
@@ -102,8 +110,11 @@ this repository task:
   The Naver blog avatar is a separate upload and does not replace the ID photo.
 - Medium and Naver avatar upload accept the supplied 1024×1024 PNG.
 
-Native profile design changes are still owned by the running root task; this
-guide records the policy and saved upload dimensions, not applied profiles.
+Native profile changes are not made by this guide. The root task owns actual
+native verification: it regenerates assets from the approved kit, rasterizes the
+PNGs and the 773×194 derivative, and QA-confirms the rendered result in the
+native channel controls. Code and this guide describe policy and dimensions;
+they cannot assert that a profile has been applied.
 
 ## Regenerate and check
 

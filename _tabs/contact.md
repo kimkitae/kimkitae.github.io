@@ -4,7 +4,7 @@ icon: fas fa-envelope
 order: 5
 ---
 
-김기태의 AX 작업노트를 읽고 자동화나 AX 과제에 관해 이야기하고 싶다면 이메일로 연락해 주세요. KFlowLabs의 협업 문의도 같은 주소로 받습니다.
+KFlowLabs AX 작업노트를 읽고 자동화나 AX 과제에 관해 이야기하고 싶다면 이메일로 연락해 주세요. KFlowLabs의 협업 문의도 같은 주소로 받습니다.
 
 For automation or AX enquiries, email [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20inquiry). Describe the workflow you want to improve and leave out confidential information.
 

@@ -49,15 +49,15 @@ SIZES: dict[str, tuple[int, int]] = {
 }
 
 TITLES = {
-    "blog-social": "김기태의 AX 작업노트 · KFlowLabs",
-    "naver-title": "김기태의 AX 작업노트",
+    "blog-social": "KFlowLabs AX 작업노트",
+    "naver-title": "KFlowLabs AX 작업노트",
     "medium-mobile-automation": "Mobile automation",
     "field-series-erp": "자동 배정에 담기지 않은 판단",
     "field-series-ai-coaching": "녹음부터 전달까지, 완료를 나누기",
     "field-series-baguio-adaptation": "같은 기능, 다른 캠퍼스의 연결",
     "field-series-a1-reports": "짧은 발화에서 유용한 리포트로",
     "medium-wordmark": "K-FLOW LABS",
-    "naver-mobile-cover": "김기태의 AX 작업노트",
+    "naver-mobile-cover": "KFlowLabs AX 작업노트",
 }
 
 STYLE = """
@@ -139,10 +139,9 @@ def blog_social(w: int, h: int, wordmark_paths: list[str], flow_paths: list[str]
     body = f'''  <rect width="{w}" height="{h}" fill="#101416"/>
 {flow(flow_paths, (720, 0, 880, 900), "#A9D7CD", "0.55")}
   {wordmark(wordmark_paths, 110, 86, 0.54, True)}
-  <text x="110" y="370" font-size="94" fill="#F4F6F5" class="display">김기태의</text>
-  <text x="110" y="480" font-size="94" fill="#F4F6F5" class="display">AX 작업노트</text>
-  <text x="110" y="566" font-size="32" fill="#A9D7CD">복잡한 일을, 흐르는 시스템으로.</text>
-  <text x="110" y="616" font-size="24" fill="#B5BEBD">AI automation · Web &amp; mobile testing · EdTech</text>
+  <text x="110" y="430" font-size="110" fill="#F4F6F5" class="display">AX 작업노트</text>
+  <text x="110" y="520" font-size="32" fill="#A9D7CD">복잡한 일을, 흐르는 시스템으로.</text>
+  <text x="110" y="570" font-size="24" fill="#B5BEBD">AI automation · Web &amp; mobile testing · EdTech</text>
   <path d="M110 744H620" stroke="#394347"/>
   <text x="110" y="792" font-size="26" fill="#F4F6F5" class="display">Kitae Kim</text>
   <text x="110" y="824" font-size="19" fill="#B5BEBD">Co-founder · K-FLOW LABS</text>
@@ -154,8 +153,8 @@ def naver_title(w: int, h: int, wordmark_paths: list[str], flow_paths: list[str]
     body = f'''  <rect width="{w}" height="{h}" fill="#101416"/>
 {flow(flow_paths, (1180, 0, 740, 480), "#A9D7CD", "0.55", transform="translate(0 -360)")}
   {wordmark(wordmark_paths, 160, 58, 0.42, True)}
-  <text x="160" y="174" font-size="18" letter-spacing="3" fill="#A9D7CD" class="mono">AX 작업노트 / K-FLOW LABS</text>
-  <text x="160" y="274" font-size="84" fill="#F4F6F5" class="display">김기태의 AX 작업노트</text>
+  <text x="160" y="174" font-size="18" letter-spacing="3" fill="#A9D7CD" class="mono">FIELD NOTES / AX · AUTOMATION · AI SYSTEMS</text>
+  <text x="160" y="274" font-size="84" fill="#F4F6F5" class="display">AX 작업노트</text>
   <text x="160" y="336" font-size="26" fill="#A9D7CD">복잡한 일을, 흐르는 시스템으로.</text>'''
     return svg_doc(w, h, TITLES["naver-title"], body)
 
@@ -189,7 +188,7 @@ def naver_mobile_cover(w: int, h: int, monogram_paths: list[str]) -> str:
     shapes = "".join(f'<path fill="#F4F6F5" d="{d}"/>' for d in monogram_paths)
     body = f'''  <rect width="{w}" height="{h}" fill="#101416"/>
   <g transform="translate({x} {y}) scale({scale})">{shapes}</g>
-  <text x="{w / 2}" y="650" text-anchor="middle" font-size="64" fill="#F4F6F5" class="display" data-kf-role="title" data-kf-line="1">김기태의</text>
+  <text x="{w / 2}" y="650" text-anchor="middle" font-size="58" fill="#F4F6F5" class="display" data-kf-role="title" data-kf-line="1">KFlowLabs</text>
   <text x="{w / 2}" y="730" text-anchor="middle" font-size="64" fill="#F4F6F5" class="display" data-kf-role="title" data-kf-line="2">AX 작업노트</text>'''
     return svg_doc(w, h, TITLES["naver-mobile-cover"], body)
 
