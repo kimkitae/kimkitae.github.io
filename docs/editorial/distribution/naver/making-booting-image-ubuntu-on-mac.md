@@ -20,4 +20,4 @@ Ubuntu ISO를 내려받고, 4GB 이상 USB를 `MS-DOS(FAT32)`로 포맷합니다
 
 원문: [맥에서 Ubuntu 부팅 USB 만들기](https://kimkitae.github.io/posts/making-booting-image-ubuntu-on-mac/)
 
-설치나 서버 구성에서 막혔다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20Ubuntu%20USB%20inquiry)로 문의해 주세요. 디스크 번호나 내부 호스트 정보는 공개 가능한 예시로 바꿔서 보내 주세요.
+설치나 서버 구성에서 막혔다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20Ubuntu%20USB%20inquiry)로 문의해 주세요. 디스크 번호나 내부 호스트 정보는 공개 가능한 예시로 바꿔서 보내 주세요.

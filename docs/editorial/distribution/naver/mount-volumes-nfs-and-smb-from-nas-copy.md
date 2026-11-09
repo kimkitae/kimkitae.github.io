@@ -16,4 +16,4 @@ SMB는 `cifs-utils`가 필요하고 경로는 `//서버/공유이름` 형식입�
 
 원문: [NAS와 Ubuntu 서버 간 네트워크 볼륨 마운트하기(NFS, SMB)](https://kimkitae.github.io/posts/mount-volumes-nfs-and-smb-from-nas-copy/)
 
-NAS 마운트나 자격 증명 관리에서 막혔다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20NAS%20mount%20inquiry)로 문의해 주세요. 실제 IP, 계정, 비밀번호는 보내지 마세요.
+NAS 마운트나 자격 증명 관리에서 막혔다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20NAS%20mount%20inquiry)로 문의해 주세요. 실제 IP, 계정, 비밀번호는 보내지 마세요.

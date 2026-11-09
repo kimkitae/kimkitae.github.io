@@ -45,7 +45,7 @@ AX 교육·아카데미에서 다룰 수 있는 주제는 아직 제안 단계�
 
 ## 연락
 
-- 이메일: [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20inquiry)
+- 이메일: [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20inquiry)
 - GitHub: [github.com/kimkitae](https://github.com/kimkitae)
 - LinkedIn: [linkedin.com/in/kitae-kim-88597817a](https://www.linkedin.com/in/kitae-kim-88597817a)
 

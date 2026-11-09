@@ -16,4 +16,4 @@ Espresso는 앱 내부 접근이 가능해 테스트가 참조하는 식별자�
 
 원문: [Espresso Android 연습 프로젝트](https://kimkitae.github.io/posts/automation2/)
 
-Android 자동화 구조를 검토 중이라면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20Espresso%20practice%20inquiry)로 문의해 주세요.
+Android 자동화 구조를 검토 중이라면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20Espresso%20practice%20inquiry)로 문의해 주세요.

@@ -71,4 +71,4 @@ iOS 시뮬레이터는 `xcrun simctl`, Android 에뮬레이터는 AVD 이름과 
 
 원문: [Mobile MCP로 시작하는 모바일 테스트 자동화 - Cursor와 Claude Desktop 연결하기](https://kimkitae.github.io/posts/mobile-mcp-setup-guide/)
 
-AI 기반 모바일 자동화를 검토 중이라면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20Mobile%20MCP%20inquiry)로 문의해 주세요. 실제 단말 정보나 계정은 공개 가능한 예시로 바꿔서 보내 주세요.
+AI 기반 모바일 자동화를 검토 중이라면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20Mobile%20MCP%20inquiry)로 문의해 주세요. 실제 단말 정보나 계정은 공개 가능한 예시로 바꿔서 보내 주세요.

@@ -79,4 +79,4 @@ SMS 도착 순서는 요청 순서와 다를 수 있습니다. 여기서 B는 �
 
 원문: [SMS 인증문자 관리 페이지 개발 및 운영하기](https://kimkitae.github.io/posts/sms-management-system/)
 
-테스트 인증 흐름을 자동화하고 있다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20SMS%20automation%20inquiry)로 문의해 주세요. 실제 전화번호, 토큰, 고객 문자 내용은 보내지 마세요.
+테스트 인증 흐름을 자동화하고 있다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20SMS%20automation%20inquiry)로 문의해 주세요. 실제 전화번호, 토큰, 고객 문자 내용은 보내지 마세요.

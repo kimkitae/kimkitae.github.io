@@ -20,4 +20,4 @@ Netplan으로 서버 네트워크를 바꾸다가 SSH가 끊기면 복구가 어
 
 원문: [Ubuntu 서버 네트워크 설정하기(DHCP, 고정 IP)](https://kimkitae.github.io/posts/setting-network-setting/)
 
-네트워크 설정이나 서버 자동화에서 막혔다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20Netplan%20inquiry)로 문의해 주세요. 실제 IP, SSID, 비밀번호는 보내지 마세요.
+네트워크 설정이나 서버 자동화에서 막혔다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20Netplan%20inquiry)로 문의해 주세요. 실제 IP, SSID, 비밀번호는 보내지 마세요.

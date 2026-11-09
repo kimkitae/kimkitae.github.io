@@ -54,4 +54,4 @@ Bolt 문서에 따르면 actions, commands, shortcuts, options, view submissions
 
 원문: [Slackbot 구축부터 활용까지 - 환경 설정하기](https://kimkitae.github.io/posts/setup-slackbot-initialization/)
 
-업무 자동화 봇을 검토 중이라면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20Slackbot%20inquiry)로 문의해 주세요. 실제 토큰이나 채널 ID는 보내지 마세요.
+업무 자동화 봇을 검토 중이라면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20Slackbot%20inquiry)로 문의해 주세요. 실제 토큰이나 채널 ID는 보내지 마세요.

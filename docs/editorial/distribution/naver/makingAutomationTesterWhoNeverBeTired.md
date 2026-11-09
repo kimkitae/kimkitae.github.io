@@ -58,4 +58,4 @@
 
 원문: [끊임없이 작동하는 테스터 - 소프트웨어와 하드웨어의 만남](https://kimkitae.github.io/posts/makingAutomationTesterWhoNeverBeTired/)
 
-비슷한 자동화 난제를 다루고 있다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20hardware%20automation%20inquiry)로 상황을 보내 주세요. 고객 정보나 실제 결제 화면 캡처는 포함하지 마세요.
+비슷한 자동화 난제를 다루고 있다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20hardware%20automation%20inquiry)로 상황을 보내 주세요. 고객 정보나 실제 결제 화면 캡처는 포함하지 마세요.

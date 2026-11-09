@@ -64,4 +64,4 @@ labels = [0, 1, -1, -1, -1]
 - 재현: [examples/rag-search-diagnostics](https://github.com/kimkitae/kimkitae.github.io/tree/main/examples/rag-search-diagnostics)
 - 원문: [RAG 검색 디버깅: 청크 두 개가 결과 다섯 개가 된 이유](https://kimkitae.github.io/posts/quick-start-rag-and-llm-for-automation/)
 
-사내 자동화 지식 검색을 검토 중이라면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20RAG%20inquiry)로 문의해 주세요. 내부 코드나 고객 데이터는 공개 가능한 최소 예제로 바꿔서 보내 주세요.
+사내 자동화 지식 검색을 검토 중이라면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20RAG%20inquiry)로 문의해 주세요. 내부 코드나 고객 데이터는 공개 가능한 최소 예제로 바꿔서 보내 주세요.

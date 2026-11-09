@@ -16,4 +16,4 @@ iOS 업데이트 후 기존 WebDriverAgent가 동작하지 않았고, 프로젝�
 
 원문: [iOS 14+ WebDriverAgent 업데이트 기록](https://kimkitae.github.io/posts/webdriveragent-upgrade/)
 
-iOS 자동화 환경 문제로 막혀 있다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20iOS%20automation%20inquiry)로 문의해 주세요. 사용 중인 Xcode, Appium, 단말 버전을 함께 알려 주세요.
+iOS 자동화 환경 문제로 막혀 있다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20iOS%20automation%20inquiry)로 문의해 주세요. 사용 중인 Xcode, Appium, 단말 버전을 함께 알려 주세요.

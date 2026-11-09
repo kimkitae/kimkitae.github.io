@@ -17,4 +17,4 @@ Appium을 처음 배울 때 문서만 읽으면 개념은 알겠는데 손이 �
 
 원문: [APPIUM Android 연습 프로젝트](https://kimkitae.github.io/posts/automation1/)
 
-Appium 학습이나 사내 자동화 교육을 계획 중이라면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20Appium%20practice%20inquiry)로 문의해 주세요.
+Appium 학습이나 사내 자동화 교육을 계획 중이라면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20Appium%20practice%20inquiry)로 문의해 주세요.

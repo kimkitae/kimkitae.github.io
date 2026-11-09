@@ -57,4 +57,4 @@ Dejavu는 매칭된 기준 음원과 점수를 돌려줍니다. 문제는 “몇
 
 원문: [알림음 확인 자동화 - 오디오 지문으로 소리 매칭하기](https://kimkitae.github.io/posts/compare-sounds-automation/)
 
-알림음이나 미디어 검증 자동화를 검토 중이라면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20audio%20automation%20inquiry)로 문의해 주세요. 사용 중인 도구와 버전, 재현 절차를 함께 보내 주시면 도움이 됩니다.
+알림음이나 미디어 검증 자동화를 검토 중이라면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20audio%20automation%20inquiry)로 문의해 주세요. 사용 중인 도구와 버전, 재현 절차를 함께 보내 주시면 도움이 됩니다.

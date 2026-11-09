@@ -59,4 +59,4 @@ Appium에 대한 오해도 정리해야 합니다. Appium은 요소를 찾는 �
 
 원문: [모바일 자동화 여정 - Appium에서 API 기반 테스트까지](https://kimkitae.github.io/posts/mobile-automation/)
 
-자동화 구조나 릴리스 검증 방식에 대해 이야기하고 싶다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20mobile%20automation%20inquiry)로 문의해 주세요. 구체적인 문제 설명과 재현 절차를 보내 주시면 더 정확히 답할 수 있습니다.
+자동화 구조나 릴리스 검증 방식에 대해 이야기하고 싶다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20mobile%20automation%20inquiry)로 문의해 주세요. 구체적인 문제 설명과 재현 절차를 보내 주시면 더 정확히 답할 수 있습니다.

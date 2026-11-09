@@ -45,4 +45,4 @@ FastAPI의 `@app.on_event("startup")` 대신 `lifespan` 컨텍스트를 쓰는 �
 
 원문: [간단한 LogViewer 구현 및 운영하기](https://kimkitae.github.io/posts/log-view-system/)
 
-내부 도구의 로그 구조를 정리하고 있다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20log%20viewer%20inquiry)로 문의해 주세요. 로그에 포함된 고객 정보나 내부 주소는 마스킹해서 보내 주세요.
+내부 도구의 로그 구조를 정리하고 있다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20log%20viewer%20inquiry)로 문의해 주세요. 로그에 포함된 고객 정보나 내부 주소는 마스킹해서 보내 주세요.

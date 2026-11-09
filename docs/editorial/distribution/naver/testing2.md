@@ -6,4 +6,4 @@
 
 원문: [Test Cases and Coverage](https://developsense.com/blog/2018/06/test-cases-and-coverage)
 
-팀의 커버리지 보고 방식을 정리하고 있다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20test%20coverage%20inquiry)로 문의해 주세요. 내부 일정이나 고객 정보는 공개 가능한 수준으로 바꿔서 보내 주세요.
+팀의 커버리지 보고 방식을 정리하고 있다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20test%20coverage%20inquiry)로 문의해 주세요. 내부 일정이나 고객 정보는 공개 가능한 수준으로 바꿔서 보내 주세요.

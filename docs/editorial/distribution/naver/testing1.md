@@ -19,4 +19,4 @@ Ministry of Testing 커뮤니티에는 “더 나은 소프트웨어 테스터�
 
 원문: [Community Thoughts: 99 Things You Can Do To Become A Better Software Tester v2.0](https://club.ministryoftesting.com/t/99-things-you-can-do-to-become-a-better-software-tester/17923)
 
-팀의 테스트 문화나 품질 지표에 대해 이야기하고 싶다면 [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20testing%20culture%20inquiry)로 문의해 주세요.
+팀의 테스트 문화나 품질 지표에 대해 이야기하고 싶다면 [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20testing%20culture%20inquiry)로 문의해 주세요.

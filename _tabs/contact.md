@@ -6,9 +6,9 @@ order: 5
 
 김기태의 AX 작업노트를 읽고 자동화나 AX 과제에 관해 이야기하고 싶다면 이메일로 연락해 주세요. KFlowLabs의 협업 문의도 같은 주소로 받습니다.
 
-For automation or AX enquiries, email [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20inquiry). Describe the workflow you want to improve and leave out confidential information.
+For automation or AX enquiries, email [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20inquiry). Describe the workflow you want to improve and leave out confidential information.
 
-- **이메일**: [iam@kimkitae.me](mailto:iam@kimkitae.me?subject=KFlowLabs%20inquiry)
+- **이메일**: [kimkitae@kflowlabs.com](mailto:kimkitae@kflowlabs.com?subject=KFlowLabs%20inquiry)
 - **GitHub**: [github.com/kimkitae](https://github.com/kimkitae)
 - **LinkedIn**: [linkedin.com/in/kitae-kim-88597817a](https://www.linkedin.com/in/kitae-kim-88597817a)
 
